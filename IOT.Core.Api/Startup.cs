@@ -1,5 +1,7 @@
 using IOT.Core.IRepository.Activity;
+using IOT.Core.IRepository.Commodity;
 using IOT.Core.Repository.Activity;
+using IOT.Core.Repository.Commodity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -33,10 +35,11 @@ namespace IOT.Core.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IOT.Core.Api", Version = "v1" });
             });
-
+            //×¢Èë
             services.AddSingleton<IActivityRepository, ActivityRepository>();
+            services.AddSingleton<ICommodityRepository, CommodityRepository>();
 
-
+            //¿çÓò
             services.AddCors(options => 
             options.AddPolicy("cors",
             p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
