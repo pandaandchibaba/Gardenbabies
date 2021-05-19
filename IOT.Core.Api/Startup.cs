@@ -12,6 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IOT.Core.IRepository.Warehouse;
+using IOT.Core.Repository.Warehouse;
+using IOT.Core.IRepository.Delivery;
+using IOT.Core.Repository.Delivery;
+using IOT.Core.IRepository.PutLibrary;
+using IOT.Core.Repository.PutLibrary;
 
 namespace IOT.Core.Api
 {
@@ -35,9 +41,12 @@ namespace IOT.Core.Api
             });
 
             services.AddSingleton<IActivityRepository, ActivityRepository>();
+            services.AddSingleton<IWarehouseRepository, WarehouseRepository>();
+            services.AddSingleton<IDeliveryRepository, DeliveryRepository>();
+            services.AddSingleton<IPutLibraryRepository, PutLibraryRepository>();
 
 
-            services.AddCors(options => 
+            services.AddCors(options =>
             options.AddPolicy("cors",
             p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
         }
