@@ -1,7 +1,9 @@
 using IOT.Core.IRepository.Activity;
 using IOT.Core.IRepository.Commodity;
+using IOT.Core.IRepository.OrderInfo;
 using IOT.Core.Repository.Activity;
 using IOT.Core.Repository.Commodity;
+using IOT.Core.Repository.OrderInfo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +40,7 @@ namespace IOT.Core.Api
             //×¢Èë
             services.AddSingleton<IActivityRepository, ActivityRepository>();
             services.AddSingleton<ICommodityRepository, CommodityRepository>();
+            services.AddSingleton<IOrderInfoRepository, OrderInfoRepository>();
 
             //¿çÓò
             services.AddCors(options => 
