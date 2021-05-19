@@ -1,4 +1,4 @@
-using IOT.Core.IRepository.Activity;
+ï»¿using IOT.Core.IRepository.Activity;
 using IOT.Core.IRepository.Commodity;
 using IOT.Core.IRepository.OrderInfo;
 using IOT.Core.Repository.Activity;
@@ -16,6 +16,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IOT.Core.IRepository.Warehouse;
+using IOT.Core.Repository.Warehouse;
+using IOT.Core.IRepository.Delivery;
+using IOT.Core.Repository.Delivery;
+using IOT.Core.IRepository.PutLibrary;
+using IOT.Core.Repository.PutLibrary;
 
 namespace IOT.Core.Api
 {
@@ -37,12 +43,15 @@ namespace IOT.Core.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IOT.Core.Api", Version = "v1" });
             });
-            //×¢Èë
+            //×¢ï¿½ï¿½
             services.AddSingleton<IActivityRepository, ActivityRepository>();
             services.AddSingleton<ICommodityRepository, CommodityRepository>();
+            services.AddSingleton<IWarehouseRepository, WarehouseRepository>();
+            services.AddSingleton<IDeliveryRepository, DeliveryRepository>();
+            services.AddSingleton<IPutLibraryRepository, PutLibraryRepository>();
+
             services.AddSingleton<IOrderInfoRepository, OrderInfoRepository>();
 
-            //¿çÓò
             services.AddCors(options => 
             options.AddPolicy("cors",
             p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
