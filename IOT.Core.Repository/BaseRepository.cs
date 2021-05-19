@@ -1,24 +1,8 @@
-﻿using IOT.Core.IRepository;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace IOT.Core.Repository
 {
-    public class BaseRepository<T> : IBaseRepository<T>
+    public class BaseRepository
     {
-        public int Delete(string ids)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Insert(T Model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<T> Query()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

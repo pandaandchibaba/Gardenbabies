@@ -23,17 +23,5 @@ namespace IOT.Core.Model
         public float CouponPrice       { get; set; }
         public float AmountPaid        { get; set; }
         public DateTime StartTime         { get; set; }
-
-
-
-        /////////////////////////////////////////////
-        public string CommodityName { get; set; }
-        public string CommodityPic { get; set; }
-        public float ShopPrice { get; set; }
-        public int SId { get; set; }
-        public string NickName { get; set; }
-        public string UserName { get; set; }
-        public string Phone { get; set; }
-        public string Address { get; set; }
     }
 }
