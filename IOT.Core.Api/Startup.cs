@@ -21,6 +21,10 @@ using IOT.Core.IRepository.Delivery;
 using IOT.Core.Repository.Delivery;
 using IOT.Core.IRepository.PutLibrary;
 using IOT.Core.Repository.PutLibrary;
+using IOT.Core.Repository.OrderInfo;
+using IOT.Core.Repository.Colonel;
+using IOT.Core.Repository.Commodity;
+using IOT.Core.IRepository;
 
 namespace IOT.Core.Api
 {
@@ -42,10 +46,14 @@ namespace IOT.Core.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IOT.Core.Api", Version = "v1" });
             });
-            //ע��
+            //注入
             services.AddSingleton<IActivityRepository, ActivityRepository>();
-
+            services.AddSingleton<IColonelRepository, ColonelRepository>();
+            services.AddSingleton<ICommodityRepository, CommodityRepository>();
+            services.AddSingleton<IRepository.Delivery.IDeliveryRepository, DeliveryRepository>();
+            services.AddSingleton<IPutLibraryRepository, PutLibraryRepository>();
             services.AddSingleton<IOrderInfoRepository, OrderInfoRepository>();
+            services.AddSingleton<IWarehouseRepository, WarehouseRepository>();
 
             services.AddCors(options => 
             options.AddPolicy("cors",
