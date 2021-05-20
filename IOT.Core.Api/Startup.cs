@@ -33,6 +33,10 @@ using IOT.Core.IRepository.OrderComment;
 using IOT.Core.Repository.MiniProgram;
 using IOT.Core.IRepository.OutLibrary;
 using IOT.Core.Repository.OutLibrary;
+using IOT.Core.Repository.SeckillCom;
+using IOT.Core.Repository.Live;
+using IOT.Core.Repository.Bargain;
+using IOT.Core.Repository.GroupBooking;
 
 namespace IOT.Core.Api
 {
