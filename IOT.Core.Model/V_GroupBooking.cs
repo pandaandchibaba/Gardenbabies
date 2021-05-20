@@ -20,5 +20,6 @@ namespace IOT.Core.Model
         public DateTime GroupBookingZdate { get; set; }
         public string GZdTime{ get { return GroupBookingZdate.ToString("yyyy-MM-dd HH:MM:ss"); } }
         public int GroupBookingState { get; set; }
+        public  string GroupBookingName{ get; set; }
     }
 }

@@ -60,20 +60,18 @@ namespace IOT.Core.Repository.Activity
         /// <returns></returns>
         public int Uptst(int id)
         {
-            string sql = "select * from Activity";
-            List<Model.Activity> la = DapperHelper.GetList<Model.Activity>(sql);
-            Model.Activity aa = la.FirstOrDefault(x => x.ActivityId.Equals(id));
-            string sql1 = "";
-            if (aa.State == 0)
+            IOT.Core.Model.Activity ls= DapperHelper.GetList<Model.Activity>($"select * from Activity where ActivityId={id}").FirstOrDefault();
+            if (ls.State == 0)
             {
-                sql = $"update Activity set State =1 where ActivityId={id}";
+                ls.State = 1;
             }
             else
             {
-                sql1 = $"update Activity set State =0 where ActivityId={id}";
+                ls.State = 0;
+                
             }
-            int i = DapperHelper.Execute(sql1);
-            return i;
+            string sql = $"update Activity set State ={ls.State} where ActivityId={id}";
+            return DapperHelper.Execute(sql);
         }
     }
 }

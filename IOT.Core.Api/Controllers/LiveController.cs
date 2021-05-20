@@ -60,5 +60,13 @@ namespace IOT.Core.Api.Controllers
         {
             return _liveRepository.UptLive(a);
         }
+
+        //修改状态
+        [HttpPost]
+        [Route("/api/LiveUptst")]
+        public int LiveUptst(int id)
+        {
+            return _liveRepository.UptSt(id);
+        }
     }
 }

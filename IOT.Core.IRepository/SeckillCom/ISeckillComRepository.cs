@@ -19,5 +19,8 @@ namespace IOT.Core.IRepository.SeckillCom
 
         //修改
         int UptSeckillCom(IOT.Core.Model.SeckillCom a);
+
+        //修改状态
+        int UptSt(int id);
     }
 }

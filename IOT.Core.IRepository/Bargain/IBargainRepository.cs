@@ -25,8 +25,8 @@ namespace IOT.Core.IRepository.Bargain
 
         //反填
         IOT.Core.Model.V_Bargain FT(int id);
-        
+
         //修改状态
-        int UptSt(int id)
+        int UptSt(int id);
     }
 }
