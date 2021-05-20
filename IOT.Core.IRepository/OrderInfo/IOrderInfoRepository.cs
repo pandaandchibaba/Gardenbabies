@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace IOT.Core.IRepository.OrderInfo
+{
+    public interface IOrderInfoRepository
+    {
+        List<IOT.Core.Model.OrderInfo> GetOrderInfos(string name, string state, string end, int tui, int dingt, int uid, string cname, string ziti);
+
+        int Delete(string ids);
+        int Insert(IOT.Core.Model.OrderInfo Model);
+        List<IOT.Core.Model.OrderInfo> Query();
+        /// <summary>
+        /// 修改备注
+        /// </summary>
+        /// <param name="Model"></param>
+        /// <returns></returns>
+        int UptRemark(IOT.Core.Model.OrderInfo Model);
+        /// <summary>
+        /// 修改配送地址
+        /// </summary>
+        /// <param name="Model"></param>
+        /// <returns></returns>
+        int UptSendWay(IOT.Core.Model.OrderInfo Model);
+        /// <summary>
+        /// 修改状态
+        /// </summary>
+        /// <param name="Model"></param>
+        /// <returns></returns>
+        int UptOrderState(IOT.Core.Model.OrderInfo Model);
+
+
+    }
+}
