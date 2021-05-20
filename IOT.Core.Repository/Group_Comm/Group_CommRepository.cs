@@ -28,7 +28,7 @@ namespace IOT.Core.Repository.Group_Comm
         public Model.Group_Comm FT(int id)
         {
             string sql = $"select * from Group_Comm where Group_CommId={id}";
-            return DapperHelper.GetList<Model.Group_Comm>(sql).First();
+            return DapperHelper.GetList<Model.Group_Comm>(sql).FirstOrDefault();
         }
 
         //显示

@@ -48,6 +48,8 @@ using IOT.Core.IRepository.CommType;
 using IOT.Core.Repository.CommType;
 using IOT.Core.IRepository.Specification;
 using IOT.Core.Repository.Specification;
+using IOT.Core.IRepository.Com_Comment;
+using IOT.Core.Repository.Com_Comment;
 
 namespace IOT.Core.Api
 {
@@ -73,10 +75,28 @@ namespace IOT.Core.Api
             services.AddSingleton<IActivityRepository, ActivityRepository>();
             services.AddSingleton<IColonelRepository, ColonelRepository>();
             services.AddSingleton<ICommodityRepository, CommodityRepository>();
-            services.AddSingleton<IRepository.Delivery.IDeliveryRepository, DeliveryRepository>();
+            services.AddSingleton<IDeliveryRepository, DeliveryRepository>();
             services.AddSingleton<IPutLibraryRepository, PutLibraryRepository>();
             services.AddSingleton<IOrderInfoRepository, OrderInfoRepository>();
             services.AddSingleton<IWarehouseRepository, WarehouseRepository>();
+            services.AddSingleton<IBargainRepository, BargainRepository>();
+            services.AddSingleton<ICheckRepRepository, CheckRepRepository>();
+            services.AddSingleton<ICom_CommentRepository, Com_CommentRepository>();
+            services.AddSingleton<IGroup_CommRepository, Group_CommRepository>();
+            services.AddSingleton<IGroupBookingRepository, GroupBookingRepository>();
+            services.AddSingleton<ILiveRepository, LiveRepository>();
+            services.AddSingleton<IMiniProgramRepository, MiniProgramRepository>();
+            services.AddSingleton<INowRepRepository, NowRepRepository>();
+            services.AddSingleton<IOrderCommentRepository, OrderCommentRepository>();
+            services.AddSingleton<ILiveRepository, LiveRepository>();
+            services.AddSingleton<IOrderInfoRepository, OrderInfoRepository>();
+            services.AddSingleton<IOutLibraryRepository, OutLibraryRepository>();
+            services.AddSingleton<IPutLibraryRepository, PutLibraryRepository>();
+            services.AddSingleton<ISeckillComRepository, SeckillComRepository>();
+            services.AddSingleton<ISpecificationRepository, SpecificationRepository>();
+            services.AddSingleton<IUsersRepository, UsersRepository>();
+            services.AddSingleton<IWarehouseRepository, WarehouseRepository>();
+            //IMiniProgramRepository
 
             services.AddCors(options => 
             options.AddPolicy("cors",

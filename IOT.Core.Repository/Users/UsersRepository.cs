@@ -16,7 +16,7 @@ namespace IOT.Core.IRepository.Users
             string sql = $"select * from Users where 1=1";
             if (!string.IsNullOrEmpty(name))
             {
-                sql += $" and UserName like %{name}%";
+                sql += $" and UserName like '%{name}%'";
             }
             
             return DapperHelper.GetList<Model.Users>(sql);

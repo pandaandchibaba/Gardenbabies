@@ -27,7 +27,7 @@ namespace IOT.Core.Repository.SeckillCom
         //修改状态
         public int UptSt(int id)
         {
-            IOT.Core.Model.SeckillCom ls = DapperHelper.GetList<IOT.Core.Model.SeckillCom>($"select * from SeckillCom a join Commodity b on a.CommodityId=b.CommodityId join Activity c on a.ActivityId=c.ActivityId where SeckillComId={id}").FirstOrDefault();
+            IOT.Core.Model.SeckillCom ls = DapperHelper.GetList<IOT.Core.Model.SeckillCom>($"select * from SeckillCom where SeckillComId={id}").FirstOrDefault();
             if (ls.State == 0)
             {
                 ls.State = 1;
