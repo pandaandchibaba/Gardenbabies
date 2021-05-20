@@ -13,6 +13,8 @@ namespace IOT.Core.Model
     {
         public int Group_CommId { get; set; }
         public int ColonelId    { get; set; }
+        public int GroupBookingID { get; set; }
         public int Group_State { get; set; }
+        public int PeopleNum { get; set; }
     }
 }

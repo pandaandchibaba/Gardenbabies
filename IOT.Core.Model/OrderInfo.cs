@@ -35,5 +35,6 @@ namespace IOT.Core.Model
         public string UserName { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
+        public string STime { get { return StartTime.ToString("yyyy-MM-dd HH:MM:ss"); } }
     }
 }

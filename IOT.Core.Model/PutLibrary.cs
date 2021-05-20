@@ -16,6 +16,7 @@ namespace IOT.Core.Model
         public int CommodityId  { get; set; }
         public int GoodNum      { get; set; }
         public DateTime PutDate { get; set; }
+        public string PTime { get { return PutDate.ToString("yyyy-MM-dd HH:MM:ss"); } }
         public string PutNO { get; set; }
 
 
