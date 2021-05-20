@@ -12,7 +12,8 @@ namespace IOT.Core.Api.Controllers
     [ApiController]
     public class ColonelController : ControllerBase
     {
-        public readonly IColonelRepository _colonelRepository;
+
+        private readonly IColonelRepository _colonelRepository;
         public ColonelController(IColonelRepository colonelRepository)
         {
             _colonelRepository = colonelRepository;
@@ -23,22 +24,16 @@ namespace IOT.Core.Api.Controllers
         //显示
         [Route("/api/colonel")]
         [HttpGet]
-        public IActionResult colonel()
+        public IActionResult colonel(int page, int limit, string nickname = "")
         {
             var ls = _colonelRepository.ShowColonel();
-            return Ok(new { code = 0, msg = "", data = ls });
+            if (!string.IsNullOrEmpty(nickname))
+            {
+                ls = ls.Where(x => x.NickName.Contains(nickname)).ToList();
+            }
+            ls = ls.Skip((page - 1) * limit).Take(limit).ToList();
+            return Ok(new { code = 0, msg = "", Count = ls.Count, data = ls });
         }
-
-
-
-        [Route("/api/ ColonelAdd")]
-        [HttpPost]
-        public int ColonelAdd(Model.Colonel a)
-        {
-            int i= _colonelRepository.AddColonel(a);
-            return i;
-        }
-
 
         [Route("/api/Colonelupt")]
         [HttpPost]
@@ -48,6 +43,25 @@ namespace IOT.Core.Api.Controllers
             return i;
         }
 
+
+        //用户显示
+        [Route("/api/Users")]
+        [HttpGet]
+        public IActionResult Users(int page, int limit)
+        {
+            var As = _colonelRepository.GetUsers();
+            As = As.Skip((page - 1) * limit).Take(limit).ToList();
+            return Ok(new { code = 0, msg = "", Count = As.Count, data = As });
+        }
+        //商品显示
+        [Route("/api/Commoditys")]
+        [HttpGet]
+        public IActionResult Commoditys(int page, int limit)
+        {
+            var As = _colonelRepository.GetCommodities();
+            As = As.Skip((page - 1) * limit).Take(limit).ToList();
+            return Ok(new { code = 0, msg = "", Count = As.Count, data = As });
+        }
 
     }
 }
