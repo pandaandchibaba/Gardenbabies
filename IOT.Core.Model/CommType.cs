@@ -11,11 +11,11 @@ namespace IOT.Core.Model
     /// </summary>
     public class CommType
     {
-        public int TId      { get; set; }
-        public string TName    { get; set; }
-        public int Sort     { get; set; }
-        public string TIcon    { get; set; }
-        public int State    { get; set; }
+        public int TId { get; set; }
+        public string TName { get; set; }
+        public int Sort { get; set; }
+        public string TIcon { get; set; }
+        public int State { get; set; }
         public int ParentId { get; set; }
     }
 }

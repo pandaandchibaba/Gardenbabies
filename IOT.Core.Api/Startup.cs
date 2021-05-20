@@ -25,6 +25,10 @@ using IOT.Core.Repository.OrderInfo;
 using IOT.Core.Repository.Colonel;
 using IOT.Core.Repository.Commodity;
 using IOT.Core.IRepository;
+using IOT.Core.IRepository.CommType;
+using IOT.Core.Repository.CommType;
+using IOT.Core.IRepository.Specification;
+using IOT.Core.Repository.Specification;
 
 namespace IOT.Core.Api
 {
@@ -50,10 +54,13 @@ namespace IOT.Core.Api
             services.AddSingleton<IActivityRepository, ActivityRepository>();
             services.AddSingleton<IColonelRepository, ColonelRepository>();
             services.AddSingleton<ICommodityRepository, CommodityRepository>();
-            services.AddSingleton<IRepository.Delivery.IDeliveryRepository, DeliveryRepository>();
+            services.AddSingleton<IDeliveryRepository, DeliveryRepository>();
             services.AddSingleton<IPutLibraryRepository, PutLibraryRepository>();
             services.AddSingleton<IOrderInfoRepository, OrderInfoRepository>();
             services.AddSingleton<IWarehouseRepository, WarehouseRepository>();
+            services.AddSingleton<ICommTypeRepository, CommTypeRepository>();
+            services.AddSingleton<ISpecificationRepository, SpecificationRepository>();
+            //ISpecificationRepository
 
             services.AddCors(options => 
             options.AddPolicy("cors",
