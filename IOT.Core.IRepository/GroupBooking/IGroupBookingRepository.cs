@@ -20,5 +20,7 @@ namespace IOT.Core.IRepository.GroupBooking
         //修改
         int UptGroupBooking(IOT.Core.Model.GroupBooking a);
 
+        //修改状态
+        int UptSt(int id);
     }
 }

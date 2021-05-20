@@ -29,9 +29,9 @@ namespace IOT.Core.Api.Controllers
         }
 
         //显示砍价商品
-        [Route("/api/BargainShow")]
+        [Route("/api/BargainShows")]
         [HttpGet]
-        public IActionResult BargainShow(string nm="",int st=0)
+        public IActionResult BargainShows(string nm,int st)
         {
             //获取全部数据
             var ls = _bargainRepository.ShowBargain();
@@ -44,9 +44,9 @@ namespace IOT.Core.Api.Controllers
         }
 
         //显示砍价列表
-        [Route("/api/ShowBargain")]
+        [Route("/api/ShowBargains")]
         [HttpGet]
-        public IActionResult ShowBargain()
+        public IActionResult ShowBargains()
         {
             //获取全部数据
             var ls = _bargainRepository.BargainShow();
@@ -76,6 +76,14 @@ namespace IOT.Core.Api.Controllers
         public int BargainUpt(IOT.Core.Model.Bargain a)
         {
             return _bargainRepository.UptBargain(a);
+        }
+
+        //修改状态
+        [Route("/api/UpdateState")]
+        [HttpGet]
+        public int UptSt(int id)
+        {
+            return _bargainRepository.UptSt(id);
         }
     }
 }

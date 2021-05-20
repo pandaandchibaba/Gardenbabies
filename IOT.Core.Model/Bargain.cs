@@ -12,6 +12,7 @@ namespace IOT.Core.Model
     public class Bargain
     {
         public int BargainId      { get; set; }
+        public int UserId { get; set; }
         public int CommodityId    { get; set; }
         public int PeopleNum      { get; set; }
         public int KNum           { get; set; }

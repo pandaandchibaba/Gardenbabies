@@ -31,15 +31,15 @@ namespace IOT.Core.Api.Controllers
         //显示
         [Route("/api/GroupBookingShow")]
         [HttpGet]
-        public IActionResult GroupBookingShow(/*int st, string nm*/)
+        public IActionResult GroupBookingShow(int st=0, string nm="")
         {
             //获取全部数据
             var ls = _groupBookingRepository.ShowGroupBooking();
-            //if (!string.IsNullOrEmpty(nm))
-            //{
-            //    ls = ls.Where(x => x.LiveId.Equals(nm)).ToList();
-            //}
-            //ls = ls.Where(x => x.IsEnable.Equals(st)).ToList();
+            if (!string.IsNullOrEmpty(nm))
+            {
+                ls = ls.Where(x => x.GroupBookingName.Contains(nm)).ToList();
+            }
+            ls = ls.Where(x => x.GroupBookingState.Equals(st)).ToList();
             return Ok(new { msg = "", code = 0, data = ls });
         }
 
@@ -59,6 +59,13 @@ namespace IOT.Core.Api.Controllers
         public int GroupBookingUpt(IOT.Core.Model.GroupBooking a)
         {
             return _groupBookingRepository.UptGroupBooking(a);
+        }
+        //修改状态
+        [Route("/api/UptSt")]
+        [HttpGet]
+        public int UptSt(int id)
+        {
+            return _groupBookingRepository.UptSt(id);
         }
     }
 }

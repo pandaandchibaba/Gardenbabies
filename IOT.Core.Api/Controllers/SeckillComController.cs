@@ -49,7 +49,6 @@ namespace IOT.Core.Api.Controllers
             });
         }
 
-
         //删除
         [Route("/api/SeckillComDel")]
         [HttpDelete]
@@ -65,6 +64,15 @@ namespace IOT.Core.Api.Controllers
         public int SeckillComUpt(IOT.Core.Model.SeckillCom a)
         {
             return _seckillComRepository.UptSeckillCom(a);
+        }
+
+
+        //修改状态
+        [Route("/SeckillCom/UptSt")]
+        [HttpGet]
+        public int UptSt(int id)
+        {
+            return _seckillComRepository.UptSt(id);
         }
     }
 }

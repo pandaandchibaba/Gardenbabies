@@ -14,14 +14,14 @@ namespace IOT.Core.Repository.GroupBooking
         //添加
         public int AddGroupBooking(Model.GroupBooking a)
         {
-            string sql = $"insert into  DelGroupBooking values({a.ColonelID},{a.CommodityId},'{a.GroupBookingName}','{a.GroupBookingRemark}','{a.GroupBookingUnit}','{a.GroupBookingSdate}','{a.GroupBookingZdate}',{ a.GroupBookingResults},{ a.GroupBookingNumber},{ a.GroupBookingSellLimitNum},{ a.GroupBookingSort},{ a.GroupBookingTemplate},{ a.GroupBookingState},{ a.GroupBookingPrice},{ a.GroupBookingLimitNum}) ";
+            string sql = $"insert into  GroupBooking values(null,{a.ColonelID},{a.CommodityId},'{a.GroupBookingName}','{a.GroupBookingRemark}','{a.GroupBookingUnit}','{a.GroupBookingSdate}','{a.GroupBookingZdate}',{ a.GroupBookingResults},{ a.GroupBookingNumber},{ a.GroupBookingSellLimitNum},{ a.GroupBookingSort},{ a.GroupBookingTemplate},{ a.GroupBookingState},{ a.GroupBookingPrice},{ a.GroupBookingLimitNum}) ";
             return DapperHelper.Execute(sql);
         }
 
         //删除
         public int DelGroupBooking(string id)
         {
-            string sql = $"delete from DelGroupBooking where GroupBookingID={id}";
+            string sql = $"delete from GroupBooking where GroupBookingID={id}";
             return DapperHelper.Execute(sql);
         }
 
@@ -35,9 +35,24 @@ namespace IOT.Core.Repository.GroupBooking
         //修改
         public int UptGroupBooking(Model.GroupBooking a)
         {
-            string sql = $"update  DelGroupBooking set ColonelID={a.ColonelID},CommodityId={a.CommodityId},GroupBookingName='{a.GroupBookingName}',GroupBookingRemark='{a.GroupBookingRemark}',GroupBookingUnit='{a.GroupBookingUnit}',GroupBookingSdate='{a.GroupBookingSdate}',GroupBookingZdate='{a.GroupBookingZdate}',GroupBookingResults={ a.GroupBookingResults},GroupBookingNumber={ a.GroupBookingNumber},GroupBookingSellLimitNum={ a.GroupBookingSellLimitNum},GroupBookingSort={ a.GroupBookingSort},GroupBookingTemplate={ a.GroupBookingTemplate},GroupBookingState={ a.GroupBookingState},GroupBookingPrice={ a.GroupBookingPrice},GroupBookingLimitNum={ a.GroupBookingLimitNum} where GroupBookingID={a.GroupBookingID}";
+            string sql = $"update  GroupBooking set ColonelID={a.ColonelID},CommodityId={a.CommodityId},GroupBookingName='{a.GroupBookingName}',GroupBookingRemark='{a.GroupBookingRemark}',GroupBookingUnit='{a.GroupBookingUnit}',GroupBookingSdate='{a.GroupBookingSdate}',GroupBookingZdate='{a.GroupBookingZdate}',GroupBookingResults={ a.GroupBookingResults},GroupBookingNumber={ a.GroupBookingNumber},GroupBookingSellLimitNum={ a.GroupBookingSellLimitNum},GroupBookingSort={ a.GroupBookingSort},GroupBookingTemplate={ a.GroupBookingTemplate},GroupBookingState={ a.GroupBookingState},GroupBookingPrice={ a.GroupBookingPrice},GroupBookingLimitNum={ a.GroupBookingLimitNum} where GroupBookingID={a.GroupBookingID}";
             return DapperHelper.Execute(sql);
         }
-
+        
+        //修改状态
+        public int UptSt(int id)
+        {
+            IOT.Core.Model.GroupBooking ls = DapperHelper.GetList<IOT.Core.Model.GroupBooking>($"select * from GroupBooking a join Colonel b on a.ColonelID=b.ColonelID join Commodity c on a.CommodityId=c.CommodityId where GroupBookingID={id}").FirstOrDefault();
+            if (ls.GroupBookingState == 1)
+            {
+                ls.GroupBookingState = 0;
+            }
+            else
+            {
+                ls.GroupBookingState = 1;
+            }
+            string sql = $"update  GroupBooking set GroupBookingState={ls.GroupBookingState} where GroupBookingID={id}";
+            return DapperHelper.Execute(sql);
+        }
     }
 }

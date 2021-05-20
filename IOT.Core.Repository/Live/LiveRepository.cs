@@ -37,5 +37,21 @@ namespace IOT.Core.Repository.Live
             string sql = $"update Live set LiveTitle='{a.LiveTitle}',Remark='{a.Remark}',LiveCover='{a.LiveCover}',GoodId='{a.GoodId}',LiveModel={a.LiveModel},AnchorId={a.AnchorId},BeginLiveDate='{a.BeginLiveDate}',EndLiveDate='{a.EndLiveDate}',IsEnable={a.IsEnable} where LiveId={a.LiveId}";
             return DapperHelper.Execute(sql);
         }
+
+        //修改直播状态
+        public int UptSt(int id)
+        {
+            IOT.Core.Model.Live ls = DapperHelper.GetList<IOT.Core.Model.Live>($"select * from Live a join Anchor where LiveId={id}").FirstOrDefault();
+            if (ls.IsEnable == 1)
+            {
+                ls.IsEnable = 0;
+            }
+            else
+            {
+                ls.IsEnable = 1;
+            }
+            string sql = $"update Live set IsEnable={ls.IsEnable} where LiveId={id}";
+            return DapperHelper.Execute(sql);
+        }
     }
 }

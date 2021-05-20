@@ -19,5 +19,8 @@ namespace IOT.Core.IRepository.Live
 
         //修改
         int UptLive(IOT.Core.Model.Live a);
+
+        //修改状态
+        int UptSt(int id);
     }
 }

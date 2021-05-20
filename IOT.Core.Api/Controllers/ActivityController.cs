@@ -69,9 +69,9 @@ namespace IOT.Core.Api.Controllers
         //修改状态
         [HttpPost]
         [Route("/api/ActivityUptst")]
-        public int ActivityUptst(int st)
+        public int ActivityUptst(int id)
         {
-            return _activityRepository.Uptst(st);
+            return _activityRepository.Uptst(id);
         }
     }
 }

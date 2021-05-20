@@ -31,6 +31,7 @@ using IOT.Core.Repository.Commodity;
 using IOT.Core.IRepository;
 using IOT.Core.IRepository.OrderComment;
 using IOT.Core.Repository.MiniProgram;
+using IOT.Core.IRepository.Users;
 using IOT.Core.IRepository.OutLibrary;
 using IOT.Core.Repository.OutLibrary;
 using IOT.Core.Repository.SeckillCom;
@@ -41,6 +42,8 @@ using IOT.Core.IRepository.CheckRep;
 using IOT.Core.Repository.CheckRep;
 using IOT.Core.IRepository.NowRep;
 using IOT.Core.Repository.NowRep;
+using IOT.Core.IRepository.Group_Comm;
+using IOT.Core.Repository.Group_Comm;
 
 namespace IOT.Core.Api
 {
@@ -70,15 +73,18 @@ namespace IOT.Core.Api
             services.AddSingleton<ILiveRepository, LiveRepository>();
             services.AddSingleton<IBargainRepository, BargainRepository>();
             services.AddSingleton<IGroupBookingRepository, GroupBookingRepository>();
+            services.AddSingleton<IGroup_CommRepository, Group_CommRepository>();
             services.AddSingleton<IDeliveryRepository, DeliveryRepository>();
             services.AddSingleton<IPutLibraryRepository, PutLibraryRepository>();
             services.AddSingleton<IOrderInfoRepository, OrderInfoRepository>();
             services.AddSingleton<IWarehouseRepository, WarehouseRepository>();
             services.AddSingleton<IOrderCommentRepository, OrderCommentRepository>();
             services.AddSingleton<IMiniProgramRepository, MiniProgramRepository>();
+            services.AddSingleton<IUsersRepository, UsersRepository>();
             services.AddSingleton<IOutLibraryRepository, OutLibraryRepository>();
             services.AddSingleton<ICheckRepRepository, CheckRepRepository>();
             services.AddSingleton<INowRepRepository, NowRepRepository>();
+
 
             services.AddCors(options => 
             options.AddPolicy("cors",
