@@ -17,6 +17,7 @@ namespace IOT.Core.Model
         public decimal Income            { get; set; }
         public int  State             { get; set; }
         public DateTime  EndTime           { get; set; }
+        public string ETime { get { return EndTime.ToString("yyyy-MM-dd HH:MM:ss"); } }
         public int  OrderFormStatus   { get; set; }
     }
 }

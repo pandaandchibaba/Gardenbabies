@@ -1,5 +1,9 @@
 ﻿using IOT.Core.IRepository.Activity;
+using IOT.Core.IRepository.Bargain;
 using IOT.Core.IRepository.Commodity;
+using IOT.Core.IRepository.GroupBooking;
+using IOT.Core.IRepository.Live;
+using IOT.Core.IRepository.SeckillCom;
 using IOT.Core.IRepository.OrderInfo;
 using IOT.Core.IRepository.Colonel;
 using IOT.Core.Repository.Activity;
@@ -28,6 +32,12 @@ using IOT.Core.IRepository;
 using IOT.Core.IRepository.OrderComment;
 using IOT.Core.Repository.MiniProgram;
 using IOT.Core.IRepository.Users;
+using IOT.Core.IRepository.OutLibrary;
+using IOT.Core.Repository.OutLibrary;
+using IOT.Core.Repository.SeckillCom;
+using IOT.Core.Repository.Live;
+using IOT.Core.Repository.Bargain;
+using IOT.Core.Repository.GroupBooking;
 
 namespace IOT.Core.Api
 {
@@ -53,13 +63,19 @@ namespace IOT.Core.Api
             services.AddSingleton<IActivityRepository, ActivityRepository>();
             services.AddSingleton<IColonelRepository, ColonelRepository>();
             services.AddSingleton<ICommodityRepository, CommodityRepository>();
-            services.AddSingleton<IRepository.Delivery.IDeliveryRepository, DeliveryRepository>();
+            services.AddSingleton<ISeckillComRepository, SeckillComRepository>();
+            services.AddSingleton<ILiveRepository, LiveRepository>();
+            services.AddSingleton<IBargainRepository, BargainRepository>();
+            services.AddSingleton<IGroupBookingRepository, GroupBookingRepository>();
+
+            services.AddSingleton<IDeliveryRepository, DeliveryRepository>();
             services.AddSingleton<IPutLibraryRepository, PutLibraryRepository>();
             services.AddSingleton<IOrderInfoRepository, OrderInfoRepository>();
             services.AddSingleton<IWarehouseRepository, WarehouseRepository>();
             services.AddSingleton<IOrderCommentRepository, OrderCommentRepository>();
             services.AddSingleton<IMiniProgramRepository, MiniProgramRepository>();
             services.AddSingleton<IUsersRepository, UsersRepository>();
+            services.AddSingleton<IOutLibraryRepository, OutLibraryRepository>();
 
             services.AddCors(options => 
             options.AddPolicy("cors",

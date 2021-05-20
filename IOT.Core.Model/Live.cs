@@ -19,6 +19,9 @@ namespace IOT.Core.Model
         public int LiveModel     { get; set; }
         public int AnchorId      { get; set; }
         public DateTime BeginLiveDate { get; set; }
+        public string BTime { get { return BeginLiveDate.ToString("yyyy-MM-dd HH:MM:ss"); } }
         public DateTime EndLiveDate   { get; set; }
+        public string ETime { get { return EndLiveDate.ToString("yyyy-MM-dd HH:MM:ss"); } }
+        public int IsEnable { get; set; }
     }
 }

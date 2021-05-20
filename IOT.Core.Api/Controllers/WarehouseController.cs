@@ -22,14 +22,15 @@ namespace IOT.Core.Api.Controllers
 
         [HttpGet]
         [Route("/api/ShowWarehouse")]
-        public IActionResult ShowWarehouse()
+        public IActionResult ShowWarehouse(int page = 1, int limit = 4)
         {
             List<Model.Warehouse> lw = _warehouseRepository.Query();
             return Ok(new
             {
                 msg = "",
                 code = 0,
-                data = lw
+                count = lw.Count,
+                data = lw.Skip((page - 1) * limit).Take(limit)
             });
         }
 

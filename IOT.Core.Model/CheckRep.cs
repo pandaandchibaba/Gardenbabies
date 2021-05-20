@@ -17,5 +17,6 @@ namespace IOT.Core.Model
         public int CheckNum     { get; set; }
         public string CheckPeople  { get; set; }
         public DateTime CheckDate    { get; set; }
+        public string CTime { get { return CheckDate.ToString("yyyy-MM-dd HH:MM:ss"); } }
     }
 }

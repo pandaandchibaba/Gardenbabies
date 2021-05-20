@@ -10,7 +10,9 @@ namespace IOT.Core.Model
         public int ActivityId   { get; set; }
         public string ActivityName { get; set; }
         public DateTime BeginTime    { get; set; }
+        public string BTime { get { return BeginTime.ToString("yyyy-MM-dd HH:MM:ss"); } }
         public DateTime EndTime      { get; set; }
+        public string ETime { get { return EndTime.ToString("yyyy-MM-dd HH:MM:ss"); } }
         public string Slideshow    { get; set; }
         public int State        { get; set; }
         public DateTime  CreateDate   { get; set; }

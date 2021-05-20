@@ -16,6 +16,6 @@ namespace IOT.Core.Model
         public string StoreName  { get; set; }
         public int State      { get; set; }
         public DateTime CreateTime { get; set; }
-       
+        public string CTime { get { return CreateTime.ToString("yyyy-MM-dd HH:MM:ss"); } }
     }
 }

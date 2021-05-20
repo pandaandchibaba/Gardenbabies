@@ -47,6 +47,7 @@ namespace IOT.Core.Model
         /// 操作日期
         /// </summary>
         public DateTime OperationDate { get; set; }
+        public string OTime { get { return OperationDate.ToString("yyyy-MM-dd HH:MM:ss"); } }
         /// <summary>
         /// 商品类别
         /// </summary>

@@ -23,6 +23,7 @@ namespace IOT.Core.Model
         public string Address        { get; set; }
         public string Coordinates    { get; set; }
         public DateTime RegisterTime   { get; set; }
+        public string RTime { get { return RegisterTime.ToString("yyyy-MM-dd HH:MM:ss"); } }
         public int Integral       { get; set; }
         public decimal Saleroom       { get; set; }
         public int DeliveryStatus { get; set; }
