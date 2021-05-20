@@ -31,6 +31,7 @@ using IOT.Core.Repository.Commodity;
 using IOT.Core.IRepository;
 using IOT.Core.IRepository.OrderComment;
 using IOT.Core.Repository.MiniProgram;
+using IOT.Core.IRepository.Users;
 using IOT.Core.IRepository.OutLibrary;
 using IOT.Core.Repository.OutLibrary;
 using IOT.Core.Repository.SeckillCom;
@@ -75,6 +76,7 @@ namespace IOT.Core.Api
             services.AddSingleton<IWarehouseRepository, WarehouseRepository>();
             services.AddSingleton<IOrderCommentRepository, OrderCommentRepository>();
             services.AddSingleton<IMiniProgramRepository, MiniProgramRepository>();
+            services.AddSingleton<IUsersRepository, UsersRepository>();
             services.AddSingleton<IOutLibraryRepository, OutLibraryRepository>();
 
 
