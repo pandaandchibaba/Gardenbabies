@@ -35,7 +35,7 @@ using IOT.Core.Repository.ColonelGrade;
 using IOT.Core.IRepository.GroupPurchase;
 using IOT.Core.Repository.GroupPurchase;
 using IOT.Core.IRepository.Path;
-using IOT.Core.Repository.path;
+
 using IOT.Core.IRepository.Brokerage;
 using IOT.Core.Repository.Brokerage;
 using IOT.Core.Repository.Colonel;
@@ -60,6 +60,7 @@ using IOT.Core.IRepository.Specification;
 using IOT.Core.Repository.Specification;
 using IOT.Core.IRepository.Com_Comment;
 using IOT.Core.Repository.Com_Comment;
+using IOT.Core.Repository.Path;
 
 namespace IOT.Core.Api
 {
@@ -90,6 +91,7 @@ namespace IOT.Core.Api
             services.AddSingleton<IOrderInfoRepository, OrderInfoRepository>();
             services.AddSingleton<IWarehouseRepository, WarehouseRepository>();
             services.AddSingleton<IBargainRepository, BargainRepository>();
+            services.AddSingleton<IBrokerageRepository, BrokerageRepository>();
             services.AddSingleton<ICheckRepRepository, CheckRepRepository>();
             services.AddSingleton<ICom_CommentRepository, Com_CommentRepository>();
             services.AddSingleton<IGroup_CommRepository, Group_CommRepository>();
@@ -106,6 +108,11 @@ namespace IOT.Core.Api
             services.AddSingleton<ISpecificationRepository, SpecificationRepository>();
             services.AddSingleton<IUsersRepository, UsersRepository>();
             services.AddSingleton<IWarehouseRepository, WarehouseRepository>();
+            services.AddSingleton<IColonelGradeRepository, ColonelGradeRepository>();
+            services.AddSingleton<IColonelManagementRepository, ColonelManagementRepository>();
+            services.AddSingleton<ICommTypeRepository, CommTypeRepository>();
+            services.AddSingleton<IGroupPurchaseRepository, GroupPurchaseRepository>();
+            services.AddSingleton<IPathRepository, PathRepository>();
             //IMiniProgramRepository
 
             services.AddCors(options => 
