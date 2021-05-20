@@ -17,5 +17,16 @@ namespace IOT.Core.Model
         public DateTime AapplyTime   { get; set; }
         public DateTime CheckTime    { get; set; }
         public int CheckStatus  { get; set; }
+
+
+
+
+
+        ////////////////
+        public string HeadPortrait { get; set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
+        public decimal Cost { get; set; }
+
     }
 }

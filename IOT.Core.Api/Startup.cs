@@ -22,9 +22,19 @@ using IOT.Core.Repository.Delivery;
 using IOT.Core.IRepository.PutLibrary;
 using IOT.Core.Repository.PutLibrary;
 using IOT.Core.Repository.OrderInfo;
-using IOT.Core.Repository.Colonel;
 using IOT.Core.Repository.Commodity;
 using IOT.Core.IRepository;
+using IOT.Core.IRepository.ColonelManagement;
+using IOT.Core.Repository.ColonelManagement;
+using IOT.Core.IRepository.ColonelGrade;
+using IOT.Core.Repository.ColonelGrade;
+using IOT.Core.IRepository.GroupPurchase;
+using IOT.Core.Repository.GroupPurchase;
+using IOT.Core.IRepository.Path;
+using IOT.Core.Repository.path;
+using IOT.Core.IRepository.Brokerage;
+using IOT.Core.Repository.Brokerage;
+using IOT.Core.Repository.Colonel;
 
 namespace IOT.Core.Api
 {
@@ -48,13 +58,17 @@ namespace IOT.Core.Api
             });
             //注入
             services.AddSingleton<IActivityRepository, ActivityRepository>();
-            services.AddSingleton<IColonelRepository, ColonelRepository>();
+            services.AddSingleton<IColonelRepository, ColonelRepositoty>();
             services.AddSingleton<ICommodityRepository, CommodityRepository>();
             services.AddSingleton<IRepository.Delivery.IDeliveryRepository, DeliveryRepository>();
             services.AddSingleton<IPutLibraryRepository, PutLibraryRepository>();
             services.AddSingleton<IOrderInfoRepository, OrderInfoRepository>();
             services.AddSingleton<IWarehouseRepository, WarehouseRepository>();
-
+            services.AddSingleton<IColonelManagementRepository, ColonelManagementRepository>();
+            services.AddSingleton<IColonelGradeRepository, ColonelGradeRepository>();
+            services.AddSingleton<IGroupPurchaseRepository, GroupPurchaseRepository>();
+            services.AddSingleton<IPathRepository, pathRepository>();
+            services.AddSingleton<IBrokerageRepository,BrokerageRepository>();
             services.AddCors(options => 
             options.AddPolicy("cors",
             p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
