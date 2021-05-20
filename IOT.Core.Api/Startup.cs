@@ -25,6 +25,8 @@ using IOT.Core.Repository.OrderInfo;
 using IOT.Core.Repository.Colonel;
 using IOT.Core.Repository.Commodity;
 using IOT.Core.IRepository;
+using IOT.Core.IRepository.OutLibrary;
+using IOT.Core.Repository.OutLibrary;
 
 namespace IOT.Core.Api
 {
@@ -50,10 +52,11 @@ namespace IOT.Core.Api
             services.AddSingleton<IActivityRepository, ActivityRepository>();
             services.AddSingleton<IColonelRepository, ColonelRepository>();
             services.AddSingleton<ICommodityRepository, CommodityRepository>();
-            services.AddSingleton<IRepository.Delivery.IDeliveryRepository, DeliveryRepository>();
+            services.AddSingleton<IDeliveryRepository, DeliveryRepository>();
             services.AddSingleton<IPutLibraryRepository, PutLibraryRepository>();
             services.AddSingleton<IOrderInfoRepository, OrderInfoRepository>();
             services.AddSingleton<IWarehouseRepository, WarehouseRepository>();
+            services.AddSingleton<IOutLibraryRepository, OutLibraryRepository>();
 
             services.AddCors(options => 
             options.AddPolicy("cors",
