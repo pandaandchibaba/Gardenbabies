@@ -13,6 +13,25 @@ namespace IOT.Core.IRepository.OrderInfo
         int Delete(string ids);
         int Insert(IOT.Core.Model.OrderInfo Model);
         List<IOT.Core.Model.OrderInfo> Query();
+        /// <summary>
+        /// 修改备注
+        /// </summary>
+        /// <param name="Model"></param>
+        /// <returns></returns>
+        int UptRemark(IOT.Core.Model.OrderInfo Model);
+        /// <summary>
+        /// 修改配送地址
+        /// </summary>
+        /// <param name="Model"></param>
+        /// <returns></returns>
+        int UptSendWay(IOT.Core.Model.OrderInfo Model);
+        /// <summary>
+        /// 修改状态
+        /// </summary>
+        /// <param name="Model"></param>
+        /// <returns></returns>
+        int UptOrderState(IOT.Core.Model.OrderInfo Model);
+
 
     }
 }
