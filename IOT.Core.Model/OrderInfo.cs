@@ -23,5 +23,6 @@ namespace IOT.Core.Model
         public float CouponPrice       { get; set; }
         public float AmountPaid        { get; set; }
         public DateTime StartTime         { get; set; }
+        public string STime { get { return StartTime.ToString("yyyy-MM-dd HH:MM:ss"); } }
     }
 }

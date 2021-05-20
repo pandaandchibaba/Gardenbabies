@@ -1,7 +1,15 @@
 using IOT.Core.IRepository.Activity;
+using IOT.Core.IRepository.Bargain;
 using IOT.Core.IRepository.Commodity;
+using IOT.Core.IRepository.GroupBooking;
+using IOT.Core.IRepository.Live;
+using IOT.Core.IRepository.SeckillCom;
 using IOT.Core.Repository.Activity;
+using IOT.Core.Repository.Bargain;
 using IOT.Core.Repository.Commodity;
+using IOT.Core.Repository.GroupBooking;
+using IOT.Core.Repository.Live;
+using IOT.Core.Repository.SeckillCom;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +46,11 @@ namespace IOT.Core.Api
             //×¢Èë
             services.AddSingleton<IActivityRepository, ActivityRepository>();
             services.AddSingleton<ICommodityRepository, CommodityRepository>();
+            services.AddSingleton<ISeckillComRepository, SeckillComRepository>();
+            services.AddSingleton<ILiveRepository, LiveRepository>();
+            services.AddSingleton<IBargainRepository, BargainRepository>();
+            services.AddSingleton<IGroupBookingRepository, GroupBookingRepository>();
+
 
             //¿çÓò
             services.AddCors(options => 

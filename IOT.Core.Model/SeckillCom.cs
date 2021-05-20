@@ -19,6 +19,7 @@ namespace IOT.Core.Model
         public int SeckillModel   { get; set; }
         public int TackTime       { get; set; }
         public DateTime ActionDate     { get; set; }
+        public string ATime { get { return ActionDate.ToString("yyyy-MM-dd HH:MM:ss"); } }
         public int State          { get; set; }
         public float SeckilPrice    { get; set; }
         public int LimitNum { get; set; }
