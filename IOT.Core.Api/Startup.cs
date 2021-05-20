@@ -1,5 +1,9 @@
 ﻿using IOT.Core.IRepository.Activity;
+using IOT.Core.IRepository.Bargain;
 using IOT.Core.IRepository.Commodity;
+using IOT.Core.IRepository.GroupBooking;
+using IOT.Core.IRepository.Live;
+using IOT.Core.IRepository.SeckillCom;
 using IOT.Core.IRepository.OrderInfo;
 using IOT.Core.IRepository.Colonel;
 using IOT.Core.Repository.Activity;
@@ -35,6 +39,21 @@ using IOT.Core.Repository.path;
 using IOT.Core.IRepository.Brokerage;
 using IOT.Core.Repository.Brokerage;
 using IOT.Core.Repository.Colonel;
+using IOT.Core.IRepository.OrderComment;
+using IOT.Core.Repository.MiniProgram;
+using IOT.Core.IRepository.Users;
+using IOT.Core.IRepository.OutLibrary;
+using IOT.Core.Repository.OutLibrary;
+using IOT.Core.Repository.SeckillCom;
+using IOT.Core.Repository.Live;
+using IOT.Core.Repository.Bargain;
+using IOT.Core.Repository.GroupBooking;
+using IOT.Core.IRepository.CheckRep;
+using IOT.Core.Repository.CheckRep;
+using IOT.Core.IRepository.NowRep;
+using IOT.Core.Repository.NowRep;
+using IOT.Core.IRepository.Group_Comm;
+using IOT.Core.Repository.Group_Comm;
 
 namespace IOT.Core.Api
 {
@@ -60,15 +79,16 @@ namespace IOT.Core.Api
             services.AddSingleton<IActivityRepository, ActivityRepository>();
             services.AddSingleton<IColonelRepository, ColonelRepositoty>();
             services.AddSingleton<ICommodityRepository, CommodityRepository>();
-            services.AddSingleton<IRepository.Delivery.IDeliveryRepository, DeliveryRepository>();
+            services.AddSingleton<ISeckillComRepository, SeckillComRepository>();
+            services.AddSingleton<ILiveRepository, LiveRepository>();
+            services.AddSingleton<IBargainRepository, BargainRepository>();
+            services.AddSingleton<IGroupBookingRepository, GroupBookingRepository>();
+            services.AddSingleton<IGroup_CommRepository, Group_CommRepository>();
+            services.AddSingleton<IDeliveryRepository, DeliveryRepository>();
             services.AddSingleton<IPutLibraryRepository, PutLibraryRepository>();
             services.AddSingleton<IOrderInfoRepository, OrderInfoRepository>();
             services.AddSingleton<IWarehouseRepository, WarehouseRepository>();
-            services.AddSingleton<IColonelManagementRepository, ColonelManagementRepository>();
-            services.AddSingleton<IColonelGradeRepository, ColonelGradeRepository>();
-            services.AddSingleton<IGroupPurchaseRepository, GroupPurchaseRepository>();
-            services.AddSingleton<IPathRepository, pathRepository>();
-            services.AddSingleton<IBrokerageRepository,BrokerageRepository>();
+
             services.AddCors(options => 
             options.AddPolicy("cors",
             p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));

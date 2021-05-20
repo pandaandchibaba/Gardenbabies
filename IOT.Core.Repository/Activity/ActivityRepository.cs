@@ -49,7 +49,29 @@ namespace IOT.Core.Repository.Activity
         /// <returns></returns>
         public int UptActivity(Model.Activity a)
         {
-            throw new NotImplementedException();
+            string sql = $"update Activity set ActivityName='{a.ActivityName}', BeginTime='{a.BeginTime}', EndTime='{a.EndTime}', Slideshow='{a.Slideshow}', State={a.State},CreateDate='{a.CreateDate}', ActivityTime={a.ActivityTime} where ActivityId={a.ActivityId}";
+            return DapperHelper.Execute(sql);
+        }
+
+        /// <summary>
+        /// 修改状态
+        /// </summary>
+        /// <param name="st"></param>
+        /// <returns></returns>
+        public int Uptst(int id)
+        {
+            IOT.Core.Model.Activity ls= DapperHelper.GetList<Model.Activity>($"select * from Activity where ActivityId={id}").FirstOrDefault();
+            if (ls.State == 0)
+            {
+                ls.State = 1;
+            }
+            else
+            {
+                ls.State = 0;
+                
+            }
+            string sql = $"update Activity set State ={ls.State} where ActivityId={id}";
+            return DapperHelper.Execute(sql);
         }
     }
 }

@@ -12,7 +12,18 @@ namespace IOT.Core.Repository.OrderInfo
     {
 
 
-
+        /// <summary>
+        /// 三表联查各种数据
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="state"></param>
+        /// <param name="end"></param>
+        /// <param name="tui"></param>
+        /// <param name="dingt"></param>
+        /// <param name="uid"></param>
+        /// <param name="cname"></param>
+        /// <param name="ziti"></param>
+        /// <returns></returns>
         public List<Model.OrderInfo> GetOrderInfos(string name, string state, string end, int tui, int dingt, int uid, string cname, string ziti)
         {
             string sql = $@"select b.CommodityName ,b.CommodityPic ,b.ShopPrice  ,b.SId ,
@@ -26,7 +37,8 @@ namespace IOT.Core.Repository.OrderInfo
 
         public int Delete(string ids)
         {
-            throw new NotImplementedException();
+            string sql = $@"delete from OrderInfo where Orderid={ids}";
+            return DapperHelper.Execute(sql);
         }
 
        
@@ -35,10 +47,34 @@ namespace IOT.Core.Repository.OrderInfo
         {
             throw new NotImplementedException();
         }
-
+        /// <summary>
+        /// 查询订单表
+        /// </summary>
+        /// <returns></returns>
         public List<Model.OrderInfo> Query()
         {
-            throw new NotImplementedException();
+            string sql = $@"select* from OrderInfo";
+            return DapperHelper.GetList<Model.OrderInfo>(sql);
         }
+
+        public int UptRemark(Model.OrderInfo Model)
+        {
+            string sql = $"UPDATE OrderInfo SET Remark='{Model.Remark}' where Orderid={Model.Orderid}";
+            return DapperHelper.Execute(sql);
+        }
+
+        public int UptSendWay(Model.OrderInfo Model)
+        {
+            string sql = $"UPDATE OrderInfo SET SendWay='{Model.SendWay}' where Orderid={Model.Orderid}";
+            return DapperHelper.Execute(sql);
+        }
+
+        public int UptOrderState(Model.OrderInfo Model)
+        {
+            string sql = $"UPDATE OrderInfo SET OrderState='{Model.OrderState}' where Orderid={Model.Orderid}";
+            return DapperHelper.Execute(sql);
+        }
+
+
     }
 }

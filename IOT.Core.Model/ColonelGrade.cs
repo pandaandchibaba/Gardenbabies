@@ -16,6 +16,7 @@ namespace IOT.Core.Model
         public string GradeExperience { get; set; }
         public decimal FirstPY         { get; set; }
         public DateTime AwardRatio      { get; set; }
+        public string ATime { get { return AwardRatio.ToString("yyyy-MM-dd HH:MM:ss"); } }
         public int GradeStatus     { get; set; }
     }
 }

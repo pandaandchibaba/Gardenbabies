@@ -18,7 +18,9 @@ namespace IOT.Core.Model
         public string GroupBookingRemark       { get; set; }
         public int GroupBookingUnit         { get; set; }
         public DateTime GroupBookingSdate        { get; set; }
+        public string CSTime { get { return GroupBookingSdate.ToString("yyyy-MM-dd HH:MM:ss"); } }
         public DateTime GroupBookingZdate        { get; set; }
+        public string GZTime { get { return GroupBookingZdate.ToString("yyyy-MM-dd HH:MM:ss"); } }
         public int GroupBookingResults      { get; set; }
         public int GroupBookingNumber       { get; set; }
         public int GroupBookingSellLimitNum { get; set; }

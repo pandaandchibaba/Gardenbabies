@@ -20,7 +20,7 @@ namespace IOT.Core.Api.Controllers
 
         [HttpGet]
         [Route("/api/ShowDelivery")]
-        public IActionResult ShowDelivery(string deliveryname )
+        public IActionResult ShowDelivery(string deliveryname, int page = 1, int limit = 4)
         {
             List<IOT.Core.Model.Delivery> ld = _deliveryRepository.Query();
             //查找
@@ -32,7 +32,8 @@ namespace IOT.Core.Api.Controllers
             {
                 msg = "",
                 code = 0,
-                data = ld
+                count=ld.Count,
+                data = ld.Skip((page - 1) * limit).Take(limit)
             });
 
 
@@ -44,7 +45,7 @@ namespace IOT.Core.Api.Controllers
         {
             int i = _deliveryRepository.Insert(delivery);
             return i;
-        
+
         }
 
         [HttpDelete]

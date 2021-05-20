@@ -15,5 +15,6 @@ namespace IOT.Core.Model
         public int SId                { get; set; }
         public float Money              { get; set; }
         public DateTime CreateDate { get; set; }
+        public string CTime { get { return CreateDate.ToString("yyyy-MM-dd HH:MM:ss"); } }
     }
 }
