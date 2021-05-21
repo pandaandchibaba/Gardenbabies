@@ -17,6 +17,13 @@ namespace IOT.Core.Repository.Colonel
         {
             throw new NotImplementedException();
         }
+
+        public Model.Colonel FT1(int id)
+        {
+            string sql = $"select  * from colonel where ColonelID={id} ";
+            return DapperHelper.GetList<IOT.Core.Model.Colonel>(sql).First();
+        }
+
         //显示
         public List<Model.Commodity> GetCommodities()
         {

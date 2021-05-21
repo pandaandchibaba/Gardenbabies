@@ -50,7 +50,18 @@ namespace IOT.Core.Repository.Com_Comment
         public List<V_Com_Comment> GetComments(string cname = "", string uname = "")
         {
             string sql = "select * from V_Com_Comment";
+            //获取全部数据
             List<V_Com_Comment> lst = DapperHelper.GetList<V_Com_Comment>(sql);
+            //商品名称
+            if (!string.IsNullOrEmpty(cname))
+            {
+                lst = lst.Where(x => x.CommodityName.Contains(cname)).ToList();
+            }
+            //用户名称
+            if (!string.IsNullOrEmpty(uname))
+            {
+                lst = lst.Where(x => x.UserName.Contains(uname)).ToList();
+            }
             return lst;
         }
     }
