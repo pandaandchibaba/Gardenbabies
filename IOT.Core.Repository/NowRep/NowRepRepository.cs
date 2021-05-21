@@ -12,7 +12,7 @@ namespace IOT.Core.Repository.NowRep
     {
         public int Delete(string ids)
         {
-            string sql = $"DELETE *FROM NowRep WHERE NowRepId in({ids})";
+            string sql = $"DELETE  FROM NowRep WHERE NowRepId in({ids})";
             return DapperHelper.Execute(sql);
         }
 
