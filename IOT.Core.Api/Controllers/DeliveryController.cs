@@ -66,5 +66,21 @@ namespace IOT.Core.Api.Controllers
             return i;
 
         }
+
+
+        [HttpGet]
+        [Route("/api/FtDelivery")]
+        public IActionResult FtWarehouse(int id)
+        {
+            List<IOT.Core.Model.Delivery> ld = _deliveryRepository.Query();
+            IOT.Core.Model.Delivery delivery = ld.FirstOrDefault(x => x.DeliveryId.Equals(id));
+            return Ok(new
+            {
+                msg = "",
+                code = 0,
+                data = delivery
+            });
+
+        }
     }
 }
