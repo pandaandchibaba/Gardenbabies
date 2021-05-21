@@ -69,6 +69,20 @@ namespace IOT.Core.Api.Controllers
             return i;
         }
 
+        [HttpGet]
+        [Route("/api/FtPutLibrary")]
+        public IActionResult FtPutLibrary(int id)
+        {
+            List<IOT.Core.Model.PutLibrary> lp = _putLibraryRepository.Query();
+            IOT.Core.Model.PutLibrary putLibrary = lp.FirstOrDefault(x => x.PutLibraryId.Equals(id));
+            return Ok(new
+            {
+                msg = "",
+                code = 0,
+                data = putLibrary
+            });
+        }
+
 
     }
 }

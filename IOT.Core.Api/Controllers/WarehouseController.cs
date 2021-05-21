@@ -55,5 +55,21 @@ namespace IOT.Core.Api.Controllers
             int i = _warehouseRepository.Update(warehouse);
             return i;
         }
+
+        [HttpGet]
+        [Route("/api/FtWarehouse")]
+        public IActionResult FtWarehouse(int id)
+        {
+            List<IOT.Core.Model.Warehouse> lw = _warehouseRepository.Query();
+            IOT.Core.Model.Warehouse warehouse = lw.FirstOrDefault(x => x.WarehouseId.Equals(id));
+            return Ok(new
+            {
+                msg = "",
+                code = 0,
+                data = warehouse
+            });
+
+        }
+
     }
 }
