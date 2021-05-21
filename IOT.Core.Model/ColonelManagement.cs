@@ -20,12 +20,6 @@ namespace IOT.Core.Model
         public DateTime CheckTime    { get; set; }
         public string CTime { get { return CheckTime.ToString("yyyy-MM-dd HH:MM:ss"); } }
         public int CheckStatus  { get; set; }
-
-
-
-
-
-        ////////////////
         public string HeadPortrait { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }

@@ -13,6 +13,6 @@ namespace IOT.Core.Model
     {
         public int Pid        { get; set; }
         public int Whether    { get; set; }
-        public string Collection { get; set; }
+        public int Collection { get; set; }
     }
 }

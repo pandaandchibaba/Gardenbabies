@@ -35,7 +35,6 @@ using IOT.Core.Repository.ColonelGrade;
 using IOT.Core.IRepository.GroupPurchase;
 using IOT.Core.Repository.GroupPurchase;
 using IOT.Core.IRepository.Path;
-
 using IOT.Core.IRepository.Brokerage;
 using IOT.Core.Repository.Brokerage;
 using IOT.Core.Repository.Colonel;
@@ -63,6 +62,22 @@ using IOT.Core.Repository.Com_Comment;
 using IOT.Core.Repository.Path;
 using IOT.Core.IRepository.Roles;
 using IOT.Core.Repository.Roles;
+using IOT.Core.IRepository.Store_Configuration;
+using IOT.Core.IRepository.Withdrawal;
+using IOT.Core.Repository.Store_Configuration;
+using IOT.Core.Repository.Withdrawal;
+using IOT.Core.Repository.Users;
+using IOT.Core.Repository.OrderComment;
+using IOT.Core.IRepository.PayStore;
+using IOT.Core.Repository.PayStore;
+using IOT.Core.IRepository.Store;
+using IOT.Core.Repository.Store;
+using IOT.Core.IRepository.SVIP;
+using IOT.Core.Repository.SVIP;
+using IOT.Core.IRepository.Agent;
+using IOT.Core.Repository.Agent;
+using IOT.Core.IRepository.CommissionRecord;
+using IOT.Core.Repository.CommissionRecord;
 
 namespace IOT.Core.Api
 {
@@ -84,7 +99,7 @@ namespace IOT.Core.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IOT.Core.Api", Version = "v1" });
             });
-            //注入
+            #region  注入
             services.AddSingleton<IActivityRepository, ActivityRepository>();
             services.AddSingleton<IColonelRepository, ColonelRepositoty>();
             services.AddSingleton<ICommodityRepository, CommodityRepository>();
@@ -116,6 +131,15 @@ namespace IOT.Core.Api
             services.AddSingleton<IGroupPurchaseRepository, GroupPurchaseRepository>();
             services.AddSingleton<IPathRepository, PathRepository>();
             services.AddSingleton<IRolesRepository, RolesRepository>();
+            services.AddSingleton<IStore_ConfigurationRepository, Store_ConfigurationRepository>();
+            services.AddSingleton<IWithdrawalRepository, WithdrawalRepository>();
+            services.AddSingleton<IStoreRepository, StoreRepository>();
+            services.AddSingleton<IPayStoreRepository, PayStoreRepository>();
+            services.AddSingleton<ICom_CommentRepository, Com_CommentRepository>();
+            services.AddSingleton<ISVIPRepository, SVIPRepository>();
+            services.AddSingleton<IAgentRepository, AgentRepository>();
+            services.AddSingleton<ICommissionRecordRepository, CommissionRecordRepository>();
+            #endregion
             //IMiniProgramRepository
 
             services.AddCors(options => 

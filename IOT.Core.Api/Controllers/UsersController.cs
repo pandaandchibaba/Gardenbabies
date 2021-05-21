@@ -18,6 +18,18 @@ namespace IOT.Core.Api.Controllers
         {
             _usersRepository = usersRepository;
         }
+
+        [Route("/api/GetLogin")]
+        [HttpGet]
+        public int GetLogin(string loginname, string loginpwd)
+        {
+            int i = _usersRepository.Login(loginname,loginpwd);
+            return i;
+        }
+
+
+
+
         [Route("/api/GetUsers")]
         [HttpGet]
         public IActionResult GetUsers(string name="",int pageindex=1,int pagesize=2)
