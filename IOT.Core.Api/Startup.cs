@@ -67,6 +67,8 @@ using IOT.Core.Repository.Store_Configuration;
 using IOT.Core.Repository.Withdrawal;
 using IOT.Core.Repository.Users;
 using IOT.Core.Repository.OrderComment;
+using IOT.Core.IRepository.PayStore;
+using IOT.Core.Repository.PayStore;
 
 namespace IOT.Core.Api
 {

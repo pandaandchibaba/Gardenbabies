@@ -13,7 +13,7 @@ namespace IOT.Core.Api.Controllers
     public class OutLibraryController : ControllerBase
     {
         //注入
-        public readonly IOutLibraryRepository  _outLibraryRepository;
+        public readonly IOutLibraryRepository _outLibraryRepository;
         public OutLibraryController(IOutLibraryRepository outLibraryRepository)
         {
             _outLibraryRepository = outLibraryRepository;
@@ -70,6 +70,20 @@ namespace IOT.Core.Api.Controllers
         {
             int i = _outLibraryRepository.Update(outLibrary);
             return i;
+        }
+
+        [HttpGet]
+        [Route("/api/FtOutLibrary")]
+        public IActionResult FtOutLibrary(int id)
+        {
+            List<IOT.Core.Model.OutLibrary> lp = _outLibraryRepository.Query();
+            IOT.Core.Model.OutLibrary outLibrary = lp.FirstOrDefault(x => x.PutLibraryId.Equals(id));
+            return Ok(new
+            {
+                msg = "",
+                code = 0,
+                data = outLibrary
+            });
         }
 
     }
