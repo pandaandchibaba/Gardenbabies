@@ -65,7 +65,7 @@ namespace IOT.Core.Repository.CommType
             if (sonNum==0)
             {
                 //删除的SQL语句
-                string sql = $"delete CommType where TId={tid}";
+                string sql = $"delete from CommType where TId={tid}";
                 return DapperHelper.Execute(sql);
             }
             else
