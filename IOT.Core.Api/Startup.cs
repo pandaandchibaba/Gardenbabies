@@ -61,6 +61,8 @@ using IOT.Core.Repository.Specification;
 using IOT.Core.IRepository.Com_Comment;
 using IOT.Core.Repository.Com_Comment;
 using IOT.Core.Repository.Path;
+using IOT.Core.IRepository.PayStore;
+using IOT.Core.Repository.PayStore;
 
 namespace IOT.Core.Api
 {
@@ -113,6 +115,10 @@ namespace IOT.Core.Api
             services.AddSingleton<ICommTypeRepository, CommTypeRepository>();
             services.AddSingleton<IGroupPurchaseRepository, GroupPurchaseRepository>();
             services.AddSingleton<IPathRepository, PathRepository>();
+
+            services.AddSingleton<IPayStoreRepository, PayStoreRepository>();
+
+
             //IMiniProgramRepository
 
             services.AddCors(options => 
