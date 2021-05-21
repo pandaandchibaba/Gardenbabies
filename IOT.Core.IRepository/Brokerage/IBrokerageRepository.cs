@@ -13,5 +13,13 @@ namespace IOT.Core.IRepository.Brokerage
         /// </summary>
         /// <returns></returns>
         List<IOT.Core.Model.Brokerage> GetBrokerages();
+        /// <summary>
+        /// 修改状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        int Updatestate(int id);
+
+       
     }
 }

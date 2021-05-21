@@ -29,6 +29,12 @@ namespace IOT.Core.Repository.Path
             return DapperHelper.Execute(sql);
         }
 
+        public Model.Path Ft(int id)
+        {
+            string sql = $"select * from path where RathID={id}";
+            return DapperHelper.GetList<IOT.Core.Model.Path>(sql).First();
+        }
+
         public List<Model.Path> GthXS()
         {
             string sql = "select * from path";
@@ -37,7 +43,17 @@ namespace IOT.Core.Repository.Path
 
         public int Update(int cid)
         {
-            throw new NotImplementedException();
+            IOT.Core.Model.Path ls = DapperHelper.GetList<IOT.Core.Model.Path>($"select * from Path  where RathID   ={cid}").FirstOrDefault();
+            if (ls.State == 0)
+            {
+                ls.State = 1;
+            }
+            else
+            {
+                ls.State = 0;
+            }
+            string sql = $"update Path set State={ls.State} where RathID   ={cid} ";
+            return DapperHelper.Execute(sql);
         }
     }
 }

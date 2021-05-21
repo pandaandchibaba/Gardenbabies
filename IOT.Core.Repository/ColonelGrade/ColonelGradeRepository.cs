@@ -17,6 +17,12 @@ namespace IOT.Core.Repository.ColonelGrade
             return DapperHelper.Execute(sql);
         }
 
+        public Model.ColonelGrade ft2(int id)
+        {
+            string sql = $"select  * from ColonelGrade where CGId={id} ";
+            return DapperHelper.GetList<IOT.Core.Model.ColonelGrade>(sql).First();
+        }
+
         public List<Model.ColonelGrade> GetColonels()
         {
             string sql = "select  * from ColonelGrade";
@@ -31,7 +37,17 @@ namespace IOT.Core.Repository.ColonelGrade
 
         public int UptState(int Cid)
         {
-            throw new NotImplementedException();
+            IOT.Core.Model.ColonelGrade ls = DapperHelper.GetList<IOT.Core.Model.ColonelGrade>($"select * from ColonelGrade  where CGId  ={Cid}").FirstOrDefault();
+            if (ls.GradeStatus == 0)
+            {
+                ls.GradeStatus = 1;
+            }
+            else
+            {
+                ls.GradeStatus = 0;
+            }
+            string sql = $"update ColonelGrade set GradeStatus={ls.GradeStatus} where CGId  ={Cid} ";
+            return DapperHelper.Execute(sql);
         }
     }
 }

@@ -37,6 +37,7 @@ namespace IOT.Core.IRepository.Path
         /// <returns></returns>
         int Update(int cid);
 
+        IOT.Core.Model.Path Ft(int id);
 
     }
 }

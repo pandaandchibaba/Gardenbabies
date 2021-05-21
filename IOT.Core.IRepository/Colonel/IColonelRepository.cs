@@ -22,6 +22,9 @@ namespace IOT.Core.IRepository.Colonel
         //商品显示
         List<IOT.Core.Model.Commodity> GetCommodities();
 
+        //反填
+        IOT.Core.Model.Colonel FT1(int id);
+
      
 
     }
