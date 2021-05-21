@@ -43,6 +43,13 @@ namespace IOT.Core.Api.Controllers
             return i;
         }
 
+        [Route("/api/FT")]
+        [HttpPost]
+        public IActionResult FT (int id)
+        {
+            return Ok(_colonelRepository.FT1(id));
+        }
+
 
         //用户显示
         [Route("/api/Users")]

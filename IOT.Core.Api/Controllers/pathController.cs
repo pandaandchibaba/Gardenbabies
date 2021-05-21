@@ -62,6 +62,19 @@ namespace IOT.Core.Api.Controllers
             int i = _pathRepository.Edit(a);
             return i;
         }
+        [Route("/api/Uptdates")]
+        [HttpPost]
+        public int Uptdates(int id)
+        {
+            return _pathRepository.Update(id);
+        }
+
+        [Route("/api/FTES")]
+        [HttpGet]
+        public IActionResult FTES(int id)
+        {
+            return Ok(_pathRepository.Ft(id));
+        }
 
 
     }

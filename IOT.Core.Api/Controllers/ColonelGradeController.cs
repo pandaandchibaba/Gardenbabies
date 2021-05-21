@@ -40,6 +40,19 @@ namespace IOT.Core.Api.Controllers
             int i = _colonelGradeRepository.Upt(a);
             return i;
         }
+        [Route("/api/Uptdatas")]
+        [HttpPost]
+        public int Uptdatas(int id)
+        {
+            return _colonelGradeRepository.UptState(id);
+        }
+
+        [Route("/api/FTS")]
+        [HttpGet]
+        public IActionResult FTS(int id)
+        {
+            return Ok(_colonelGradeRepository.ft2(id));
+        }
 
 
 

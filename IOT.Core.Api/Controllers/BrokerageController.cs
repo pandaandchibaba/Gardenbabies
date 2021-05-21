@@ -24,5 +24,13 @@ namespace IOT.Core.Api.Controllers
             var ls = _brokerageRepository.GetBrokerages();
             return Ok(new { data = ls });
         }
+        [Route("/api/Uptdetes")]
+        [HttpPost]
+        public int Uptdetes(int id)
+        {
+            return _brokerageRepository.Updatestate(id);
+        }
+
+
     }
 }

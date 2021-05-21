@@ -31,6 +31,12 @@ namespace IOT.Core.Api.Controllers
             ls = ls.Skip((page - 1) * limit).Take(limit).ToList();
             return Ok(new {code=0,msg="",Count=ls.Count(), data = ls });
         }
+        [Route("/api/Uptdata")]
+        [HttpPost]
+        public int Uptdata(int  id)
+        {
+            return _colonelManagementRepository.Uptdata(id);
+        }
 
     }
 }
