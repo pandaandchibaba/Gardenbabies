@@ -26,7 +26,9 @@ namespace IOT.Core.Model
 
 
         //////////////////////////
-        ///
+        /// <summary>
+        /// //商品表
+        /// </summary>
         public string CommodityName { get; set; }
         public string CommodityPic { get; set; }
         public float ShopPrice { get; set; }
@@ -36,5 +38,29 @@ namespace IOT.Core.Model
         public string Phone { get; set; }
         public string Address { get; set; }
         public string STime { get { return StartTime.ToString("yyyy-MM-dd HH:MM:ss"); } }
+
+        //团长
+
+        public int Sex { get; set; }
+
+        public string ColonelName { get; set; }
+        public string MemberNum { get; set; }
+        public string PColonelId { get; set; }
+        public string Region { get; set; }
+        public string Estate { get; set; }
+
+        public string Coordinates { get; set; }
+        public DateTime RegisterTime { get; set; }
+        public string RTime { get { return RegisterTime.ToString("yyyy-MM-dd HH:MM:ss"); } }
+        public int Integral { get; set; }
+        public decimal Saleroom { get; set; }
+        public int DeliveryStatus { get; set; }
+        public decimal Cost { get; set; }
+        public string Alipay { get; set; }
+        public string BankSite { get; set; }
+        public string CardName { get; set; }
+        public string BankCard { get; set; }
+        public string HeadPortrait { get; set; }
+        public string CommIds { get; set; }
     }
 }

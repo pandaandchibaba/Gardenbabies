@@ -126,6 +126,7 @@ namespace IOT.Core.Api
             services.AddSingleton<IStore_ConfigurationRepository, Store_ConfigurationRepository>();
             services.AddSingleton<IWithdrawalRepository, WithdrawalRepository>();
             services.AddSingleton<IStoreRepository, StoreRepository>();
+            services.AddSingleton<IPayStoreRepository, PayStoreRepository>();
             //IMiniProgramRepository
 
             services.AddCors(options => 

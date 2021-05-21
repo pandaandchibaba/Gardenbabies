@@ -31,7 +31,8 @@ namespace IOT.Core.Repository.OrderInfo
 			 a.SendWay ,a.CommodityPrice ,a.DistributionCosts ,a.OrderPrice ,a.CouponPrice ,a.AmountPaid ,a.StartTime ,a.remark,a.Orderid,a.CommodityId,a.UserId,a.OrderState
             from OrderInfo a
             join Commodity b on a.CommodityId = b.CommodityId
-            join Users c on a.UserId = c.UserId ";
+            join Users c on a.UserId = c.UserId 
+            join Colonel d on c.ColonelID=d.ColonelID";
             return DapperHelper.GetList<Model.OrderInfo>(sql);
         }
 
