@@ -69,6 +69,8 @@ using IOT.Core.Repository.Users;
 using IOT.Core.Repository.OrderComment;
 using IOT.Core.IRepository.PayStore;
 using IOT.Core.Repository.PayStore;
+using IOT.Core.IRepository.Store;
+using IOT.Core.Repository.Store;
 
 namespace IOT.Core.Api
 {
@@ -123,6 +125,7 @@ namespace IOT.Core.Api
             services.AddSingleton<IPathRepository, PathRepository>();
             services.AddSingleton<IStore_ConfigurationRepository, Store_ConfigurationRepository>();
             services.AddSingleton<IWithdrawalRepository, WithdrawalRepository>();
+            services.AddSingleton<IStoreRepository, StoreRepository>();
             //IMiniProgramRepository
 
             services.AddCors(options => 
