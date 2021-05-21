@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IOT.Core.IRepository.Users;
 
-namespace IOT.Core.IRepository.Users
+namespace IOT.Core.Repository.Users
 {
     public class UsersRepository : IUsersRepository
     {

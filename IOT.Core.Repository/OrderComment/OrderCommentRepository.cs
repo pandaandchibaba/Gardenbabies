@@ -1,11 +1,12 @@
 ﻿using IOT.Core.Common;
+using IOT.Core.IRepository.OrderComment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IOT.Core.IRepository.OrderComment
+namespace IOT.Core.Repository.OrderComment
 {
     public class OrderCommentRepository : IOrderCommentRepository
     {

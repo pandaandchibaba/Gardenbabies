@@ -24,10 +24,10 @@ namespace IOT.Core.Repository.Colonel
             return DapperHelper.GetList<Model.Commodity>(sql);
         }
        
-        public List<Users> GetUsers()
+        public List<Model.Users> GetUsers()
         {
             string sql = "SELECT b.HeadPortrait,a.UserName,a.Phone from Users a join Colonel b on a.ColonelID =b.ColonelID ";
-            return DapperHelper.GetList<Users>(sql);
+            return DapperHelper.GetList<Model.Users>(sql);
         }
    
         public List<Model.Colonel> ShowColonel()

@@ -61,6 +61,12 @@ using IOT.Core.Repository.Specification;
 using IOT.Core.IRepository.Com_Comment;
 using IOT.Core.Repository.Com_Comment;
 using IOT.Core.Repository.Path;
+using IOT.Core.IRepository.Store_Configuration;
+using IOT.Core.IRepository.Withdrawal;
+using IOT.Core.Repository.Store_Configuration;
+using IOT.Core.Repository.Withdrawal;
+using IOT.Core.Repository.Users;
+using IOT.Core.Repository.OrderComment;
 
 namespace IOT.Core.Api
 {
@@ -113,6 +119,8 @@ namespace IOT.Core.Api
             services.AddSingleton<ICommTypeRepository, CommTypeRepository>();
             services.AddSingleton<IGroupPurchaseRepository, GroupPurchaseRepository>();
             services.AddSingleton<IPathRepository, PathRepository>();
+            services.AddSingleton<IStore_ConfigurationRepository, Store_ConfigurationRepository>();
+            services.AddSingleton<IWithdrawalRepository, WithdrawalRepository>();
             //IMiniProgramRepository
 
             services.AddCors(options => 
