@@ -97,7 +97,7 @@ namespace IOT.Core.Repository.CommType
         /// 获取一级分类
         /// </summary>
         /// <returns></returns>
-        public List<Model.CommType> GetOneType()
+        public List<Model.CommType> GetOneType() 
         {
             return DapperHelper.GetList<Model.CommType>("select * from CommType where ParentId=0");
         }
