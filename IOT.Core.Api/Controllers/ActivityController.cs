@@ -31,7 +31,7 @@ namespace IOT.Core.Api.Controllers
         //显示
         [Route("/api/ActivityShow")]
         [HttpGet]
-        public IActionResult ActivityShow(string nm = "", int st = 0)
+        public IActionResult ActivityShow(string nm = "", int st = -1)
         {
             //获取全部数据
             var ls = _activityRepository.ShowActivity();
@@ -39,8 +39,10 @@ namespace IOT.Core.Api.Controllers
             {
                 ls = ls.Where(x => x.ActivityName.Contains(nm)).ToList();
             }
-            ls = ls.Where(x => x.State.Equals(st)).ToList();
-           
+            if (st!=-1)
+            {
+                ls = ls.Where(x => x.State.Equals(st)).ToList();
+            }
             return Ok(new
             {
                 msg = "",
