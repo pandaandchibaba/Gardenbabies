@@ -26,33 +26,47 @@ namespace IOT.Core.Repository.CommType
         {
             if (comm.TId == 0)  //添加
             {
-                string sql = $"insert into CommType values(null,'{comm.TName}',{comm.Sort},'{comm.TIcon}',{comm.State},{comm.ParentId})";
-                int i = DapperHelper.Execute(sql);
-                if (i > 0)
+                try
                 {
-                    return "添加成功";
+                    string sql = $"insert into CommType values(null,'{comm.TName}',{comm.Sort},'{comm.TIcon}',{comm.State},{comm.ParentId})";
+                    int i = DapperHelper.Execute(sql);
+                    if (i > 0)
+                    {
+                        return "添加成功";
+                    }
+                    else
+                    {
+                        return "添加失败";
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    return "添加失败";
-                }
 
+                    throw;
+                }
             }
             else  //修改
             {
-                string sql = $"update CommType set TName='{comm.TName}',Sort={comm.Sort},TIcon='{comm.TIcon}',State={comm.State},ParentId={comm.ParentId} where TId={comm.TId}";
-                int i = DapperHelper.Execute(sql);
-                if (i > 0)
+                try
                 {
-                    return "修改成功";
+                    string sql = $"update CommType set TName='{comm.TName}',Sort={comm.Sort},TIcon='{comm.TIcon}',State={comm.State},ParentId={comm.ParentId} where TId={comm.TId}";
+                    int i = DapperHelper.Execute(sql);
+                    if (i > 0)
+                    {
+                        return "修改成功";
+                    }
+                    else
+                    {
+                        return "修改失败";
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    return "修改失败";
+
+                    throw;
                 }
             }
         }
-
         /// <summary>
         /// 删除分类
         /// </summary>
@@ -97,7 +111,7 @@ namespace IOT.Core.Repository.CommType
         /// 获取一级分类
         /// </summary>
         /// <returns></returns>
-        public List<Model.CommType> GetOneType()
+        public List<Model.CommType> GetOneType() 
         {
             return DapperHelper.GetList<Model.CommType>("select * from CommType where ParentId=0");
         }
@@ -109,19 +123,27 @@ namespace IOT.Core.Repository.CommType
         /// <returns></returns>
         public int UpdateState(int tid)
         {
-            //获取要修改的分类
-            IOT.Core.Model.CommType commType = DapperHelper.GetList<IOT.Core.Model.CommType>($"select * from CommType where TId={tid}").FirstOrDefault();
-            if (commType.State == 0)
+            try
             {
-                commType.State = 1;
+                //获取要修改的分类
+                IOT.Core.Model.CommType commType = DapperHelper.GetList<IOT.Core.Model.CommType>($"select * from CommType where TId={tid}").FirstOrDefault();
+                if (commType.State == 0)
+                {
+                    commType.State = 1;
+                }
+                else
+                {
+                    commType.State = 0;
+                }
+                //修改的SQL语句
+                string sql = $"update CommType set State={commType.State} where TId={commType.TId}";
+                return DapperHelper.Execute(sql);
             }
-            else
+            catch (Exception)
             {
-                commType.State = 0;
+                throw;
             }
-            //修改的SQL语句
-            string sql = $"update CommType set State={commType.State} where TId={commType.TId}";
-            return DapperHelper.Execute(sql);
+            
         }
     }
 }

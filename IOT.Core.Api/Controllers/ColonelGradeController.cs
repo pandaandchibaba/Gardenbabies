@@ -20,14 +20,13 @@ namespace IOT.Core.Api.Controllers
 
         [Route("/Api/colonelGrade")]
         [HttpGet]
-        public IActionResult colonelGrade(int page,int limit)
+        public IActionResult colonelGrade()
         {
             var ls = _colonelGradeRepository.GetColonels();
-            ls = ls.Skip((page - 1) * limit).Take(limit).ToList();
-            return Ok(new {code=0,msg="",count=ls.Count, data = ls });
+            return Ok( new{data = ls });
         }
         [Route("/Api/delte")]
-        [HttpPost]
+        [HttpDelete]
         public int  delte(string id)
         {
             int i = _colonelGradeRepository.Edit(id);

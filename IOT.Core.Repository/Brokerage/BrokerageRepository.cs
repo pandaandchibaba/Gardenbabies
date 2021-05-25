@@ -14,23 +14,31 @@ namespace IOT.Core.Repository.Brokerage
 
         public List<Model.Brokerage> GetBrokerages()
         {
-            string sql = "select b.HeadPortrait,b.NickName,a.BrokerageType,a.Income,a.State,a.EndTime,a.OrderFormStatus from brokerage a join Colonel b ON a.ColonelID=b.ColonelID";
+            string sql = "select a.BId, b.HeadPortrait,b.NickName,a.BrokerageType,a.Income,a.State,a.EndTime,a.OrderFormStatus from brokerage a join Colonel b ON a.ColonelID=b.ColonelID";
             return DapperHelper.GetList<Model.Brokerage>(sql);
         }
 
         public int Updatestate(int id)
         {
-            IOT.Core.Model.Brokerage ls = DapperHelper.GetList<IOT.Core.Model.Brokerage>($"select * from Brokerage  where BId   ={id}").FirstOrDefault();
-            if (ls.State == 0)
+            try
             {
-                ls.State = 1;
+                IOT.Core.Model.Brokerage ls = DapperHelper.GetList<IOT.Core.Model.Brokerage>($"select * from Brokerage  where BId   ={id}").FirstOrDefault();
+                if (ls.State == 0)
+                {
+                    ls.State = 1;
+                }
+                else
+                {
+                    ls.State = 0;
+                }
+                string sql = $"update Brokerage set State ={ls.State } where BId   ={id} ";
+                return DapperHelper.Execute(sql);
             }
-            else
+            catch (Exception)
             {
-                ls.State = 0;
+
+                throw;
             }
-            string sql = $"update Brokerage set State ={ls.State } where BId   ={id} ";
-            return DapperHelper.Execute(sql);
         }
     }
 }

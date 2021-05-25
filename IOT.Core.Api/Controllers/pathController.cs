@@ -49,7 +49,7 @@ namespace IOT.Core.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [Route("/Api/Delete")]
-        [HttpPost]
+        [HttpDelete]
         public int Delete(string id)
         {
             int i = _pathRepository.delete(id);
