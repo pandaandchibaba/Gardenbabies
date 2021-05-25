@@ -56,6 +56,14 @@ namespace IOT.Core.Api.Controllers
             return i;
         }
 
+        [HttpPut]
+        [Route("/api/UptWarehouseState")]
+        public int UptWarehouseState(int id)
+        {
+            int i = _warehouseRepository.UptState(id);
+            return i;
+        }
+
         [HttpGet]
         [Route("/api/FtWarehouse")]
         public IActionResult FtWarehouse(int id)
