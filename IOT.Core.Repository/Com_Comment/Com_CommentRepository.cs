@@ -18,16 +18,25 @@ namespace IOT.Core.Repository.Com_Comment
         /// <returns></returns>
         public string CreateCom_Comment(Model.Com_Comment comment)
         {
-            string sql = $"insert into Com_Comment values(null,{comment.CommodityId},{comment.UserId},{comment.CommGrade},{comment.SeverGrade},'{comment.CommentContent}','{comment.RevertContent}','{comment.CommentPic}',now())";
-            int i = DapperHelper.Execute(sql);
-            if (i>0)
+            try
             {
-                return "添加成功";
+                string sql = $"insert into Com_Comment values(null,{comment.CommodityId},{comment.UserId},{comment.CommGrade},{comment.SeverGrade},'{comment.CommentContent}','{comment.RevertContent}','{comment.CommentPic}',now())";
+                int i = DapperHelper.Execute(sql);
+                if (i > 0)
+                {
+                    return "添加成功";
+                }
+                else
+                {
+                    return "添加失败";
+                }
             }
-            else
+            catch (Exception)
             {
-                return "添加失败";
+
+                throw;
             }
+            
         }
 
         /// <summary>

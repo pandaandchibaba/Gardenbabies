@@ -18,8 +18,16 @@ namespace IOT.Core.Repository.Commodity
         public int CreateCommodity(Model.Commodity commodity)
         {
             //添加的SQL语句
-            string sql = $"insert into Commodity values (null,'{commodity.CommodityName}','{commodity.CommodityPic}',{commodity.ShopPrice},{commodity.ShopNum},{commodity.Repertory},{commodity.Sort},0,now(),{commodity.TId},'{commodity.Remark}',{commodity.TemplateId},'{commodity.CommodityKey}','{commodity.SendAddress}','{commodity.Job}',{commodity.Integral},{commodity.SId},'{commodity.Color}','{commodity.Size}',0,0,{commodity.CostPrice},{commodity.ColonelID},{commodity.Mid})";
-            return DapperHelper.Execute(sql);
+            try
+            {
+                string sql = $"insert into Commodity values (null,'{commodity.CommodityName}','{commodity.CommodityPic}',{commodity.ShopPrice},{commodity.ShopNum},{commodity.Repertory},{commodity.Sort},0,now(),{commodity.TId},'{commodity.Remark}',{commodity.TemplateId},'{commodity.CommodityKey}','{commodity.SendAddress}','{commodity.Job}',{commodity.Integral},{commodity.SId},'{commodity.Color}','{commodity.Size}',0,0,{commodity.CostPrice},{commodity.ColonelID},{commodity.Mid})";
+                return DapperHelper.Execute(sql);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>
@@ -31,26 +39,27 @@ namespace IOT.Core.Repository.Commodity
         /// <returns></returns>
         public List<IOT.Core.Model.V_Commodity> GetCommodities(int code = 1, int tid = 0, string key = "")
         {
-            string sql = "";
-            if (code == 1)  //出售中
+            //string sql = "select * from V_Commodity ";
+            StringBuilder sql = new StringBuilder();
+            sql.Append("select * from V_Commodity ");
+            switch (code)
             {
-                sql = "select * from V_Commodity where DeleteState=0 and State=1";
+                case 1:
+                    sql.Append("where DeleteState=0 and State=1");
+                    break;
+                case 2:
+                    sql.Append("where DeleteState=0");
+                    break;
+                case 3:
+                    sql.Append("where DeleteState=0 and IsSell=1");
+                    break;
+                case 4:
+                    sql.Append("where DeleteState=1");
+                    break;
             }
-            else if (code == 2)  //仓库中
-            {
-                sql = "select * from V_Commodity where DeleteState=0";
-            }
-            else if (code == 3)  //已销售商品
-            {
-                sql = "select * from V_Commodity where DeleteState=0 and IsSell=1";
-            }
-            else if (code == 4)  //回收站
-            {
-                sql = "select * from V_Commodity where DeleteState=1";
-            }
-            List<IOT.Core.Model.V_Commodity> lst = DapperHelper.GetList<IOT.Core.Model.V_Commodity>(sql);
+            List<IOT.Core.Model.V_Commodity> lst = DapperHelper.GetList<IOT.Core.Model.V_Commodity>(sql.ToString());
             //类别查询
-            if (tid!=0)
+            if (tid != 0)
             {
                 lst = lst.Where(x => x.TId == tid).ToList();
             }
@@ -71,7 +80,7 @@ namespace IOT.Core.Repository.Commodity
         {
             //获取要修改的商品
             IOT.Core.Model.Commodity commodity = DapperHelper.GetList<IOT.Core.Model.Commodity>($"select * from Commodity where CommodityId={CId}").FirstOrDefault();
-            if (commodity.DeleteState==0)
+            if (commodity.DeleteState == 0)
             {
                 commodity.DeleteState = 1;
             }
@@ -91,19 +100,27 @@ namespace IOT.Core.Repository.Commodity
         /// <returns></returns>
         public int UpdateState(int CId)
         {
-            //获取要修改的商品
-            IOT.Core.Model.Commodity commodity = DapperHelper.GetList<IOT.Core.Model.Commodity>($"select * from Commodity where CommodityId={CId}").FirstOrDefault();
-            if (commodity.State == 0)
+            try
             {
-                commodity.State = 1;
+                //获取要修改的商品
+                IOT.Core.Model.Commodity commodity = DapperHelper.GetList<IOT.Core.Model.Commodity>($"select * from Commodity where CommodityId={CId}").FirstOrDefault();
+                if (commodity.State == 0)
+                {
+                    commodity.State = 1;
+                }
+                else
+                {
+                    commodity.State = 0;
+                }
+                //修改的SQL语句
+                string sql = $"update Commodity set State={commodity.State} where CommodityId={commodity.CommodityId}";
+                return DapperHelper.Execute(sql);
             }
-            else
+            catch (Exception)
             {
-                commodity.State = 0;
+
+                throw;
             }
-            //修改的SQL语句
-            string sql = $"update Commodity set State={commodity.State} where CommodityId={commodity.CommodityId}";
-            return DapperHelper.Execute(sql);
         }
     }
 }

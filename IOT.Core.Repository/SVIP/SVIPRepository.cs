@@ -17,16 +17,25 @@ namespace IOT.Core.Repository.SVIP
         /// <returns></returns>
         public string CreateSVIP(Model.SVIP sVIP)
         {
-            string sql = $"insert into SVIP values (null,'{sVIP.SName}','{sVIP.BackgroudColor}','{sVIP.Icon}','{sVIP.BCImg}',{sVIP.Consume},{sVIP.Commission},{sVIP.Money},'{sVIP.Rate}','{sVIP.Explains}')";
-            int i = DapperHelper.Execute(sql);
-            if (i > 0)
+            try
             {
-                return "添加成功";
+                string sql = $"insert into SVIP values (null,'{sVIP.SName}','{sVIP.BackgroudColor}','{sVIP.Icon}','{sVIP.BCImg}',{sVIP.Consume},{sVIP.Commission},{sVIP.Money},'{sVIP.Rate}','{sVIP.Explains}')";
+                int i = DapperHelper.Execute(sql);
+                if (i > 0)
+                {
+                    return "添加成功";
+                }
+                else
+                {
+                    return "添加失败";
+                }
             }
-            else
+            catch (Exception)
             {
-                return "添加失败";
+
+                throw;
             }
+            
         }
     }
 }
