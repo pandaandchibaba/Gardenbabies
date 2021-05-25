@@ -14,7 +14,7 @@ namespace IOT.Core.Repository.Brokerage
 
         public List<Model.Brokerage> GetBrokerages()
         {
-            string sql = "select b.HeadPortrait,b.NickName,a.BrokerageType,a.Income,a.State,a.EndTime,a.OrderFormStatus from brokerage a join Colonel b ON a.ColonelID=b.ColonelID";
+            string sql = "select a.BId, b.HeadPortrait,b.NickName,a.BrokerageType,a.Income,a.State,a.EndTime,a.OrderFormStatus from brokerage a join Colonel b ON a.ColonelID=b.ColonelID";
             return DapperHelper.GetList<Model.Brokerage>(sql);
         }
 

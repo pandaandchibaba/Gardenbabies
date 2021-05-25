@@ -13,6 +13,7 @@ namespace IOT.Core.IRepository.Warehouse
         int Delete(string ids);
         int Insert(IOT.Core.Model.Warehouse Model);
         List<IOT.Core.Model.Warehouse> Query();
+        int UptState(int id);
 
     }
 }

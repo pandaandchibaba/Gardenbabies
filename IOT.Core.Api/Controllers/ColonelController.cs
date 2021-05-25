@@ -24,15 +24,15 @@ namespace IOT.Core.Api.Controllers
         //显示
         [Route("/api/colonel")]
         [HttpGet]
-        public IActionResult colonel(int page, int limit, string nickname = "")
+        public IActionResult colonel(string nickname = "")
         {
             var ls = _colonelRepository.ShowColonel();
             if (!string.IsNullOrEmpty(nickname))
             {
                 ls = ls.Where(x => x.NickName.Contains(nickname)).ToList();
             }
-            ls = ls.Skip((page - 1) * limit).Take(limit).ToList();
-            return Ok(new { code = 0, msg = "", Count = ls.Count, data = ls });
+            
+            return Ok(new {data = ls });
         }
 
         [Route("/api/Colonelupt")]

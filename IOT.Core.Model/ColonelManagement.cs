@@ -25,5 +25,6 @@ namespace IOT.Core.Model
         public string Address { get; set; }
         public decimal Cost { get; set; }
 
+
     }
 }

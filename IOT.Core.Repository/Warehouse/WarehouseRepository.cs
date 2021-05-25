@@ -34,5 +34,22 @@ namespace IOT.Core.Repository.Warehouse
             string sql = $"UPDATE Warehouse SET WarehouseName='{warehouse.WarehouseName}',WarehouseSite='{warehouse.WarehouseSite}',WarehouseCoordinate='{warehouse.WarehouseCoordinate}',WarehouseNum={warehouse.WarehouseNum},WarehouseState='{warehouse.WarehouseState}' WHERE WarehouseId={warehouse.WarehouseId}";
             return DapperHelper.Execute(sql);
         }
+
+        public int UptState(int id)
+        {
+            string sql = "SELECT *FROM Warehouse";
+            List<IOT.Core.Model.Warehouse> lw = DapperHelper.GetList<IOT.Core.Model.Warehouse>(sql);
+            IOT.Core.Model.Warehouse warehouse = lw.FirstOrDefault(x => x.WarehouseId.Equals(id));
+            string sqls = "";
+            if (warehouse.WarehouseState=="0")
+            {
+                sqls = $"UPDATE Warehouse SET WarehouseState='1' WHERE WarehouseId={id}";
+            }
+            else
+            {
+                sqls = $"UPDATE Warehouse SET WarehouseState='0' WHERE WarehouseId={id}";
+            }
+            return DapperHelper.Execute(sqls);
+        }
     }
 }
