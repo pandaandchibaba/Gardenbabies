@@ -11,6 +11,16 @@ namespace IOT.Core.Repository.Commodity
     public class CommodityRepository : ICommodityRepository
     {
         /// <summary>
+        /// 枚举
+        /// </summary>
+        public enum Code
+        {
+            出售中的商品 = 1,
+            仓库中的商品,
+            已销售的商品,
+            回收站的商品
+        }
+        /// <summary>
         /// 添加商品
         /// </summary>
         /// <param name="commodity"></param>
@@ -42,18 +52,19 @@ namespace IOT.Core.Repository.Commodity
             //string sql = "select * from V_Commodity ";
             StringBuilder sql = new StringBuilder();
             sql.Append("select * from V_Commodity ");
-            switch (code)
+            Code co = (Code)code;
+            switch (co)
             {
-                case 1:
+                case Code.出售中的商品:
                     sql.Append("where DeleteState=0 and State=1");
                     break;
-                case 2:
+                case Code.仓库中的商品:
                     sql.Append("where DeleteState=0");
                     break;
-                case 3:
+                case Code.已销售的商品:
                     sql.Append("where DeleteState=0 and IsSell=1");
                     break;
-                case 4:
+                case Code.回收站的商品:
                     sql.Append("where DeleteState=1");
                     break;
             }

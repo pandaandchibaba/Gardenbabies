@@ -25,7 +25,7 @@ namespace IOT.Core.IRepository.CommType
         /// 显示所有分类
         /// </summary>
         /// <returns></returns>
-        List<IOT.Core.Model.V_CommType> GetCommodities();
+        List<IOT.Core.Model.V_CommType> GetCommTypes(string st = "", string key = "");
 
         /// <summary>
         /// 删除分类
