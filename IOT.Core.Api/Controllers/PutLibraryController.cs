@@ -22,7 +22,7 @@ namespace IOT.Core.Api.Controllers
 
         [HttpGet]
         [Route("/api/ShowPutLibrary")]
-        public IActionResult ShowPutLibrary(string warehousename,string putno,string sdate = "", string zdate = "", int page = 1, int limit = 4)
+        public IActionResult ShowPutLibrary(string warehousename,string putno,string sdate = "", string zdate = "")
         {
             List<IOT.Core.Model.PutLibrary> lp = _putLibraryRepository.Query();
             if (!string.IsNullOrEmpty(warehousename))
@@ -42,8 +42,7 @@ namespace IOT.Core.Api.Controllers
             {
                 msg = "",
                 code = 0,
-                count=lp.Count,
-                data = lp.Skip((page - 1) * limit).Take(limit)
+                data = lp
             });
         }
         [HttpPost]
