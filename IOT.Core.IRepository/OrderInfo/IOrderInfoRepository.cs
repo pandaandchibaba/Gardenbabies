@@ -8,8 +8,18 @@ namespace IOT.Core.IRepository.OrderInfo
 {
     public interface IOrderInfoRepository
     {
-        List<IOT.Core.Model.OrderInfo> GetOrderInfos(string name, string state, string end, int tui, int dingt, int uid, string cname, string ziti);
-
+        /// <summary>
+        /// 订单概述
+        /// </summary>
+        /// <returns></returns>
+        List<IOT.Core.Model.v_OrderInfo> getnum();
+        List<IOT.Core.Model.OrderInfo> GetOrderInfos(string name, int state, string end, int tui, int dingt, int uid, string cname, string ziti);
+        /// <summary>
+        /// 添加
+        /// </summary>
+        /// <param name="orderInfo"></param>
+        /// <returns></returns>
+        int insert(IOT.Core.Model.OrderInfo orderInfo);
         int Delete(string ids);
         int Insert(IOT.Core.Model.OrderInfo Model);
         List<IOT.Core.Model.OrderInfo> Query();
