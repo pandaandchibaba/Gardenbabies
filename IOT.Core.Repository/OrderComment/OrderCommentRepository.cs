@@ -10,15 +10,18 @@ namespace IOT.Core.Repository.OrderComment
 {
     public class OrderCommentRepository : IOrderCommentRepository
     {
-        public int Del(string ids)
+        public int Del(int id)
         {
-            string sql = $"delete from OrderComment where Commentid in ({ids})";
+            string sql = $"delete from OrderComment where Commentid ={id}";
             return DapperHelper.Execute(sql) ;
         }
 
         public List<Model.OrderComment> Query()
         {
-            string sql = $"SELECT * FROM OrderComment a JOIN Com_Comment b on a.Com_CommentId=b.Com_CommentId";
+            string sql = @$"SELECT a.*,b.*,c.commodityPic,c.commodityName FROM 
+OrderComment a 
+JOIN Com_Comment b on a.Com_CommentId=b.Com_CommentId
+JOIN Commodity c ON c.CommodityId=b.CommodityId";
             return DapperHelper.GetList<Model.OrderComment>(sql);
         }
 

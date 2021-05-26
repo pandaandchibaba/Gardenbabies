@@ -10,7 +10,7 @@ namespace IOT.Core.IRepository.OrderComment
     {
         List<IOT.Core.Model.OrderComment> Query();
         int UptState(int id);
-        int Del(string ids);
+        int Del(int id);
 
     }
 }
