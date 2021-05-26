@@ -33,9 +33,13 @@ namespace IOT.Core.Api.Controllers
             {
                 lp = lp.Where(x => x.PutNO.Contains(putno)).ToList();
             }
-            if (!string.IsNullOrEmpty(sdate) && !string.IsNullOrEmpty(zdate))
+            if (!string.IsNullOrEmpty(sdate))
             {
-                lp = lp.Where(x => x.PutDate >= Convert.ToDateTime(sdate)&x.PutDate<= Convert.ToDateTime(zdate)).ToList();
+                lp = lp.Where(x => x.PutDate >= Convert.ToDateTime(sdate)).ToList();
+            }
+            if (!string.IsNullOrEmpty(zdate))
+            {
+                lp = lp.Where(x =>x.PutDate <= Convert.ToDateTime(zdate)).ToList();
             }
 
             return Ok(new

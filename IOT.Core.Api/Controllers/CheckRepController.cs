@@ -42,9 +42,13 @@ namespace IOT.Core.Api.Controllers
             {
                 lc = lc.Where(x => x.WarehouseName.Contains(warehousename)).ToList();
             }
-            if (!string.IsNullOrEmpty(sdate) && !string.IsNullOrEmpty(zdate))
+            if (!string.IsNullOrEmpty(sdate))
             {
-                lc = lc.Where(x => x.CheckDate >= Convert.ToDateTime(sdate) & x.CheckDate <= Convert.ToDateTime(zdate)).ToList();
+                lc = lc.Where(x => x.CheckDate >= Convert.ToDateTime(sdate)).ToList();
+            }
+            if (!string.IsNullOrEmpty(zdate))
+            {
+                lc = lc.Where(x => x.CheckDate <= Convert.ToDateTime(zdate)).ToList();
             }
             return Ok(new
             {
