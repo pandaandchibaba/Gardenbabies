@@ -26,11 +26,15 @@ namespace IOT.Core.Api.Controllers
 
         [Route("/Api/TOShow")]
         [HttpGet]
-        public IActionResult TOShow(int page,int limit)
+        public IActionResult TOShow(string sname="")
         {
             var ls = _pathRepository.GthXS();
-            ls = ls.Skip((page - 1) * limit).Take(limit).ToList();
-            return Ok(new {code=0,msg="",count=ls.Count, data = ls });
+            if (!string.IsNullOrEmpty(sname))
+            { 
+              ls=ls.Where(x=>x.PName.Contains(sname)).ToList();
+            }
+           
+            return Ok(new {data = ls });
         }
         /// <summary>
         /// 添加

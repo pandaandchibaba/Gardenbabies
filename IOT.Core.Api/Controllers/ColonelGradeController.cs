@@ -26,7 +26,7 @@ namespace IOT.Core.Api.Controllers
             return Ok( new{data = ls });
         }
         [Route("/Api/delte")]
-        [HttpDelete]
+        [HttpGet]
         public int  delte(string id)
         {
             int i = _colonelGradeRepository.Edit(id);
@@ -41,9 +41,10 @@ namespace IOT.Core.Api.Controllers
         }
         [Route("/api/Uptdatas")]
         [HttpPost]
-        public int Uptdatas(int id)
+        public int Uptdatas(int Cid)
         {
-            return _colonelGradeRepository.UptState(id);
+            int i = _colonelGradeRepository.UptState(Cid);
+            return i;
         }
 
         [Route("/api/FTS")]
