@@ -23,7 +23,7 @@ namespace IOT.Core.Api.Controllers
 
         [HttpGet]
         [Route("/api/ShowOutLibrary")]
-        public IActionResult ShowOutLibrary(string warehousename, string putno, string sdate = "", string zdate = "", int page = 1, int limit = 4)
+        public IActionResult ShowOutLibrary(string warehousename, string putno, string sdate = "", string zdate = "")
         {
             List<IOT.Core.Model.OutLibrary> lp = _outLibraryRepository.Query();
             if (!string.IsNullOrEmpty(warehousename))
@@ -34,17 +34,20 @@ namespace IOT.Core.Api.Controllers
             {
                 lp = lp.Where(x => x.OutNO.Contains(putno)).ToList();
             }
-            if (!string.IsNullOrEmpty(sdate) && !string.IsNullOrEmpty(zdate))
+            if (!string.IsNullOrEmpty(sdate))
             {
-                lp = lp.Where(x => x.OutDate >= Convert.ToDateTime(sdate) & x.OutDate <= Convert.ToDateTime(zdate)).ToList();
+                lp = lp.Where(x => x.OutDate >= Convert.ToDateTime(sdate)).ToList();
+            }
+            if (!string.IsNullOrEmpty(zdate))
+            {
+                lp = lp.Where(x => x.OutDate <= Convert.ToDateTime(zdate)).ToList();
             }
 
             return Ok(new
             {
                 msg = "",
                 code = 0,
-                count = lp.Count,
-                data = lp.Skip((page - 1) * limit).Take(limit)
+                data = lp
             });
         }
 

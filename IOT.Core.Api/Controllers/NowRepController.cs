@@ -19,7 +19,7 @@ namespace IOT.Core.Api.Controllers
 
         [HttpGet]
         [Route("/api/ShowNowRep")]
-        public IActionResult ShowNowRep(string commodityname,string warehousename, int page = 1, int limit = 4)
+        public IActionResult ShowNowRep(string commodityname,string warehousename)
         {
             List<IOT.Core.Model.NowRep> ln = _nowRepRepository.Query();
             if (!string.IsNullOrEmpty(commodityname))
@@ -34,8 +34,7 @@ namespace IOT.Core.Api.Controllers
             {
                 msg = "",
                 code = 0,
-                count = ln.Count,
-                data = ln.Skip((page - 1) * limit).Take(limit)
+                data = ln
             });
         }
 
