@@ -37,6 +37,7 @@ namespace IOT.Core.Api.Controllers
                         data = list
                     });
                 }
+
                 else
                 {
                     
