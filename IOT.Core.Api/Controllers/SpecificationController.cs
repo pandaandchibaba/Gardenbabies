@@ -26,7 +26,7 @@ namespace IOT.Core.Api.Controllers
         /// </summary>
         /// <param name="specification"></param>
         /// <returns></returns>
-        [HttpPost("/Specification/CreateSpecification")]
+        [HttpPost("/api/CreateSpecification")]
         public string CreateSpecification(IOT.Core.Model.Specification specification)
         {
             return _specification.CreateSpecification(specification);
@@ -37,8 +37,8 @@ namespace IOT.Core.Api.Controllers
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        [HttpPost("/Specification/DeleteSpecification")]
-        public int DeleteSpecification([FromForm] string ids)
+        [HttpGet("/api/DeleteSpecification")]
+        public int DeleteSpecification(string ids)
         {
             return _specification.DeleteSpecification(ids);
         }
@@ -48,7 +48,7 @@ namespace IOT.Core.Api.Controllers
         /// </summary>
         /// <param name="sid"></param>
         /// <returns></returns>
-        [HttpGet("/Specification/GetSpecificationBySId")]
+        [HttpGet("/api/GetSpecificationBySId")]
         public IActionResult GetSpecificationBySId(int sid)
         {
             return Ok(_specification.GetSpecificationBySId(sid));
@@ -61,7 +61,7 @@ namespace IOT.Core.Api.Controllers
         /// <param name="limit"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        [HttpGet("/Specification/GetSpecifications")]
+        [HttpGet("/api/GetSpecifications")]
         public IActionResult GetSpecifications(int page, int limit, string key = "")
         {
             //获取全部数据
