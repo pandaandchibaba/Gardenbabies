@@ -16,6 +16,12 @@ namespace IOT.Core.Repository.Store
             return DapperHelper.Execute(sql);
         }
 
+        public List<Model.Commodity> GetCommodities()
+        {
+            string sql = "SELECT *FROM Commodity";
+            return DapperHelper.GetList<IOT.Core.Model.Commodity>(sql);
+        }
+
         public List<Model.Store> GetStores()
         {
             string sql = $"SELECT * FROM Store ";
@@ -32,6 +38,30 @@ namespace IOT.Core.Repository.Store
         {
             string sql = $"INSERT INTO Store VALUES(NULL,'{Model.MName}','{Model.Shopowner}','{Model.Goods}','{Model.Volume}','{Model.StoreType}','{Model.Extraction}','{Model.State}','{Model.StoreNo}','{Model.Pwd}','{Model.Phone}','{Model.Background}','{Model.Logo}','{Model.Approve}')";
             return DapperHelper.Execute(sql);
+        }
+        /// <summary>
+        /// 修改商品状态
+        /// </summary>
+        /// <param name="cid"></param>
+        /// <returns></returns>
+        public int UptCom(int cid)
+        {
+            string sql = $"SELECT * FROM Commodity ";
+
+            List<IOT.Core.Model.Commodity> list = DapperHelper.GetList<IOT.Core.Model.Commodity>(sql);
+
+            IOT.Core.Model.Commodity order = list.FirstOrDefault(x => x.CommodityId.Equals(cid));
+            string sqlq = "";
+            if (order.State == 0)
+            {
+                sqlq = $"UPDATE Commodity SET State=State+1 where CommodityId={cid}";
+            }
+            else
+            {
+                sqlq = $"UPDATE Commodity SET State=State-1 where CommodityId={cid}";
+
+            }
+            return DapperHelper.Execute(sqlq);
         }
 
         public int UptStore(Model.Store Model)

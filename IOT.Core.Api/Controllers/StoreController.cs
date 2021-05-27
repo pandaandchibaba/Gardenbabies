@@ -12,23 +12,41 @@ namespace IOT.Core.Api.Controllers
     [ApiController]
     public class StoreController : ControllerBase
     {
-        private readonly IStoreRepository  _storeRepository;
+        private readonly IStoreRepository _storeRepository;
 
-        public StoreController(IStoreRepository  storeRepository)
+        public StoreController(IStoreRepository storeRepository)
         {
             _storeRepository = storeRepository;
         }
 
+        [Route("/api/GetCommodity")]
+        [HttpGet]
+        public IActionResult GetCommodity(string ids)
+        {
+            var list = _storeRepository.GetCommodities();
+            if (!string.IsNullOrEmpty(ids))
+            {
+                list = list.Where(x => x.CommodityId.ToString().Equals(ids) || x.CommodityName.Contains(ids)).ToList();
+            }
+            return Ok(new
+            {
+                msg = "",
+                code = 0,
+                data = list
+            });
+        }
+
+
         [Route("/api/GetStores")]
         [HttpGet]
-        public IActionResult GetStores( int pageindex = 1, int pagesize = 2)
+        public IActionResult GetStores()
         {
             var list = _storeRepository.GetStores();
             return Ok(new
             {
                 msg = "",
                 code = 0,
-                data = list.Skip((pageindex - 1) * pagesize).Take(pagesize)
+                data = list
             });
         }
         [Route("/api/GetStoresFan")]
@@ -67,6 +85,20 @@ namespace IOT.Core.Api.Controllers
             int i = _storeRepository.UptStore(Model);
             return i;
         }
+
+        /// <summary>
+        /// 修改商品状态
+        /// </summary>
+        /// <param name="cid"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("/api/UptCom")]
+        public int UptCom(int cid)
+        {
+            int i = _storeRepository.UptCom(cid);
+            return i;
+        }
+
         [HttpPost]
         [Route("/api/UptStoreState")]
 
