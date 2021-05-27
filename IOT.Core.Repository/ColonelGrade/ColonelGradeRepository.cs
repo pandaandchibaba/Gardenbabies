@@ -35,19 +35,38 @@ namespace IOT.Core.Repository.ColonelGrade
             return DapperHelper.Execute(sql);
         }
 
-        public int UptState(int Cid)
+        //public int UptState(int id)
+        //{
+        //    IOT.Core.Model.ColonelGrade ls = DapperHelper.GetList<IOT.Core.Model.ColonelGrade>($"select * from ColonelGrade  where CGId  ={id}").FirstOrDefault();
+        //    if (ls.GradeStatus==0)
+        //    {
+        //        ls.GradeStatus = 1;
+        //    }
+        //    else
+        //    {
+        //        ls.GradeStatus = 0;
+        //    }
+        //    string sql = $"update ColonelGrade set GradeStatus={ls.GradeStatus} where CGId  ={ls.CGId} ";
+        //    return DapperHelper.Execute(sql);
+        //}
+
+        //修改状态
+        public int UptState(int id)
         {
-            IOT.Core.Model.ColonelGrade ls = DapperHelper.GetList<IOT.Core.Model.ColonelGrade>($"select * from ColonelGrade  where CGId  ={Cid}").FirstOrDefault();
-            if (ls.GradeStatus == 0)
+            string sql = $"select * from ColonelGrade  where CGId";
+            List<IOT.Core.Model.ColonelGrade> list = DapperHelper.GetList<IOT.Core.Model.ColonelGrade>(sql);
+            IOT.Core.Model.ColonelGrade oreder = list.FirstOrDefault (x => x.CGId.Equals(id));
+            string sqlq = "";
+            if (oreder.GradeStatus == 0)
             {
-                ls.GradeStatus = 1;
+                sqlq = $"update ColonelGrade set GradeStatus=GradeStatus+1 where CGId  ={id}";
             }
             else
             {
-                ls.GradeStatus = 0;
+                sqlq = $"update ColonelGrade set GradeStatus=GradeStatus-1 where CGId  ={id}";
             }
-            string sql = $"update ColonelGrade set GradeStatus={ls.GradeStatus} where CGId  ={Cid} ";
-            return DapperHelper.Execute(sql);
+            return DapperHelper.Execute(sqlq);
+
         }
     }
 }

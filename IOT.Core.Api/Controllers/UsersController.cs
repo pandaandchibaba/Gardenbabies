@@ -66,7 +66,7 @@ namespace IOT.Core.Api.Controllers
             int i = _usersRepository.UptUsersState(id);
             return i;
         }
-        [HttpDelete]
+        [HttpGet]
         [Route("/api/DelUsers")]
 
         public int DelUsers(int ids)
