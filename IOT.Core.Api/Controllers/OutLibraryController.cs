@@ -50,7 +50,7 @@ namespace IOT.Core.Api.Controllers
                 data = lp
             });
         }
-
+        //添加
         [HttpPost]
         [Route("/api/AddOutLibrary")]
         public int AddOutLibrary(IOT.Core.Model.OutLibrary outLibrary)
@@ -58,7 +58,7 @@ namespace IOT.Core.Api.Controllers
             int i = _outLibraryRepository.Insert(outLibrary);
             return i;
         }
-
+        //删除
         [HttpDelete]
         [Route("/api/DelOutLibrary")]
         public int DelOutLibrary(string ids)
@@ -67,6 +67,7 @@ namespace IOT.Core.Api.Controllers
             return i;
 
         }
+
         [HttpPut]
         [Route("/api/UptOutLibrary")]
         public int UptOutLibrary(IOT.Core.Model.OutLibrary outLibrary)
