@@ -62,5 +62,6 @@ namespace IOT.Core.IRepository.Store
         /// <returns></returns>
         /// 
         int DelCom(int ids);
+
     }
 }

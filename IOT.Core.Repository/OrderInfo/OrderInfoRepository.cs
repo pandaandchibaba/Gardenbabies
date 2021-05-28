@@ -24,13 +24,11 @@ namespace IOT.Core.Repository.OrderInfo
         /// <param name="cname"></param>
         /// <param name="ziti"></param>
         /// <returns></returns>
-        public List<Model.OrderInfo> GetOrderInfos(string name, int state, string end, int tui, int dingt, int uid, string cname, string ziti)
+        public List<Model.OrderInfo> GetOrderInfos(string name, int sendway, string state, string end, int tui, int dingt, int uid, string cname, string ziti)
         {
 
             string sql = $@"select b.CommodityName ,b.CommodityPic ,b.ShopPrice ,b.SId ,
-             c.NickName ,c.UserName ,c.Phone ,c.Address ,
-			a.*
-            from OrderInfo a
+             c.NickName ,c.UserName ,c.Phone ,c.Address ,a.* from OrderInfo a
             join Commodity b on a.CommodityId = b.CommodityId
             join Users c on a.UserId = c.UserId 
             join Colonel d on c.ColonelID=d.ColonelID";
@@ -55,7 +53,11 @@ namespace IOT.Core.Repository.OrderInfo
         /// <returns></returns>
         public List<Model.OrderInfo> Query()
         {
-            string sql = $@"select* from OrderInfo";
+            string sql = $@"select a.*,b.*,c.*,d.*
+            from OrderInfo a
+            join Commodity b on a.CommodityId = b.CommodityId
+            join Users c on a.UserId = c.UserId 
+            join Colonel d on c.ColonelID=d.ColonelID";
             return DapperHelper.GetList<Model.OrderInfo>(sql);
         }
 
@@ -81,7 +83,9 @@ namespace IOT.Core.Repository.OrderInfo
         {
             string sql = $"SELECT CONCAT(DATE_FORMAT(now(), '%Y%m%d%H%i%s'),lpad(round(round(rand(),4)*1000),4,'0'))";
             var num = DapperHelper.Exescalar(sql);
-            string sqls = $"insert INTO OrderInfo values(NULL,'{num}','{orderInfo.CommodityId}','{orderInfo.UserId}','{orderInfo.SendWay}','{orderInfo.OrderState}','{orderInfo.Remark}','{orderInfo.CommodityPrice}','{orderInfo.DistributionCosts}','{orderInfo.OrderPrice}','{orderInfo.CouponPrice}','{orderInfo.AmountPaid}','{orderInfo.StartTime}')";
+            string sqla = $"SELECT CONCAT(DATE_FORMAT(now(), '%Y%m%d%H%i%s'),lpad(round(round(rand(),4)*1000),4,'0'))";
+            var nums = DapperHelper.Exescalar(sqla);
+            string sqls = $"insert INTO OrderInfo values(NULL,'{num}','{nums}','{orderInfo.CommodityId}','{orderInfo.UserId}','{orderInfo.SendWay}','{orderInfo.OrderState}','{orderInfo.Remark}','{orderInfo.CommodityPrice}','{orderInfo.DistributionCosts}','{orderInfo.OrderPrice}','{orderInfo.CouponPrice}','{orderInfo.AmountPaid}','{orderInfo.StartTime}')";
             return DapperHelper.Execute(sqls);
         }
 

@@ -23,12 +23,12 @@ namespace IOT.Core.Api.Controllers
 
         [HttpGet]
         [Route("/api/GetListOrderInfo")]
-        public IActionResult GetListOrderInfo(string name = "", int state = 0, string end = "", int tui = 0, int dingt = 0, int uid = 0, string cname = "", string ziti = "")
+        public IActionResult GetListOrderInfo(string name = "",int sendway = 0 ,string state = "", string end = "", int tui = 0, int dingt = 0, int uid = 0, string cname = "", string ziti = "")
         {
             try
             {
-                List<IOT.Core.Model.OrderInfo> list = _orderInfoRepository.GetOrderInfos(name, state, end, tui, dingt, uid, cname, ziti);
-                if (name==""&&state==0&&end==""&&tui==0&&dingt==0&&uid==0&& cname==""&&ziti=="")
+                List<IOT.Core.Model.OrderInfo> list = _orderInfoRepository.GetOrderInfos(name,sendway, state, end, tui, dingt, uid, cname, ziti);
+                if (name==""&&sendway==0&&state==""&&end==""&&tui==0&&dingt==0&&uid==0&& cname==""&&ziti=="")
                 {
                     return Ok(new
                     {
@@ -43,15 +43,19 @@ namespace IOT.Core.Api.Controllers
                     
                     if (!string.IsNullOrEmpty(name))
                     {
-                        list = list.Where(x => x.CommodityName.Contains(name) || x.Phone.Contains(name)).ToList();
+                        list = list.Where(x => x.CommodityName.Contains(name) || x.Phone.Contains(name)||x.Ordernumber.Contains(name)).ToList();
                     }
-                    if (state!=0)
+                    if (sendway != 0)
                     {
-                        list = list.Where(x => x.OrderState == state).ToList();
+                        list = list.Where(x => x.SendWay == sendway).ToList();
+                    }
+                    if (!string.IsNullOrEmpty(state))
+                    {
+                        list = list.Where(x => x.StartTime >= Convert.ToDateTime(end)).ToList();
                     }
                     if (!string.IsNullOrEmpty(end))
                     {
-                        list = list.Where(x => x.StartTime < Convert.ToDateTime(state)).ToList();
+                        list = list.Where(x => x.StartTime <=Convert.ToDateTime(end)).ToList();
                     }
                     if (tui != 0)
                     {
@@ -59,7 +63,7 @@ namespace IOT.Core.Api.Controllers
                     }
                     if (dingt != 0)
                     {
-                        list = list.Where(x => x.OrderState == tui).ToList();
+                        list = list.Where(x => x.OrderState == dingt).ToList();
                     }
                     if (uid != 0)
                     {
@@ -134,7 +138,7 @@ namespace IOT.Core.Api.Controllers
         [HttpPost]
         [Route("/api/UptOrderInfoRemark")]
         
-        public int UptRemark(Model.OrderInfo Model)
+        public int UptRemark([FromForm]Model.OrderInfo Model)
         {
             try
             {
@@ -150,7 +154,7 @@ namespace IOT.Core.Api.Controllers
         [HttpPost]
         [Route("/api/UptOrderInfoSendWay")]
         
-        public int UptSendWay(Model.OrderInfo Model)
+        public int UptSendWay([FromForm]Model.OrderInfo Model)
         {
             try
             {
@@ -166,7 +170,7 @@ namespace IOT.Core.Api.Controllers
         [HttpPost]
         [Route("/api/UptOrderInfoOrderState")]
         
-        public int UptOrderState(Model.OrderInfo Model)
+        public int UptOrderState([FromForm]Model.OrderInfo Model)
         {
             try
             {
