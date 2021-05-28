@@ -36,7 +36,7 @@ namespace IOT.Core.Api.Controllers
                 data = list
             });
         }
-
+      
 
         //显示门店
         [Route("/api/GetStores")]
