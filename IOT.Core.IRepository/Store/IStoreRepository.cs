@@ -63,7 +63,5 @@ namespace IOT.Core.IRepository.Store
         /// 
         int DelCom(int ids);
 
-        //订单显示查询
-        List<IOT.Core.Model.OrderInfo> GetOrder();
     }
 }

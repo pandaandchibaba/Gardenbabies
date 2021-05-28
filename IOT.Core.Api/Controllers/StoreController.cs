@@ -37,47 +37,6 @@ namespace IOT.Core.Api.Controllers
             });
         }
 
-        //显示订单
-        [Route("/api/GetOrder")]
-        [HttpGet]
-        public IActionResult GetOrder(int id=0,string name="")
-        {
-            var list = _storeRepository.GetOrder();
-            if (id==0&&string.IsNullOrEmpty(name))
-            {
-                return Ok(new
-                {
-                    msg = "",
-                    code = 0,
-                    data = list
-                });
-            }
-            else
-            {
-                if (id == 1)
-                {
-                    list = list.Where(x => x.Ordernumber.Equals(name)).ToList();
-                }
-                if (id == 2)
-                {
-                    list = list.Where(x => x.UserName.Equals(name)).ToList();
-                }
-                if (id == 3)
-                {
-                    list = list.Where(x => x.Phone.Contains(name)).ToList();
-                }
-
-
-                return Ok(new
-                {
-                    msg = "",
-                    code = 0,
-                    data = list
-                });
-            }
-
-           
-        }
 
         //显示门店
         [Route("/api/GetStores")]
