@@ -37,7 +37,7 @@ namespace IOT.Core.Api.Controllers
         /// <param name="comm"></param>
         /// <returns></returns>
         [HttpPost("/api/CreateType")]
-        public string CreateType(IOT.Core.Model.CommType comm)
+        public string CreateType([FromForm]IOT.Core.Model.CommType comm)
         {
             return _commType.CreateType(comm);
         }
@@ -82,7 +82,8 @@ namespace IOT.Core.Api.Controllers
         [HttpGet("/api/GetCommTypeByTid")]
         public IActionResult GetCommTypeByTid(int tid)
         {
-            return Ok(_commType.GetCommTypeByTid(tid));
+            IOT.Core.Model.V_CommType comm = _commType.GetCommTypeByTid(tid);
+            return Ok(comm);
         }
 
         /// <summary>

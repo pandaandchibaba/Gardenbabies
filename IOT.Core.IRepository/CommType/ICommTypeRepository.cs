@@ -46,7 +46,7 @@ namespace IOT.Core.IRepository.CommType
         /// </summary>
         /// <param name="tid"></param>
         /// <returns></returns>
-        IOT.Core.Model.CommType GetCommTypeByTid(int tid);
+        IOT.Core.Model.V_CommType GetCommTypeByTid(int tid);
 
         /// <summary>
         /// 绑定类别下拉

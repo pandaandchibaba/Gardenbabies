@@ -68,6 +68,7 @@ namespace IOT.Core.Repository.Commodity
                     sql.Append("where DeleteState=1");
                     break;
             }
+            sql.Append(" order by sort");
             List<IOT.Core.Model.V_Commodity> lst = DapperHelper.GetList<IOT.Core.Model.V_Commodity>(sql.ToString());
             //类别查询
             if (tid != 0)

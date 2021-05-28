@@ -20,5 +20,6 @@ namespace IOT.Core.Model
         public string RevertContent   { get; set; }
         public string CommentPic      { get; set; }
         public string CommentTime     { get; set; }
+        public int CommentState { get; set; }
     }
 }

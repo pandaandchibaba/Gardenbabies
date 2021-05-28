@@ -9,10 +9,15 @@ namespace IOT.Core.IRepository.Store
     public interface IStoreRepository
     {
         /// <summary>
-        /// 显示
+        /// 显示门店
         /// </summary>
         /// <returns></returns>
         List<IOT.Core.Model.Store> GetStores();
+        /// <summary>
+        /// 显示商品
+        /// </summary>
+        /// <returns></returns>
+        List<IOT.Core.Model.Commodity> GetCommodities();
         /// <summary>
         /// 反填
         /// </summary>
@@ -32,16 +37,30 @@ namespace IOT.Core.IRepository.Store
         /// <returns></returns>
         int UptStore(Model.Store Model);
         /// <summary>
-        /// 修改状态
+        /// 修改门店状态
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         int UptStoreState(int id);
+        /// <summary>
+        /// 修改商品状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        int UptCom(int cid);
+
         /// <summary>
         /// 删除
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
         int DelStore(int ids);
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        /// 
+        int DelCom(int ids);
     }
 }

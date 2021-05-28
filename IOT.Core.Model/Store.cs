@@ -25,6 +25,8 @@ namespace IOT.Core.Model
         public string Background   { get; set; }
         public string Logo         { get; set; }
         public int Approve { get; set; }
-    
+
+      
+
     }
 }

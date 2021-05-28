@@ -18,7 +18,7 @@ namespace IOT.Core.Repository.NowRep
 
         public List<Model.NowRep> Query()
         {
-            string sql = "SELECT b.CommodityPic,b.CommodityName,b.CommodityId,c.WarehouseName,d.GoodNum,d.GoodNum GoodNums FROM NowRep a JOIN Commodity b ON a.CommodityId=b.CommodityId JOIN Warehouse c ON a.WarehouseId=c.WarehouseId JOIN PutLibrary d ON a.PutLibraryId=d.PutLibraryId JOIN OutLibrary e ON a.PutLibraryId = e.PutLibraryId";
+            string sql = "SELECT a.NowRepId, b.CommodityPic,b.CommodityName,b.CommodityId,c.WarehouseName,d.GoodNum,e.GoodNum GoodNums FROM NowRep a JOIN Commodity b ON a.CommodityId=b.CommodityId JOIN Warehouse c ON a.WarehouseId=c.WarehouseId JOIN PutLibrary d ON a.PutLibraryId=d.PutLibraryId JOIN OutLibrary e ON a.PutLibraryId = e.PutLibraryId";
             return DapperHelper.GetList<IOT.Core.Model.NowRep>(sql);
         }
 
