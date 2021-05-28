@@ -94,7 +94,7 @@ namespace IOT.Core.Repository.CommType
         /// <returns></returns>
         public List<IOT.Core.Model.V_CommType> GetCommTypes(string st = "", string key = "")
         {
-            List<IOT.Core.Model.V_CommType> lst = DapperHelper.GetList<IOT.Core.Model.V_CommType>("select * from V_CommType ");
+            List<IOT.Core.Model.V_CommType> lst = DapperHelper.GetList<IOT.Core.Model.V_CommType>("select * from V_CommType order by sort");
             //状态
             if (!string.IsNullOrEmpty(st))
             { 
@@ -112,9 +112,9 @@ namespace IOT.Core.Repository.CommType
         /// </summary>
         /// <param name="tid"></param>
         /// <returns></returns>
-        public Model.CommType GetCommTypeByTid(int tid)
+        public Model.V_CommType GetCommTypeByTid(int tid)
         {
-            return DapperHelper.GetList<IOT.Core.Model.CommType>("select * from CommType").FirstOrDefault();
+            return DapperHelper.GetList<IOT.Core.Model.V_CommType>($"select * from V_CommType where TId={tid}").FirstOrDefault();
         }
 
         /// <summary>
