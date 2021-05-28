@@ -8,7 +8,7 @@ namespace IOT.Core.IRepository.Withdrawal
 {
     public interface IWithdrawalRepository
     {
-        List<IOT.Core.Model.Withdrawal> Query(string name);
+        List<IOT.Core.Model.Withdrawal> Query ();
 
     }
 }
