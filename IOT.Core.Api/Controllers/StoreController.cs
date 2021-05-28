@@ -14,11 +14,12 @@ namespace IOT.Core.Api.Controllers
     {
         private readonly IStoreRepository _storeRepository;
 
+
         public StoreController(IStoreRepository storeRepository)
         {
             _storeRepository = storeRepository;
         }
-
+        //显示商品
         [Route("/api/GetCommodity")]
         [HttpGet]
         public IActionResult GetCommodity(string ids)
@@ -35,8 +36,9 @@ namespace IOT.Core.Api.Controllers
                 data = list
             });
         }
+      
 
-
+        //显示门店
         [Route("/api/GetStores")]
         [HttpGet]
         public IActionResult GetStores()

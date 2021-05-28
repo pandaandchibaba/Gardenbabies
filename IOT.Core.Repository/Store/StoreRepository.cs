@@ -28,6 +28,7 @@ namespace IOT.Core.Repository.Store
             return DapperHelper.GetList<IOT.Core.Model.Commodity>(sql);
         }
 
+
         public List<Model.Store> GetStores()
         {
             string sql = $"SELECT * FROM Store ";
