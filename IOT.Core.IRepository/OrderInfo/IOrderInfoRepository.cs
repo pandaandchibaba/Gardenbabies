@@ -13,7 +13,7 @@ namespace IOT.Core.IRepository.OrderInfo
         /// </summary>
         /// <returns></returns>
         List<IOT.Core.Model.v_OrderInfo> getnum();
-        List<IOT.Core.Model.OrderInfo> GetOrderInfos(string name, int state, string end, int tui, int dingt, int uid, string cname, string ziti);
+        List<IOT.Core.Model.OrderInfo> GetOrderInfos(string name, int sendway, string state, string end, int tui, int dingt, int uid, string cname, string ziti);
         /// <summary>
         /// 添加
         /// </summary>
