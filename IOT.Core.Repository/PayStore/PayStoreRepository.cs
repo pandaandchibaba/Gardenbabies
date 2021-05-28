@@ -11,7 +11,13 @@ namespace IOT.Core.Repository.PayStore
 {
     public class PayStoreRepository : IPayStoreRepository
     {
-    
+        public List<Model.PayStore> GetPayStores()
+        {
+            string sql = "SELECT *FROM PayStore where Pid=1";
+            List<Model.PayStore> lp = DapperHelper.GetList<Model.PayStore>(sql);
+            return lp;
+        }
+
         public int UptCollection(Model.PayStore Model)
         {
             string sql = "SELECT *FROM PayStore";
