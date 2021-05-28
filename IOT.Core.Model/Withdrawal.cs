@@ -20,5 +20,6 @@ namespace IOT.Core.Model
         public string WTTime { get { return Wtime.ToString("yyyy-MM-dd HH:MM:ss"); } }
         public int State { get; set; }
         public int Mid { get; set; }
+        public string Mname { get; set; }
     }
 }

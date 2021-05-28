@@ -61,6 +61,16 @@ namespace IOT.Core.Api.Controllers
                 data = list
             });
         }
+        //删除商品
+        [HttpDelete]
+        [Route("/api/DelCom")]
+
+        public int DelCom(int ids)
+        {
+            int i = _storeRepository.DelCom(ids);
+            return i;
+        }
+        //删除门店
         [HttpDelete]
         [Route("/api/DelStore")]
 

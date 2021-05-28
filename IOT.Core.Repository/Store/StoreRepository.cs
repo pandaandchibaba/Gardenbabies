@@ -10,6 +10,12 @@ namespace IOT.Core.Repository.Store
 {
     public class StoreRepository : IStoreRepository
     {
+        public int DelCom(int ids)
+        {
+            string sql = $"DELETE FROM Commodity WHERE CommodityId=({ids})";
+            return DapperHelper.Execute(sql);
+        }
+
         public int DelStore(int ids)
         {
             string sql = $"delete from Store where Mid in ({ids})";
