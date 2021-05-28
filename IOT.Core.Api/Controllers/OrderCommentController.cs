@@ -21,14 +21,14 @@ namespace IOT.Core.Api.Controllers
         [HttpGet]
         [Route("/api/GetOrderComment")]
 
-        public IActionResult GetOrderComment(int pageindex=1,int pagesize=2)
+        public IActionResult GetOrderComment()
         {
             var list = _orderCommentRepository.Query();
             return Ok(new
             {
                 msg = "",
                 code = 0,
-                data = list.Skip((pageindex - 1) * pagesize).Take(pagesize)
+                data = list
             });
         }
 
@@ -44,9 +44,9 @@ namespace IOT.Core.Api.Controllers
         [HttpDelete]
         [Route("/api/DelOrderComment")]
 
-        public int Del(string ids)
+        public int Del(int id)
         {
-            int i = _orderCommentRepository.Del(ids);
+            int i = _orderCommentRepository.Del(id);
             return i;
         }
     }

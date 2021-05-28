@@ -17,17 +17,20 @@ namespace IOT.Core.Api.Controllers
         {
             _withdrawalRepository = withdrawalRepository;
         }
-        [HttpPost]
-        [Route("/api/Query")]
-        public IActionResult GetWithdrawals(string name="",int page=1,int limit=2)
+        [HttpGet]
+        [Route("/api/GetWithdrawals")]
+        public IActionResult GetWithdrawals(string name="")
         {
-            List<Model.Withdrawal> list = _withdrawalRepository.Query(name);
+            List<Model.Withdrawal> list = _withdrawalRepository.Query();
+            if (!string.IsNullOrEmpty(name))
+            {
+                list = list.Where(x => x.Mname.Contains(name)).ToList();
+            }
             return Ok(new
             {
                 msg = "",
                 code = 0,
-                count = list.Count,
-                data = list.Skip((page - 1) * limit).Take(limit)
+                data = list
             });
         }
     }

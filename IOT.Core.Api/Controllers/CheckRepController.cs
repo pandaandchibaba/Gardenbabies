@@ -31,7 +31,7 @@ namespace IOT.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("/api/ShowCheckRep")]
-        public IActionResult ShowCheckRep(string checkno, string warehousename, string sdate = "", string zdate = "", int page = 1, int limit = 4)
+        public IActionResult ShowCheckRep(string checkno, string warehousename, string sdate = "", string zdate = "")
         {
             List<IOT.Core.Model.CheckRep> lc = _checkRepRepository.Query();
             if (!string.IsNullOrEmpty(checkno))
@@ -42,16 +42,19 @@ namespace IOT.Core.Api.Controllers
             {
                 lc = lc.Where(x => x.WarehouseName.Contains(warehousename)).ToList();
             }
-            if (!string.IsNullOrEmpty(sdate) && !string.IsNullOrEmpty(zdate))
+            if (!string.IsNullOrEmpty(sdate))
             {
-                lc = lc.Where(x => x.CheckDate >= Convert.ToDateTime(sdate) & x.CheckDate <= Convert.ToDateTime(zdate)).ToList();
+                lc = lc.Where(x => x.CheckDate >= Convert.ToDateTime(sdate)).ToList();
+            }
+            if (!string.IsNullOrEmpty(zdate))
+            {
+                lc = lc.Where(x => x.CheckDate <= Convert.ToDateTime(zdate)).ToList();
             }
             return Ok(new
             {
                 msg = "",
                 code = 0,
-                count=lc.Count,
-                data = lc.Skip((page - 1) * limit).Take(limit)
+                data = lc
             });
         }
 

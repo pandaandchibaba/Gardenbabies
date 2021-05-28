@@ -21,6 +21,7 @@ namespace IOT.Core.Model
         ///
 
         public int CommodityId       { get; set; }
+
         public int UserId            { get; set; }
         public int CommGrade         { get; set; }
         public int SeverGrade        { get; set; }
@@ -28,6 +29,9 @@ namespace IOT.Core.Model
         public string RevertContent     { get; set; }
         public string CommentPic        { get; set; }
         public string CommentTime       { get; set; }
+        public string CommodityPic { get; set; }
+        public string CommodityName { get; set; }
+        
 
     }
 }

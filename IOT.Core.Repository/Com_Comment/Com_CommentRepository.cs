@@ -11,6 +11,16 @@ namespace IOT.Core.Repository.Com_Comment
 {
     public class Com_CommentRepository : ICom_CommentRepository
     {
+        public enum Days
+        {
+            全部 = 0,
+            今天 = 1,
+            昨天 = 2,
+            最近七天 = 3,
+            最近三十天 = 4,
+            本月 = 5,
+            本年 = 6,
+        }
         /// <summary>
         /// 添加评论
         /// </summary>
@@ -36,7 +46,7 @@ namespace IOT.Core.Repository.Com_Comment
 
                 throw;
             }
-            
+
         }
 
         /// <summary>
@@ -56,22 +66,60 @@ namespace IOT.Core.Repository.Com_Comment
         /// <param name="cname"></param>
         /// <param name="uname"></param>
         /// <returns></returns>
-        public List<V_Com_Comment> GetComments(string cname = "", string uname = "")
+        public List<V_Com_Comment> GetComments(int days = 0, string st = "", string cname = "", string uname = "")
         {
-            string sql = "select * from V_Com_Comment";
+            StringBuilder sql = new StringBuilder();
+            sql.Append("select * from V_Com_Comment ");
+            //转换成枚举
+            Days day = (Days)days;
+            switch (day)
+            {
+                case Days.今天:
+                    sql.Append(" where Days<1");
+                    break;
+                case Days.昨天:
+                    sql.Append(" where Days=1");
+                    break;
+                case Days.最近七天:
+                    sql.Append(" where Days<=7");
+                    break;
+                case Days.最近三十天:
+                    sql.Append(" where Days<=30");
+                    break;
+                case Days.本月:
+                    sql.Append($" where Months={DateTime.Now.Month} and Years={DateTime.Now.Year}");
+                    break;
+                case Days.本年:
+                    sql.Append($" where Years={DateTime.Now.Year}");
+                    break;
+                default:
+                    break;
+            }
             //获取全部数据
-            List<V_Com_Comment> lst = DapperHelper.GetList<V_Com_Comment>(sql);
-            //商品名称
-            if (!string.IsNullOrEmpty(cname))
-            {
-                lst = lst.Where(x => x.CommodityName.Contains(cname)).ToList();
-            }
-            //用户名称
-            if (!string.IsNullOrEmpty(uname))
-            {
-                lst = lst.Where(x => x.UserName.Contains(uname)).ToList();
-            }
+            List<V_Com_Comment> lst = DapperHelper.GetList<V_Com_Comment>(sql.ToString());
+            
+            lst= lst.Where(x => (string.IsNullOrEmpty(cname) ? true : x.CommodityName.Contains(cname)) && (string.IsNullOrEmpty(uname) ? true : x.UserName.Contains(uname)) && (string.IsNullOrEmpty(st) ? true : x.CommentState.ToString() == st)).ToList();
             return lst;
+        }
+
+        /// <summary>
+        /// 回复评论
+        /// </summary>
+        /// <param name="com"></param>
+        /// <returns></returns>
+        public int ReplyComment(Model.Com_Comment com)
+        {
+            try
+            {
+                string sql = $"update Com_Comment set RevertContent='{com.RevertContent}',CommentState=1 where  Com_CommentId={com.Com_CommentId}";
+                return DapperHelper.Execute(sql);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
     }
 }

@@ -25,7 +25,7 @@ namespace IOT.Core.Repository.Delivery
 
         public List<Model.Delivery> Query()
         {
-            string sql = "SELECT  a.DeliveryId,a.DeliveryName,c.ColonelName,c.Phone Phones,a.DeliveryPath,c.Address Addresss FROM Delivery a JOIN Users b ON a.UserId=b.UserId join Colonel c ON a.ColonelID=c.ColonelID";
+            string sql = "SELECT a.WarehouseId, a.DeliveryId,a.DeliveryName,c.ColonelName,c.Phone Phones,a.DeliveryPath,c.Address Addresss FROM Delivery a JOIN Users b ON a.UserId=b.UserId join Colonel c ON a.ColonelID=c.ColonelID";
             return DapperHelper.GetList<IOT.Core.Model.Delivery>(sql);
         }
 

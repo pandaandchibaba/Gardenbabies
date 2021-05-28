@@ -25,7 +25,7 @@ namespace IOT.Core.Api.Controllers
         /// 获取所有一级分类
         /// </summary>
         /// <returns></returns>
-        [HttpGet("/CommType/GetOneType")]
+        [HttpGet("/api/GetOneType")]
         public IActionResult GetOneType()
         {
             return Ok(_commType.GetOneType());
@@ -36,8 +36,8 @@ namespace IOT.Core.Api.Controllers
         /// </summary>
         /// <param name="comm"></param>
         /// <returns></returns>
-        [HttpPost("/CommType/CreateType")]
-        public string CreateType(IOT.Core.Model.CommType comm)
+        [HttpPost("/api/CreateType")]
+        public string CreateType([FromForm]IOT.Core.Model.CommType comm)
         {
             return _commType.CreateType(comm);
         }
@@ -46,10 +46,10 @@ namespace IOT.Core.Api.Controllers
         /// 显示所有分类
         /// </summary>
         /// <returns></returns>
-        [HttpGet("/CommType/GetCommodities")]
-        public IActionResult GetCommodities()
+        [HttpGet("/api/GetCommTypes")]
+        public IActionResult GetCommTypes(string st="",string key="")
         {
-            return Ok(_commType.GetCommodities());
+            return Ok(_commType.GetCommTypes(st,key));
         }
 
         /// <summary>
@@ -57,8 +57,8 @@ namespace IOT.Core.Api.Controllers
         /// </summary>
         /// <param name="tid"></param>
         /// <returns></returns>
-        [HttpPost("/CommType/DeleteType")]
-        public int DeleteType([FromForm]int tid)
+        [HttpGet("/api/DeleteType")]
+        public int DeleteType(int tid)
         {
             return _commType.DeleteType(tid);
         }
@@ -68,8 +68,8 @@ namespace IOT.Core.Api.Controllers
         /// </summary>
         /// <param name="tid"></param>
         /// <returns></returns>
-        [HttpPost("/CommType/UpdateState")]
-        public int UpdateState([FromForm]int tid)
+        [HttpGet("/api/UpdateTypeState")]
+        public int UpdateState(int tid)
         {
             return _commType.UpdateState(tid);
         }
@@ -79,10 +79,11 @@ namespace IOT.Core.Api.Controllers
         /// </summary>
         /// <param name="tid"></param>
         /// <returns></returns>
-        [HttpGet("/CommType/GetCommTypeByTid")]
+        [HttpGet("/api/GetCommTypeByTid")]
         public IActionResult GetCommTypeByTid(int tid)
         {
-            return Ok(_commType.GetCommTypeByTid(tid));
+            IOT.Core.Model.V_CommType comm = _commType.GetCommTypeByTid(tid);
+            return Ok(comm);
         }
 
         /// <summary>
@@ -90,7 +91,7 @@ namespace IOT.Core.Api.Controllers
         /// </summary>
         /// <param name="pid"></param>
         /// <returns></returns>
-        [HttpGet("/CommType/BindType")]
+        [HttpGet("/api/BindType")]
         public IActionResult BindType(int pid=0)
         {
             return Ok(_commType.BindType(pid));

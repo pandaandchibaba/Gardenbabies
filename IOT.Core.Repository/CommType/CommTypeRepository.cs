@@ -13,7 +13,7 @@ namespace IOT.Core.Repository.CommType
     {
         public List<Model.CommType> BindType(int pid)
         {
-            string sql = $"select * from CommType where ParentId={pid}";
+            string sql = $"select * from CommType where ParentId={pid} and State=1";
             return DapperHelper.GetList<Model.CommType>(sql);
         }
 
@@ -76,7 +76,7 @@ namespace IOT.Core.Repository.CommType
         {
             //查询要删除商品的子菜单数量
             int sonNum = Convert.ToInt32(DapperHelper.Exescalar($"select count(*) from CommType where ParentId={tid}"));
-            if (sonNum==0)
+            if (sonNum == 0)
             {
                 //删除的SQL语句
                 string sql = $"delete from CommType where TId={tid}";
@@ -92,9 +92,19 @@ namespace IOT.Core.Repository.CommType
         /// 获取所有分类
         /// </summary>
         /// <returns></returns>
-        public List<IOT.Core.Model.V_CommType> GetCommodities()
+        public List<IOT.Core.Model.V_CommType> GetCommTypes(string st = "", string key = "")
         {
-            return DapperHelper.GetList<IOT.Core.Model.V_CommType>("select * from V_CommType ");
+            List<IOT.Core.Model.V_CommType> lst = DapperHelper.GetList<IOT.Core.Model.V_CommType>("select * from V_CommType order by sort");
+            //状态
+            if (!string.IsNullOrEmpty(st))
+            { 
+                lst = lst.Where(x => x.State == Convert.ToInt32(st)).ToList();
+            }
+            if (!string.IsNullOrEmpty(key))
+            {
+                lst = lst.Where(x => x.TName.Contains(key)).ToList();
+            }
+            return lst;
         }
 
         /// <summary>
@@ -102,18 +112,18 @@ namespace IOT.Core.Repository.CommType
         /// </summary>
         /// <param name="tid"></param>
         /// <returns></returns>
-        public Model.CommType GetCommTypeByTid(int tid)
+        public Model.V_CommType GetCommTypeByTid(int tid)
         {
-            return DapperHelper.GetList<IOT.Core.Model.CommType>("select * from CommType").FirstOrDefault();
+            return DapperHelper.GetList<IOT.Core.Model.V_CommType>($"select * from V_CommType where TId={tid}").FirstOrDefault();
         }
 
         /// <summary>
         /// 获取一级分类
         /// </summary>
         /// <returns></returns>
-        public List<Model.CommType> GetOneType() 
+        public List<Model.CommType> GetOneType()
         {
-            return DapperHelper.GetList<Model.CommType>("select * from CommType where ParentId=0");
+            return DapperHelper.GetList<Model.CommType>("select * from CommType where ParentId=0 and State=1");
         }
 
         /// <summary>
@@ -143,7 +153,7 @@ namespace IOT.Core.Repository.CommType
             {
                 throw;
             }
-            
+
         }
     }
 }

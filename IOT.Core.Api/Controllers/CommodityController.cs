@@ -13,16 +13,6 @@ namespace IOT.Core.Api.Controllers
     public class CommodityController : ControllerBase
     {
         /// <summary>
-        /// 枚举
-        /// </summary>
-        public enum Code
-        {
-            出售中的商品 = 1,
-            仓库中的商品,
-            已销售的商品,
-            回收站的商品
-        }
-        /// <summary>
         /// 注入
         /// </summary>
         private readonly ICommodityRepository _commodity;
@@ -43,12 +33,11 @@ namespace IOT.Core.Api.Controllers
         [HttpGet("/api/GetCommodities")]
         public IActionResult GetCommodities(int page, int limit, int code = 1, int tid = 0, string key = "")
         {
-            Code co = (Code)code;
             List<IOT.Core.Model.V_Commodity> lst = _commodity.GetCommodities(code, tid, key);
             int count = lst.Count;
             return Ok(new
             {
-                msg = co,
+                msg = "",
                 code = 0,
                 count = count,
                 data = lst.Skip((page - 1) * limit).Take(limit)

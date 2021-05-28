@@ -22,15 +22,14 @@ namespace IOT.Core.Api.Controllers
 
         [HttpGet]
         [Route("/api/ShowWarehouse")]
-        public IActionResult ShowWarehouse(int page = 1, int limit = 4)
+        public IActionResult ShowWarehouse()
         {
             List<Model.Warehouse> lw = _warehouseRepository.Query();
             return Ok(new
             {
                 msg = "",
                 code = 0,
-                count = lw.Count,
-                data = lw.Skip((page - 1) * limit).Take(limit)
+                data = lw
             });
         }
 
@@ -53,6 +52,14 @@ namespace IOT.Core.Api.Controllers
         public int UptWarehouse(IOT.Core.Model.Warehouse warehouse)
         {
             int i = _warehouseRepository.Update(warehouse);
+            return i;
+        }
+
+        [HttpPut]
+        [Route("/api/UptWarehouseState")]
+        public int UptWarehouseState(int id)
+        {
+            int i = _warehouseRepository.UptState(id);
             return i;
         }
 
