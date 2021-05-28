@@ -69,7 +69,7 @@ namespace IOT.Core.Repository.Agent
         /// </summary>
         /// <param name="aid"></param>
         /// <returns></returns>
-        public int DeleteAgent(string aid)
+        public int DeleteAgent(int aid)
         {
             string sql = $"delete from Agent where AgentId ={aid}";
             return DapperHelper.Execute(sql);

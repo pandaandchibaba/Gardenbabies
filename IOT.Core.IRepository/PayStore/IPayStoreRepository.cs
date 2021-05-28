@@ -10,5 +10,6 @@ namespace IOT.Core.IRepository.PayStore
     {
         int UptWhether(IOT.Core.Model.PayStore Model);
         int UptCollection(IOT.Core.Model.PayStore Model);
+        List<IOT.Core.Model.PayStore> GetPayStores();
     }
 }

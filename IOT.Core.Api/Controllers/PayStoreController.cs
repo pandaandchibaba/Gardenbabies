@@ -18,6 +18,18 @@ namespace IOT.Core.Api.Controllers
         {
             _payStoreRepository = payStoreRepository;
         }
+        [HttpGet]
+        [Route("/api/ShowPayStore")]
+        public IActionResult ShowPayStore()
+        {
+            List<Model.PayStore> lp = _payStoreRepository.GetPayStores();
+            return Ok(new
+            {
+                msg = "",
+                code = 0,
+                data = lp
+            });
+        }
 
         [HttpPut]
         [Route("/api/UptCollection")]
