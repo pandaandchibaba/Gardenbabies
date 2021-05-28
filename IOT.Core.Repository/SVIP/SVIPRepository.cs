@@ -19,7 +19,7 @@ namespace IOT.Core.Repository.SVIP
         {
             try
             {
-                string sql = $"insert into SVIP values (null,'{sVIP.SName}','{sVIP.BackgroudColor}','{sVIP.Icon}','{sVIP.BCImg}',{sVIP.Consume},{sVIP.Commission},{sVIP.Money},'{sVIP.Rate}','{sVIP.Explains}')";
+                string sql = $"insert into SVIP values (null,'{sVIP.SName}','{sVIP.BackgroudColor}','{sVIP.Icon}','{sVIP.BCImg}',{sVIP.Consume},{sVIP.Commission},{sVIP.Money},{sVIP.Rate},'{sVIP.Explains}')";
                 int i = DapperHelper.Execute(sql);
                 if (i > 0)
                 {
