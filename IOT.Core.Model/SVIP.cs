@@ -19,7 +19,7 @@ namespace IOT.Core.Model
         public int Consume        { get; set; }
         public int Commission     { get; set; }
         public int Money          { get; set; }
-        public string Rate           { get; set; }
+        public int Rate           { get; set; }
         public string Explains { get; set; }
     }
 }
