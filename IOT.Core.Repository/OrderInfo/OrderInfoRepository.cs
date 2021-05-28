@@ -28,9 +28,7 @@ namespace IOT.Core.Repository.OrderInfo
         {
 
             string sql = $@"select b.CommodityName ,b.CommodityPic ,b.ShopPrice ,b.SId ,
-             c.NickName ,c.UserName ,c.Phone ,c.Address ,
-			a.*
-            from OrderInfo a
+             c.NickName ,c.UserName ,c.Phone ,c.Address ,a.* from OrderInfo a
             join Commodity b on a.CommodityId = b.CommodityId
             join Users c on a.UserId = c.UserId 
             join Colonel d on c.ColonelID=d.ColonelID";
