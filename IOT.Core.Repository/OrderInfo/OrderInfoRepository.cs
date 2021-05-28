@@ -24,7 +24,7 @@ namespace IOT.Core.Repository.OrderInfo
         /// <param name="cname"></param>
         /// <param name="ziti"></param>
         /// <returns></returns>
-        public List<Model.OrderInfo> GetOrderInfos(string name, int state, string end, int tui, int dingt, int uid, string cname, string ziti)
+        public List<Model.OrderInfo> GetOrderInfos(string name, int sendway, string state, string end, int tui, int dingt, int uid, string cname, string ziti)
         {
 
             string sql = $@"select b.CommodityName ,b.CommodityPic ,b.ShopPrice ,b.SId ,
