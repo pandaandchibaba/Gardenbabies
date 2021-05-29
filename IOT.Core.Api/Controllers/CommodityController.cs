@@ -76,5 +76,15 @@ namespace IOT.Core.Api.Controllers
         {
             return _commodity.CreateCommodity(commodity);
         }
+
+        /// <summary>
+        /// 获取所有商品
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("/api/GetAllCommodities")]
+        public IActionResult GetAllCommodities()
+        {
+            return Ok(_commodity.GetAllCommodities());
+        }
     }
 }
