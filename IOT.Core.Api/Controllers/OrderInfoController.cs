@@ -67,7 +67,7 @@ namespace IOT.Core.Api.Controllers
                     }
                     if (uid != 0)
                     {
-                        list = list.Where(x => x.UserId == tui).ToList();
+                        list = list.Where(x => x.UserId == uid).ToList();
                     }
                     if (!string.IsNullOrEmpty(cname))
                     {
