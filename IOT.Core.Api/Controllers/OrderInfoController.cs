@@ -19,8 +19,6 @@ namespace IOT.Core.Api.Controllers
             _orderInfoRepository = orderInfoRepository;
         }
 
-
-
         [HttpGet]
         [Route("/api/GetListOrderInfo")]
         public IActionResult GetListOrderInfo(int bid=0,string name = "",int sendway = 0 ,string state = "", string end = "", int tui = 0, int dingt = 0, int uid = 0, string cname = "", string ziti = "")
@@ -37,7 +35,6 @@ namespace IOT.Core.Api.Controllers
                         data = list
                     });
                 }
-
                 else
                 {
                     if (bid==1)
@@ -52,7 +49,6 @@ namespace IOT.Core.Api.Controllers
                     {
                         list = list.Where(x => x.Phone.Contains(name)).ToList();
                     }
-
                     if (sendway != 0)
                     {
                         list = list.Where(x => x.SendWay == sendway).ToList();
@@ -75,7 +71,7 @@ namespace IOT.Core.Api.Controllers
                     }
                     if (uid != 0)
                     {
-                        list = list.Where(x => x.UserId == tui).ToList();
+                        list = list.Where(x => x.UserId == uid).ToList();
                     }
                     if (!string.IsNullOrEmpty(cname))
                     {
@@ -91,15 +87,13 @@ namespace IOT.Core.Api.Controllers
                         code = 0,
                         data = list
                     });
-                }
-                    
+                } 
             }
             catch (Exception)
             {
 
                 throw;
             }
-            
         }
         [HttpGet]
         [Route("/api/GetOrderInfo")]
