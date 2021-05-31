@@ -92,9 +92,9 @@ namespace IOT.Core.Api.Controllers
         /// <param name="pid"></param>
         /// <returns></returns>
         [HttpGet("/api/BindType")]
-        public IActionResult BindType(int pid=0)
+        public IActionResult BindType()
         {
-            return Ok(_commType.BindType(pid));
+            return Ok(_commType.BindType());
         }
     }
 }

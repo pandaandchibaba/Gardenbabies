@@ -51,6 +51,14 @@ namespace IOT.Core.Api.Controllers
                 data = list
             });
         }
+
+        [Route("/api/ShowStores")]
+        [HttpGet]
+        public IActionResult ShowStores(string address="",string key="")
+        {
+            var list = _storeRepository.GetStores(address,key);
+            return Ok(list);
+        }
         [Route("/api/GetStoresFan")]
         [HttpGet]
         public IActionResult GetStoresFan(int id)

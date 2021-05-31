@@ -35,6 +35,18 @@ namespace IOT.Core.Api.Controllers
             return Ok(new {data = ls });
         }
 
+        /// <summary>
+        /// 显示查询
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        [HttpGet("/api/GetColonel")]
+        public IActionResult GetColonel(string address="",string key="")
+        {
+            return Ok(_colonelRepository.GetColonel(address, key));
+        }
+
         [Route("/api/Colonelupt")]
         [HttpPost]
         public int Colonelupt(Model.Colonel a)

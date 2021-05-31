@@ -53,6 +53,6 @@ namespace IOT.Core.IRepository.CommType
         /// </summary>
         /// <param name="pid"></param>
         /// <returns></returns>
-        List<IOT.Core.Model.CommType> BindType(int pid);
+        List<Dictionary<string, object>> BindType();
     }
 }
