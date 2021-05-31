@@ -23,12 +23,12 @@ namespace IOT.Core.Api.Controllers
 
         [HttpGet]
         [Route("/api/GetListOrderInfo")]
-        public IActionResult GetListOrderInfo(string name = "",int sendway = 0 ,string state = "", string end = "", int tui = 0, int dingt = 0, int uid = 0, string cname = "", string ziti = "")
+        public IActionResult GetListOrderInfo(int bid=0,string name = "",int sendway = 0 ,string state = "", string end = "", int tui = 0, int dingt = 0, int uid = 0, string cname = "", string ziti = "")
         {
             try
             {
                 List<IOT.Core.Model.OrderInfo> list = _orderInfoRepository.GetOrderInfos(name,sendway, state, end, tui, dingt, uid, cname, ziti);
-                if (name==""&&sendway==0&&state==""&&end==""&&tui==0&&dingt==0&&uid==0&& cname==""&&ziti=="")
+                if (bid==0&&name==""&&sendway==0&&state==""&&end==""&&tui==0&&dingt==0&&uid==0&& cname==""&&ziti=="")
                 {
                     return Ok(new
                     {
@@ -36,15 +36,20 @@ namespace IOT.Core.Api.Controllers
                         code = 0,
                         data = list
                     });
-                }
-
-                else
-                {
-                    
-                    if (!string.IsNullOrEmpty(name))
+                }else{
+                    if (bid==1)
                     {
-                        list = list.Where(x => x.CommodityName.Contains(name) || x.Phone.Contains(name)||x.Ordernumber.Contains(name)).ToList();
+                        list = list.Where(x => x.Ordernumber.Contains(name)).ToList();
                     }
+                    if (bid == 2)
+                    {
+                        list = list.Where(x => x.UserName.Contains(name)).ToList();
+                    }
+                    if (bid == 3)
+                    {
+                        list = list.Where(x => x.Phone.Contains(name)).ToList();
+                    }
+
                     if (sendway != 0)
                     {
                         list = list.Where(x => x.SendWay == sendway).ToList();

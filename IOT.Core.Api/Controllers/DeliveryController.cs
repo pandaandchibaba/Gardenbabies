@@ -59,7 +59,7 @@ namespace IOT.Core.Api.Controllers
 
         [HttpPut]
         [Route("/api/UptDelivery")]
-        public int UptDelivery(IOT.Core.Model.Delivery delivery)
+        public int UptDelivery([FromForm]IOT.Core.Model.Delivery delivery)
         {
             int i = _deliveryRepository.Update(delivery);
             return i;
