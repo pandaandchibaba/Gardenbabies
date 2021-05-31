@@ -25,7 +25,7 @@ namespace IOT.Core.Repository.Users
 
         public int InsertUsers(Model.Users Model)
         {
-            string sql = $"INSERT INTO Users VALUES(NULL,{Model.UserName},{Model.LoginName},{Model.LoginPwd},'0','0','1',NULL,'{Model.RoleId}','0')";
+            string sql = $"INSERT INTO Users VALUES(NULL,{Model.UserName},{Model.LoginName},{Model.LoginPwd},'0','0','1',NULL,'{Model.RoleId}','0','0')";
             return DapperHelper.Execute(sql);
 
         }

@@ -23,7 +23,7 @@ namespace IOT.Core.Api.Controllers
 
         [HttpGet]
         [Route("/api/GetListOrderInfo")]
-        public IActionResult GetListOrderInfo(string name = "",int sendway = 0 ,string state = "", string end = "", int tui = 0, int dingt = 0, int uid = 0, string cname = "", string ziti = "")
+        public IActionResult GetListOrderInfo(int bid=0, string name = "",int sendway = 0 ,string state = "", string end = "", int tui = 0, int dingt = 0, int uid = 0, string cname = "", string ziti = "")
         {
             try
             {
@@ -40,10 +40,18 @@ namespace IOT.Core.Api.Controllers
 
                 else
                 {
-                    
-                    if (!string.IsNullOrEmpty(name))
+
+                    if (bid == 1)
                     {
-                        list = list.Where(x => x.CommodityName.Contains(name) || x.Phone.Contains(name)||x.Ordernumber.Contains(name)).ToList();
+                        list = list.Where(x => x.Ordernumber.Contains(name)).ToList();
+                    }
+                    if (bid == 2)
+                    {
+                        list = list.Where(x => x.UserName.Contains(name)).ToList();
+                    }
+                    if (bid == 3)
+                    {
+                        list = list.Where(x => x.Phone.Contains(name)).ToList();
                     }
                     if (sendway != 0)
                     {
