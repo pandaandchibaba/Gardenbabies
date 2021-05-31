@@ -19,8 +19,6 @@ namespace IOT.Core.Api.Controllers
             _orderInfoRepository = orderInfoRepository;
         }
 
-
-
         [HttpGet]
         [Route("/api/GetListOrderInfo")]
         public IActionResult GetListOrderInfo(int bid=0, string name = "",int sendway = 0 ,string state = "", string end = "", int tui = 0, int dingt = 0, int uid = 0, string cname = "", string ziti = "")
@@ -28,7 +26,7 @@ namespace IOT.Core.Api.Controllers
             try
             {
                 List<IOT.Core.Model.OrderInfo> list = _orderInfoRepository.GetOrderInfos(name,sendway, state, end, tui, dingt, uid, cname, ziti);
-                if (name==""&&sendway==0&&state==""&&end==""&&tui==0&&dingt==0&&uid==0&& cname==""&&ziti=="")
+                if (bid==0&&name==""&&sendway==0&&state==""&&end==""&&tui==0&&dingt==0&&uid==0&& cname==""&&ziti=="")
                 {
                     return Ok(new
                     {
@@ -37,10 +35,8 @@ namespace IOT.Core.Api.Controllers
                         data = list
                     });
                 }
-
                 else
                 {
-
                     if (bid == 1)
                     {
                         list = list.Where(x => x.Ordernumber.Contains(name)).ToList();
@@ -92,14 +88,12 @@ namespace IOT.Core.Api.Controllers
                         data = list
                     });
                 }
-                    
             }
             catch (Exception)
             {
 
                 throw;
             }
-            
         }
         [HttpGet]
         [Route("/api/GetOrderInfo")]
