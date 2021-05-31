@@ -18,11 +18,11 @@ namespace IOT.Core.Model
         public string BCImg { get; set; }
         public string Fans { get; set; }
         public int Consume { get; set; }
-        public double Money { get; set; }
+        public decimal Money { get; set; }
         public string NFans { get; set; }
-        public double Two { get; set; }
-        public double Three { get; set; }
-        public double One { get; set; }
+        public decimal Two { get; set; }
+        public decimal Three { get; set; }
+        public decimal One { get; set; }
         public string Explaina { get; set; }
         public int AgentState { get; set; }
     }
