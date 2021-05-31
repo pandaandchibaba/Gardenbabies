@@ -20,6 +20,7 @@ namespace IOT.Core.Repository.Commodity
             已销售的商品,
             回收站的商品
         }
+
         /// <summary>
         /// 添加商品
         /// </summary>
@@ -133,6 +134,15 @@ namespace IOT.Core.Repository.Commodity
 
                 throw;
             }
+        }
+
+        /// <summary>
+        /// 获取所有商品
+        /// </summary>
+        /// <returns></returns>
+        public List<Model.Commodity> GetAllCommodities()
+        {
+            return DapperHelper.GetList<Model.Commodity>("select * from Commodity where DeleteState=0");
         }
     }
 }

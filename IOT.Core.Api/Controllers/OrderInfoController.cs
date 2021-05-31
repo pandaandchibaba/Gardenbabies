@@ -21,7 +21,7 @@ namespace IOT.Core.Api.Controllers
 
         [HttpGet]
         [Route("/api/GetListOrderInfo")]
-        public IActionResult GetListOrderInfo(int bid=0,string name = "",int sendway = 0 ,string state = "", string end = "", int tui = 0, int dingt = 0, int uid = 0, string cname = "", string ziti = "")
+        public IActionResult GetListOrderInfo(int bid=0, string name = "",int sendway = 0 ,string state = "", string end = "", int tui = 0, int dingt = 0, int uid = 0, string cname = "", string ziti = "")
         {
             try
             {
@@ -37,7 +37,7 @@ namespace IOT.Core.Api.Controllers
                 }
                 else
                 {
-                    if (bid==1)
+                    if (bid == 1)
                     {
                         list = list.Where(x => x.Ordernumber.Contains(name)).ToList();
                     }
@@ -87,7 +87,9 @@ namespace IOT.Core.Api.Controllers
                         code = 0,
                         data = list
                     });
-                } 
+                }
+                    
+                    
             }
             catch (Exception)
             {
