@@ -53,7 +53,7 @@ namespace IOT.Core.Api.Controllers
         //添加
         [HttpPost]
         [Route("/api/AddOutLibrary")]
-        public int AddOutLibrary(IOT.Core.Model.OutLibrary outLibrary)
+        public int AddOutLibrary([FromForm]IOT.Core.Model.OutLibrary outLibrary)
         {
             int i = _outLibraryRepository.Insert(outLibrary);
             return i;
@@ -70,7 +70,7 @@ namespace IOT.Core.Api.Controllers
 
         [HttpPut]
         [Route("/api/UptOutLibrary")]
-        public int UptOutLibrary(IOT.Core.Model.OutLibrary outLibrary)
+        public int UptOutLibrary([FromForm]IOT.Core.Model.OutLibrary outLibrary)
         {
             int i = _outLibraryRepository.Update(outLibrary);
             return i;
