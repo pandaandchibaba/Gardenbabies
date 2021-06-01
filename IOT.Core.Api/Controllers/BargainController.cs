@@ -22,34 +22,45 @@ namespace IOT.Core.Api.Controllers
         //添加
         [Route("/api/BargainAdd")]
         [HttpPost]
-        public int BargainAdd(IOT.Core.Model.Bargain a)
-        { 
-            int i = _bargainRepository.AddBargain(a); 
+        public int BargainAdd([FromForm]IOT.Core.Model.Bargain a)
+        {
+            int i = _bargainRepository.AddBargain(a);
             return i;
         }
 
         //显示砍价商品
         [Route("/api/BargainShows")]
         [HttpGet]
-        public IActionResult BargainShows(string nm,int st)
+        public IActionResult BargainShows(string nm = "", int st = -1)
         {
             //获取全部数据
             var ls = _bargainRepository.ShowBargain();
             if (!string.IsNullOrEmpty(nm))
             {
-                ls = ls.Where(x => x.CommodityName.Contains(nm)).ToList();
+                ls = ls.Where(x => x.BargainName.Contains(nm)).ToList();
             }
-            ls = ls.Where(x => x.State.Equals(st)).ToList();
+            if (st != -1)
+            {
+                ls = ls.Where(x => x.State.Equals(st)).ToList();
+            }
             return Ok(new { msg = "", code = 0, data = ls });
         }
 
         //显示砍价列表
         [Route("/api/ShowBargains")]
         [HttpGet]
-        public IActionResult ShowBargains()
+        public IActionResult ShowBargains(string nmid="", int st=-1)
         {
             //获取全部数据
             var ls = _bargainRepository.BargainShow();
+            if (!string.IsNullOrEmpty(nmid))
+            {
+                ls = ls.Where(x => x.CommodityName.Contains(nmid) || x.BargainId.Equals(nmid)).ToList();
+            }
+            if (st != -1)
+            {
+                ls = ls.Where(x => x.ActionState.Equals(st)).ToList();
+            }
             return Ok(new { msg = "", code = 0, data = ls });
         }
 
@@ -58,12 +69,12 @@ namespace IOT.Core.Api.Controllers
         [HttpGet]
         public IActionResult FT(int id)
         {
-            return Ok(_bargainRepository.FT(id));   
+            return Ok(_bargainRepository.FT(id));
         }
 
         //删除
         [Route("/api/BargainDel")]
-        [HttpDelete]
+        [HttpGet]
         public int BargainDel(string id)
         {
             return _bargainRepository.DelBargain(id);
@@ -73,15 +84,15 @@ namespace IOT.Core.Api.Controllers
         //修改
         [HttpPost]
         [Route("/api/BargainUpt")]
-        public int BargainUpt(IOT.Core.Model.Bargain a)
+        public int BargainUpt([FromForm]IOT.Core.Model.Bargain a)
         {
             return _bargainRepository.UptBargain(a);
         }
 
         //修改状态
-        [Route("/api/UpdateState")]
+        [Route("/api/UpdateBargainState")]
         [HttpGet]
-        public int UptSt(int id)
+        public int UpdateBargainState(int id)
         {
             return _bargainRepository.UptSt(id);
         }

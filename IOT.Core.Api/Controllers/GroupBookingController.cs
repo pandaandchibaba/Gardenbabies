@@ -22,7 +22,7 @@ namespace IOT.Core.Api.Controllers
         //添加
         [Route("/api/GroupBookingAdd")]
         [HttpPost]
-        public int GroupBookingAdd(IOT.Core.Model.GroupBooking a)
+        public int GroupBookingAdd([FromForm]IOT.Core.Model.GroupBooking a)
         {
             int i = _groupBookingRepository.AddGroupBooking(a);
             return i;
@@ -31,7 +31,7 @@ namespace IOT.Core.Api.Controllers
         //显示
         [Route("/api/GroupBookingShow")]
         [HttpGet]
-        public IActionResult GroupBookingShow(int st=0, string nm="")
+        public IActionResult GroupBookingShow(int st = -1, string nm = "")
         {
             //获取全部数据
             var ls = _groupBookingRepository.ShowGroupBooking();
@@ -39,14 +39,26 @@ namespace IOT.Core.Api.Controllers
             {
                 ls = ls.Where(x => x.GroupBookingName.Contains(nm)).ToList();
             }
-            ls = ls.Where(x => x.GroupBookingState.Equals(st)).ToList();
+            if (st != -1)
+            {
+                ls = ls.Where(x => x.GroupBookingState.Equals(st)).ToList();
+            }
+            
             return Ok(new { msg = "", code = 0, data = ls });
         }
 
 
+        //反填
+        [Route("/api/GroupBookingFT")]
+        [HttpGet]
+        public IActionResult GroupBookingFT(int id)
+        {
+            return Ok(_groupBookingRepository.FTV_GroupBooking(id));
+        }
+
         //删除
         [Route("/api/GroupBookingDel")]
-        [HttpDelete]
+        [HttpGet]
         public int LiveDel(string id)
         {
             return _groupBookingRepository.DelGroupBooking(id);
@@ -56,14 +68,14 @@ namespace IOT.Core.Api.Controllers
         //修改
         [HttpPost]
         [Route("/api/GroupBookingUpt")]
-        public int GroupBookingUpt(IOT.Core.Model.GroupBooking a)
+        public int GroupBookingUpt([FromForm]IOT.Core.Model.GroupBooking a)
         {
             return _groupBookingRepository.UptGroupBooking(a);
         }
         //修改状态
-        [Route("/api/UptSt")]
+        [Route("/api/UptGroupBookingSt")]
         [HttpGet]
-        public int UptSt(int id)
+        public int UptGroupBookingSt(int id)
         {
             return _groupBookingRepository.UptSt(id);
         }

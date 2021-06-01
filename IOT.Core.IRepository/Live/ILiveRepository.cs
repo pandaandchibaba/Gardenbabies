@@ -15,10 +15,13 @@ namespace IOT.Core.IRepository.Live
         List<IOT.Core.Model.Live> ShowLive();
 
         //删除
-        int DelLive(string id);
+        int DelLive(int id);
 
         //修改
         int UptLive(IOT.Core.Model.Live a);
+
+        //反填
+        IOT.Core.Model.Live FT(int id);
 
         //修改状态
         int UptSt(int id);

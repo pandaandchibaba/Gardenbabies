@@ -14,15 +14,32 @@ namespace IOT.Core.Repository.Bargain
         //添加
         public int AddBargain(Model.Bargain a)
         {
-            string sql = $"insert into Bargain values (null,{a.CommodityId},{a.UserId},{a.PeopleNum},{a.KNum},'{a.BeginDate}','{a.EndDate}',{a.Astrict},{a.ActionState},{a.PartNum},{a.MinPrice},{a.SurplusNum},{a.SurplusBargain},'{a.BargainName}','{a.BargainRemark}',{a.Template},{a.LimitNum},{a.BargainSum})";
-            return DapperHelper.Execute(sql);
+            try
+            {
+                string sql = $"insert into Bargain values (null,{a.CommodityId},2,{a.PeopleNum},{a.KNum},'{a.BeginDate}','{a.EndDate}',{a.Astrict},'{a.Job}',{a.ActionState},7,5,6,7,'{a.BargainName}','{a.BargainRemark}',{a.Template},100,{a.Sort},36)";
+                return DapperHelper.Execute(sql);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
         }
 
         //显示砍价列表
         public List<Model.V_Bargain> BargainShow()
         {
-            string sql = "select * from V_Bargain";
-            return DapperHelper.GetList<Model.V_Bargain>(sql);
+            try
+            {
+                string sql = "select * from V_Bargain";
+                return DapperHelper.GetList<Model.V_Bargain>(sql);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         //删除
@@ -49,14 +66,15 @@ namespace IOT.Core.Repository.Bargain
         //修改
         public int UptBargain(Model.Bargain a)
         {
-            string sql = $"update Bargain set UserId={a.UserId}, PeopleNum={a.PeopleNum},KNum={a.KNum},Astrict={a.Astrict},PartNum={a.PartNum},MinPrice={a.MinPrice},SurplusNum={a.SurplusNum},SurplusBargain={a.SurplusBargain},BargainName='{a.BargainName}',BargainRemark='{a.BargainRemark}',Template={a.Template},LimitNum={a.LimitNum},BargainSum={a.BargainSum}  where BargainId={a.BargainId}";
+            string sql = $"update Bargain set MinPrice={a.MinPrice},BargainName='{a.BargainName}',BargainRemark='{a.BargainRemark}',BargainSum={a.BargainSum},ActionState={a.ActionState}  where BargainId={a.BargainId}";
             return DapperHelper.Execute(sql);
         }
+        
 
         //修改状态
         public int UptSt(int id)
         {
-            IOT.Core.Model.Bargain ls = DapperHelper.GetList<IOT.Core.Model.Bargain>($"select * from Bargain a join Commodity b on a.CommodityId=b.CommodityId where BargainId={id}").FirstOrDefault();
+            IOT.Core.Model.Bargain ls = DapperHelper.GetList<IOT.Core.Model.Bargain>($"select* from Bargain a join Commodity b on a.CommodityId=b.CommodityId join Users c on a.UserId=c.UserId where BargainId={id}").FirstOrDefault();
             if (ls.ActionState == 0)
             {
                 ls.ActionState = 1;

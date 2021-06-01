@@ -1,5 +1,6 @@
 ﻿using IOT.Core.Common;
 using IOT.Core.IRepository.Commodity;
+using IOT.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,6 +61,22 @@ namespace IOT.Core.Repository.Commodity
                 lst = lst.Where(x => x.CommodityName.Contains(key) || x.CommodityKey == key || x.CommodityId.ToString() == key).ToList();
             }
             return lst;
+        }
+
+
+        //纯显示
+        public List<V_Commodity> ShowCommodities()
+        {
+            try
+            {
+                string sql = "select * from V_Commodity where DeleteState=0";
+                return DapperHelper.GetList<V_Commodity>(sql);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>

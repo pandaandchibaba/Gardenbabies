@@ -42,10 +42,19 @@ namespace IOT.Core.Common
         /// <returns></returns>
         public static object Exescalar(string sql)
         {
-            using (IDbConnection db = new MySqlConnection(ConfigurationManager.Conn))
+            try
             {
-                return db.ExecuteScalar(sql);
+                using (IDbConnection db = new MySqlConnection(ConfigurationManager.Conn))
+                {
+                    return db.ExecuteScalar(sql);
+                }
             }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
         }
     }
 }

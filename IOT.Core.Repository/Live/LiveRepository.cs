@@ -13,15 +13,22 @@ namespace IOT.Core.Repository.Live
         //添加
         public int AddLive(Model.Live a)
         {
-            string sql = $"insert into Live values (null,'{a.LiveTitle}','{a.Remark}','{a.LiveCover}','{a.GoodId}',{a.LiveModel},{a.AnchorId},'{a.BeginLiveDate}','{a.EndLiveDate}',{a.IsEnable})";
+            string sql = $"insert into Live values (null,'{a.LiveTitle}','{a.Remark}','https://www.hualigs.cn/image/60b086b319dbb.jpg','{a.GoodId}',1,{a.AnchorId},now(),now(),1)";
             return DapperHelper.Execute(sql);
         }
 
         //删除
-        public int DelLive(string id)
+        public int DelLive(int id)
         {
             string sql = $"delete from Live where LiveId = {id}";
             return DapperHelper.Execute(sql);
+        }
+
+        //反填
+        public Model.Live FT(int id)
+        {
+            string sql = $"select * from Live where LiveId = {id}";
+            return DapperHelper.GetList<Model.Live>(sql).First();
         }
 
         //显示
@@ -34,7 +41,7 @@ namespace IOT.Core.Repository.Live
         //修改
         public int UptLive(Model.Live a)
         {
-            string sql = $"update Live set LiveTitle='{a.LiveTitle}',Remark='{a.Remark}',LiveCover='{a.LiveCover}',GoodId='{a.GoodId}',LiveModel={a.LiveModel},AnchorId={a.AnchorId},BeginLiveDate='{a.BeginLiveDate}',EndLiveDate='{a.EndLiveDate}',IsEnable={a.IsEnable} where LiveId={a.LiveId}";
+            string sql = $"update Live set LiveTitle='{a.LiveTitle}',Remark='{a.Remark}',LiveCover='{a.LiveCover}',GoodId='{a.GoodId}',LiveModel={a.LiveModel},AnchorId={a.AnchorId},BeginLiveDate='{a.BeginLiveDate}',EndLiveDate=,IsEnable={a.IsEnable} where LiveId={a.LiveId}";
             return DapperHelper.Execute(sql);
         }
 
