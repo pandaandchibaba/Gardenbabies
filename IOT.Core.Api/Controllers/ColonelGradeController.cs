@@ -38,7 +38,7 @@ namespace IOT.Core.Api.Controllers
         }
         [Route("/Api/Uptdate")]
         [HttpPost]
-        public int Uptdate(Model.ColonelGrade a)
+        public int Uptdate([FromForm]Model.ColonelGrade a)
         {
             int i = _colonelGradeRepository.Upt(a);
             return i;

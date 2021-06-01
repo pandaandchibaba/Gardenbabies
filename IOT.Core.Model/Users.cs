@@ -25,6 +25,7 @@ namespace IOT.Core.Model
 
 
 
+
         /////////////////////////////
         public string HeadPortrait { get; set; }
     }

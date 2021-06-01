@@ -13,45 +13,90 @@ namespace IOT.Core.Repository.SeckillCom
         //添加
         public int AddSeckillCom(Model.SeckillCom a)
         {
-            string sql = $"insert into SeckillCom values (null,{a.ActivityId},{a.CommodityId},'{a.SeckillTitle}','{a.SeckillRemaek}',{a.SeckillModel},{a.TackTime},'{a.ActionDate}',{a.State},{a.SeckilPrice},{a.LimitNum})";
-            return DapperHelper.Execute(sql);
+            try
+            {
+                string sql = $"insert into SeckillCom values (null,{a.ActivityId},{a.CommodityId},'{a.SeckillTitle}','{a.SeckillRemaek}',{a.SeckillModel},'{a.Job}',{a.TackTime},'{a.ActionDate}',{a.State},25,3)";
+                return DapperHelper.Execute(sql);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
         }
 
         //删除
-        public int DelSeckillCom(string id)
+        public int DelSeckillCom(int id)
         {
-            string sql = $"delete from SeckillCom where SeckillComId={id}";
-            return DapperHelper.Execute(sql);
+            try
+            {
+                string sql = $"delete from SeckillCom where SeckillComId={id}";
+                return DapperHelper.Execute(sql);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
         }
 
         //修改状态
-        public int UptSt(int id)
+        public int UptState(int id)
         {
-            IOT.Core.Model.SeckillCom ls = DapperHelper.GetList<IOT.Core.Model.SeckillCom>($"select * from SeckillCom where SeckillComId={id}").FirstOrDefault();
-            if (ls.State == 0)
+            try
             {
-                ls.State = 1;
+                IOT.Core.Model.SeckillCom ls = DapperHelper.GetList<IOT.Core.Model.SeckillCom>($"select * from SeckillCom where SeckillComId={id}").FirstOrDefault();
+                if (ls.State == 0)
+                {
+                    ls.State = 1;
+                }
+                else
+                {
+                    ls.State = 0;
+                }
+                string sql = $"update SeckillCom set State={ls.State} where SeckillComId={id}";
+                return DapperHelper.Execute(sql);
             }
-            else
+            catch (Exception)
             {
-                ls.State = 0;
+
+                throw;
             }
-            string sql = $"update SeckillCom set State={ls.State} where SeckillComId={id}";
-            return DapperHelper.Execute(sql);
+           
         }
 
         //显示
-        public List<Model.SeckillCom> ShowSeckillCom()
+        public List<Model.V_SeckillCom> ShowSeckillCom()
         {
-            string sql = "select * from SeckillCom a join Commodity b on a.CommodityId=b.CommodityId join Activity c on a.ActivityId=c.ActivityId";
-            return DapperHelper.GetList<IOT.Core.Model.SeckillCom>(sql);
+            try
+            {
+                string sql = "select * from V_SeckillCom";
+                return DapperHelper.GetList<IOT.Core.Model.V_SeckillCom>(sql);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
 
         //修改
         public int UptSeckillCom(Model.SeckillCom a)
         {
-            string sql = $"update SeckillCom set ActivityId={ a.ActivityId},CommodityId={a.CommodityId},SeckillTitle='{a.SeckillTitle}',SeckillRemaek='{a.SeckillRemaek}',SeckillModel={ a.SeckillModel},TackTime={ a.TackTime},ActionDate='{a.ActionDate}',State={ a.State},SeckilPrice={ a.SeckilPrice},LimitNum={ a.LimitNum} where SeckillComId={a.SeckillComId}";
-            return DapperHelper.Execute(sql);
+            try
+            {
+                string sql = $"update SeckillCom set SeckillTitle='{a.SeckillTitle}',SeckillRemaek='{a.SeckillRemaek}',State={ a.State},SeckilPrice={ a.SeckilPrice} where SeckillComId={a.SeckillComId}";
+                return DapperHelper.Execute(sql);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
     }
 }

@@ -35,7 +35,7 @@ namespace IOT.Core.IRepository.Path
         /// </summary>
         /// <param name="cid"></param>
         /// <returns></returns>
-        int Update(int cid);
+        int Update(string cid);
 
         IOT.Core.Model.Path Ft(int id);
 

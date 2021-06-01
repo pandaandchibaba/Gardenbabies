@@ -16,6 +16,7 @@ namespace IOT.Core.Model
         public string Slideshow    { get; set; }
         public int State        { get; set; }
         public DateTime  CreateDate   { get; set; }
+        public string Date { get { return CreateDate.ToString("yyyy-MM-dd HH:MM:ss"); } }
         public int ActivityTime { get; set; }
     }
 }

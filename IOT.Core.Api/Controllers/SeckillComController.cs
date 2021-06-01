@@ -22,7 +22,7 @@ namespace IOT.Core.Api.Controllers
         //添加
         [Route("/api/SeckillComAdd")]
         [HttpPost]
-        public int SeckillComAdd(IOT.Core.Model.SeckillCom a)
+        public int SeckillComAdd([FromForm]IOT.Core.Model.SeckillCom a)
         {
             int i = _seckillComRepository.AddSeckillCom(a);
             return i;
@@ -31,16 +31,19 @@ namespace IOT.Core.Api.Controllers
         //显示
         [Route("/api/SeckillComShow")]
         [HttpGet]
-        public IActionResult SeckillComShow(string nmid, int st)
+        public IActionResult SeckillComShow(string nmid, int st=-1)
         {
             var ls = _seckillComRepository.ShowSeckillCom();
             //根据姓名id查询
             if (!string.IsNullOrEmpty(nmid))
             {
-                ls = ls.Where(x => x.CommodityId.Equals(nmid) || x.SeckillTitle.Contains(nmid)).ToList();
+                ls = ls.Where(x => x.SeckillComId.Equals(nmid) || x.CommodityName.Contains(nmid)).ToList();
             }
             //根据状态查询
-            ls = ls.Where(x => x.State.Equals(st)).ToList();
+            if (st != -1)
+            {
+                ls = ls.Where(x => x.State.Equals(st)).ToList();
+            }
             return Ok(new
             {
                 msg = "",
@@ -51,8 +54,8 @@ namespace IOT.Core.Api.Controllers
 
         //删除
         [Route("/api/SeckillComDel")]
-        [HttpDelete]
-        public int SeckillComDel(string id)
+        [HttpGet]
+        public int SeckillComDel(int id)
         {
             return _seckillComRepository.DelSeckillCom(id);
         }
@@ -61,18 +64,18 @@ namespace IOT.Core.Api.Controllers
         //修改
         [HttpPost]
         [Route("/api/SeckillComUpt")]
-        public int SeckillComUpt(IOT.Core.Model.SeckillCom a)
+        public int SeckillComUpt([FromForm]IOT.Core.Model.SeckillCom a)
         {
             return _seckillComRepository.UptSeckillCom(a);
         }
 
 
         //修改状态
-        [Route("/SeckillCom/UptSt")]
+        [Route("/api/UptSeckillComState")]
         [HttpGet]
-        public int UptSt(int id)
+        public int UptSeckillComState(int id)
         {
-            return _seckillComRepository.UptSt(id);
+            return _seckillComRepository.UptState(id);
         }
     }
 }
