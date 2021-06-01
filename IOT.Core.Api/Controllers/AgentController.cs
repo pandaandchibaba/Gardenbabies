@@ -24,7 +24,7 @@ namespace IOT.Core.Api.Controllers
         /// <param name="agent"></param>
         /// <returns></returns>
         [HttpPost("/api/CreateAgent")]
-        public string CreateAgent(Model.Agent agent)
+        public string CreateAgent([FromForm]Model.Agent agent)
         {
             return _agent.CreateAgent(agent);
         }
@@ -78,7 +78,7 @@ namespace IOT.Core.Api.Controllers
         /// <param name="aid"></param>
         /// <returns></returns>
         [HttpPost("/api/UpdateState")]
-        public int UpdateState([FromForm] IOT.Core.Model.Agent agent)
+        public int UpdateState([FromForm]IOT.Core.Model.Agent agent)
         {
             return _agent.UpdateState(agent.AgentId);
         }

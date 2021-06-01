@@ -49,7 +49,7 @@ namespace IOT.Core.Api.Controllers
         /// <param name="com_Comment"></param>
         /// <returns></returns>
         [HttpPost("/api/CreateCom_Comment")]
-        public string CreateCom_Comment(IOT.Core.Model.Com_Comment com_Comment)
+        public string CreateCom_Comment([FromForm]IOT.Core.Model.Com_Comment com_Comment)
         {
             return _com_Comment.CreateCom_Comment(com_Comment);
         }

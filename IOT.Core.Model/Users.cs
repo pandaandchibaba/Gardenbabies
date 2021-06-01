@@ -22,6 +22,7 @@ namespace IOT.Core.Model
         public int ColonelID { get; set; }
         public int RoleId { get; set; }
         public int Mid { get; set; }
+        public int Mid { get; set; }
 
 
 

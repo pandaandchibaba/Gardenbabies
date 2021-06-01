@@ -51,7 +51,7 @@ namespace IOT.Core.Api.Controllers
         }
         [HttpPost]
         [Route("/api/AddPutLibrary")]
-        public int AddPutLibrary(IOT.Core.Model.PutLibrary putLibrary)
+        public int AddPutLibrary([FromForm]IOT.Core.Model.PutLibrary putLibrary)
         {
             int i = _putLibraryRepository.Insert(putLibrary);
             return i;
@@ -66,7 +66,7 @@ namespace IOT.Core.Api.Controllers
         }
         [HttpPut]
         [Route("/api/UptPutLibrary")]
-        public int UptPutLibrary(IOT.Core.Model.PutLibrary putLibrary)
+        public int UptPutLibrary([FromForm]IOT.Core.Model.PutLibrary putLibrary)
         {
             int i = _putLibraryRepository.Update(putLibrary);
             return i;

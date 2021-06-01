@@ -28,7 +28,7 @@ namespace IOT.Core.Api.Controllers
         /// <param name="limit"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        [HttpGet("/CommissionRecord/GetCommissionRecords")]
+        [HttpGet("/api/GetCommissionRecords")]
         public IActionResult GetCommissionRecords(int page,int limit,string key="")
         {
             List<IOT.Core.Model.V_CommissionRecord> lst = _commissionRecord.GetCommissionRecords(key);

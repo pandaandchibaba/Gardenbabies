@@ -33,17 +33,17 @@ namespace IOT.Core.Api.Controllers
 
         [HttpPut]
         [Route("/api/UptCollection")]
-        public int UptCollection(IOT.Core.Model.PayStore payStore)
+        public int UptCollection()
         {
-            int i = _payStoreRepository.UptCollection(payStore);
+            int i = _payStoreRepository.UptCollection();
             return i;
         }
 
         [HttpPut]
         [Route("/api/UptWhether")]
-        public int UptWhether(IOT.Core.Model.PayStore payStore)
+        public int UptWhether()
         {
-            int i = _payStoreRepository.UptWhether(payStore);
+            int i = _payStoreRepository.UptWhether();
             return i;
         }
     }

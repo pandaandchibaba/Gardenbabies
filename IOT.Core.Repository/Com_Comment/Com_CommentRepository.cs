@@ -30,7 +30,7 @@ namespace IOT.Core.Repository.Com_Comment
         {
             try
             {
-                string sql = $"insert into Com_Comment values(null,{comment.CommodityId},{comment.UserId},{comment.CommGrade},{comment.SeverGrade},'{comment.CommentContent}','{comment.RevertContent}','{comment.CommentPic}',now())";
+                string sql = $"insert into Com_Comment values(null,{comment.CommodityId},{comment.UserId},{comment.CommGrade},{comment.SeverGrade},'{comment.CommentContent}','{comment.RevertContent}','{comment.CommentPic}',now(),{comment.CommentState})";
                 int i = DapperHelper.Execute(sql);
                 if (i > 0)
                 {

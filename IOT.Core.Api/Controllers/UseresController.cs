@@ -111,6 +111,14 @@ namespace IOT.Core.Api.Controllers
             });
         }
 
-
+        /// <summary>
+        /// 获取所有用户
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("/api/GetAllUsers")]
+        public IActionResult GetAllUsers()
+        {
+            return Ok(_usersRepository.GetAllUsers());
+        }
     }
 }

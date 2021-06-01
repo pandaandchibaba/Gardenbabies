@@ -13,6 +13,11 @@ namespace IOT.Core.Repository.Users
     /// </summary>
     public class UsersRepository : IUsersRepository
     {
+        /// <summary>
+        /// 查询显示用户
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
        
         /// <summary>
         /// /显示
@@ -29,6 +34,12 @@ namespace IOT.Core.Repository.Users
             
             return DapperHelper.GetList<Model.Users>(sql);
         }
+
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <param name="Model"></param>
+        /// <returns></returns>
         /// <summary>
         /// 添加
         /// </summary>
@@ -40,6 +51,12 @@ namespace IOT.Core.Repository.Users
             return DapperHelper.Execute(sql);
 
         }
+
+        /// <summary>
+        /// 修改用户
+        /// </summary>
+        /// <param name="Model"></param>
+        /// <returns></returns>
         /// <summary>
         /// 修改
         /// </summary>
@@ -56,6 +73,11 @@ namespace IOT.Core.Repository.Users
         /// <param name="id"></param>
         /// <returns></returns>
 
+        /// <summary>
+        /// 修改用户状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public int UptUsersState(int id)
         {
             string sql = $"select * from Users ";
@@ -75,6 +97,12 @@ namespace IOT.Core.Repository.Users
             }
             return DapperHelper.Execute(sqlq);
         }
+
+        /// <summary>
+        /// 删除用户
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
         /// <summary>
         /// 删除
         /// </summary>
@@ -85,6 +113,12 @@ namespace IOT.Core.Repository.Users
             string sql = $"delete from Users where UserId in ({ids})";
             return DapperHelper.Execute(sql);
         }
+
+        /// <summary>
+        /// 反填用户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         /// <summary>
         /// 反填
         /// </summary>
@@ -95,6 +129,13 @@ namespace IOT.Core.Repository.Users
             string sql = $"select * from Users where Userid={id}";
             return DapperHelper.GetList<IOT.Core.Model.Users>(sql);
         }
+
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="loginname"></param>
+        /// <param name="loginpwd"></param>
+        /// <returns></returns>
         /// <summary>
         /// 登录
         /// </summary>
@@ -116,6 +157,15 @@ namespace IOT.Core.Repository.Users
                 return 0;
             }
 
+        }
+        
+        /// <summary>
+        /// 获取全部用户
+        /// </summary>
+        /// <returns></returns>
+        public List<Model.Users> GetAllUsers()
+        {
+            return DapperHelper.GetList<Model.Users>("select * from Users");
         }
     }
 }

@@ -24,25 +24,39 @@ namespace IOT.Core.Repository.Colonel
             return DapperHelper.GetList<IOT.Core.Model.Colonel>(sql).First();
         }
 
+        /// <summary>
+        /// 团长的显示查询
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public List<V_Colonel> GetColonel(string address = "", string key = "")
+        {
+            //获取全部数据
+            List<Model.V_Colonel> lst = DapperHelper.GetList<Model.V_Colonel>("select * from V_Colonel");
+            lst = lst.Where(x => (string.IsNullOrEmpty(address) ? true : x.Address.Contains(address)) && (string.IsNullOrEmpty(key) ? true : (x.UserName.Contains(key) || x.Phone == key))).ToList();
+            return lst;
+        }
+
         //显示
         public List<Model.Commodity> GetCommodities()
         {
             string sql = "select CommodityId,CommodityPic,CommodityName,ShopPrice from Commodity";
             return DapperHelper.GetList<Model.Commodity>(sql);
         }
-       /// <summary>
-       /// 商品显示
-       /// </summary>
-       /// <returns></returns>
+        /// <summary>
+        /// 商品显示
+        /// </summary>
+        /// <returns></returns>
         public List<Model.Users> GetUsers()
         {
             string sql = "SELECT a.ColonelID, b.HeadPortrait,a.UserName,a.Phone from Users a join Colonel b on a.ColonelID =b.ColonelID ";
             return DapperHelper.GetList<Model.Users>(sql);
         }
-   /// <summary>
-   /// 团员显示
-   /// </summary>
-   /// <returns></returns>
+        /// <summary>
+        /// 团员显示
+        /// </summary>
+        /// <returns></returns>
         public List<Model.Colonel> ShowColonel()
         {
             string sql = "select  * from colonel";
@@ -55,6 +69,6 @@ namespace IOT.Core.Repository.Colonel
             return DapperHelper.Execute(sql);
         }
 
-  
+
     }
 }

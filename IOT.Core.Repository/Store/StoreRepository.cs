@@ -1,5 +1,6 @@
 ﻿using IOT.Core.Common;
 using IOT.Core.IRepository.Store;
+using IOT.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,20 @@ namespace IOT.Core.Repository.Store
         {
             string sql = $"SELECT * FROM Store ";
             return DapperHelper.GetList<Model.Store>(sql);
+        }
+
+        /// <summary>
+        /// 显示查询门店
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public List<V_Store> GetStores(string address = "", string key = "")
+        {
+            //获取全部数据
+            List<V_Store> lst = DapperHelper.GetList<V_Store>("select * from V_Store");
+            lst = lst.Where(x => (string.IsNullOrEmpty(address) ? true : x.Address.Contains(address)) && (string.IsNullOrEmpty(key) ? true : (x.UserName.Contains(key) || x.Phone == key))).ToList();
+            return lst;
         }
 
         public List<Model.Store> GetStoresFan(int id)

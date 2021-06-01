@@ -11,6 +11,14 @@ namespace IOT.Core.IRepository.Colonel
         //显示
         List<IOT.Core.Model.Colonel> ShowColonel();
 
+
+        /// <summary>
+        /// 显示 查询
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        List<IOT.Core.Model.V_Colonel> GetColonel(string address="",string key="");
         //删除
         int DelColonel(string id);
 

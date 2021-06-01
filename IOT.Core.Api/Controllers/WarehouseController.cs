@@ -35,7 +35,7 @@ namespace IOT.Core.Api.Controllers
 
         [HttpPost]
         [Route("/api/AddWarehouse")]
-        public int AddWarehouse(IOT.Core.Model.Warehouse warehouse)
+        public int AddWarehouse([FromForm]IOT.Core.Model.Warehouse warehouse)
         {
             int i = _warehouseRepository.Insert(warehouse);
             return i;
@@ -47,9 +47,9 @@ namespace IOT.Core.Api.Controllers
             int i = _warehouseRepository.Delete(ids);
             return i;
         }
-        [HttpPut]
+        [HttpPost]
         [Route("/api/UptWarehouse")]
-        public int UptWarehouse(IOT.Core.Model.Warehouse warehouse)
+        public int UptWarehouse([FromForm]IOT.Core.Model.Warehouse warehouse)
         {
             int i = _warehouseRepository.Update(warehouse);
             return i;
