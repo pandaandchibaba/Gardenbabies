@@ -23,8 +23,8 @@ namespace IOT.Core.Api.Controllers
         /// </summary>
         /// <param name="agent"></param>
         /// <returns></returns>
-        [HttpPost("/Agent/CreateAgent")]
-        public string CreateAgent(Model.Agent agent)
+        [HttpPost("/api/CreateAgent")]
+        public string CreateAgent([FromForm]Model.Agent agent)
         {
             return _agent.CreateAgent(agent);
         }
@@ -34,19 +34,19 @@ namespace IOT.Core.Api.Controllers
         /// </summary>
         /// <param name="aid"></param>
         /// <returns></returns>
-        [HttpPost("/Agent/DeleteAgent")]
-        public int DeleteAgent([FromForm]string aid)
+        [HttpPost("/api/DeleteAgent")]
+        public int DeleteAgent([FromForm] IOT.Core.Model.Agent agent)
         {
-            return _agent.DeleteAgent(aid);
+            return _agent.DeleteAgent(agent.AgentId);
         }
 
         /// <summary>
         /// 分页显示代理商
         /// </summary>
-        /// <param name="page"></param>
-        /// <param name="limit"></param>
+        /// <param name="page">页码</param>
+        /// <param name="limit">页面大小</param>
         /// <returns></returns>
-        [HttpGet("/Agent/GetAgents")]
+        [HttpGet("/api/GetAgents")]
         public IActionResult GetAgents(int page, int limit)
         {
             List<Model.Agent> lst = _agent.GetAgents();
@@ -66,7 +66,7 @@ namespace IOT.Core.Api.Controllers
         /// </summary>
         /// <param name="aid"></param>
         /// <returns></returns>
-        [HttpGet("/Agent/GetAgentByAId")]
+        [HttpGet("/api/GetAgentByAId")]
         public IActionResult GetAgentByAId(int aid)
         {
             return Ok(_agent.GetAgentByAId(aid));
@@ -77,10 +77,10 @@ namespace IOT.Core.Api.Controllers
         /// </summary>
         /// <param name="aid"></param>
         /// <returns></returns>
-        [HttpPost("/Agent/UpdateState")]
-        public int UpdateState([FromForm] int aid)
+        [HttpPost("/api/UpdateState")]
+        public int UpdateState([FromForm]IOT.Core.Model.Agent agent)
         {
-            return _agent.UpdateState(aid);
+            return _agent.UpdateState(agent.AgentId);
         }
     }
 }

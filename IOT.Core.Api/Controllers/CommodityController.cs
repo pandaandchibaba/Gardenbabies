@@ -30,7 +30,7 @@ namespace IOT.Core.Api.Controllers
         /// <param name="tid">类别</param>
         /// <param name="key">查询关键词</param>
         /// <returns></returns>
-        [HttpGet("/Commodity/GetCommodities")]
+        [HttpGet("/api/GetCommodities")]
         public IActionResult GetCommodities(int page, int limit, int code = 1, int tid = 0, string key = "")
         {
             List<IOT.Core.Model.V_Commodity> lst = _commodity.GetCommodities(code, tid, key);
@@ -67,7 +67,7 @@ namespace IOT.Core.Api.Controllers
         /// </summary>
         /// <param name="cid"></param>
         /// <returns></returns>
-        [HttpGet("/Commodity/UpdateState")]
+        [HttpGet("/api/UpdateCommodityState")]
         public int UpdateState(int cid)
         {
             return _commodity.UpdateState(cid);
@@ -78,7 +78,7 @@ namespace IOT.Core.Api.Controllers
         /// </summary>
         /// <param name="cid"></param>
         /// <returns></returns>
-        [HttpGet("/Commodity/UpdateDeleteState")]
+        [HttpGet("/api/UpdateDeleteState")]
         public int UpdateDeleteState(int cid)
         {
             return _commodity.UpdateDeleteState(cid);
@@ -89,10 +89,20 @@ namespace IOT.Core.Api.Controllers
         /// </summary>
         /// <param name="commodity"></param>
         /// <returns></returns>
-        [HttpPost("/Commodity/CreateCommodity")]
+        [HttpPost("/api/CreateCommodity")]
         public int CreateCommodity(Model.Commodity commodity)
         {
             return _commodity.CreateCommodity(commodity);
+        }
+
+        /// <summary>
+        /// 获取所有商品
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("/api/GetAllCommodities")]
+        public IActionResult GetAllCommodities()
+        {
+            return Ok(_commodity.GetAllCommodities());
         }
     }
 }

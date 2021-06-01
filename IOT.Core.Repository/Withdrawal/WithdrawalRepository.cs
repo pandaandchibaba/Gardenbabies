@@ -10,9 +10,9 @@ namespace IOT.Core.Repository.Withdrawal
 {
     public class WithdrawalRepository : IWithdrawalRepository
     {
-        public List<Model.Withdrawal> Query(string name)
+        public List<Model.Withdrawal> Query()
         {
-            string sql = $"select * from Withdrawal";
+            string sql = $"select a.*,b.MName FROM Withdrawal a JOIN Store b ON a.Mid=b.Mid";
             return DapperHelper.GetList<Model.Withdrawal>(sql);
         }
     }

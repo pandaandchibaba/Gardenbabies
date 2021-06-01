@@ -20,20 +20,19 @@ namespace IOT.Core.Api.Controllers
 
         [HttpGet]
         [Route("/api/ShowDelivery")]
-        public IActionResult ShowDelivery(string deliveryname, int page = 1, int limit = 4)
+        public IActionResult ShowDelivery(int warehouseId)
         {
             List<IOT.Core.Model.Delivery> ld = _deliveryRepository.Query();
             //查找
-            if (!string.IsNullOrEmpty(deliveryname))
+            if (warehouseId!=0)
             {
-                ld = ld.Where(x => x.DeliveryName.Contains(deliveryname)).ToList();
+                ld = ld.Where(x => x.WarehouseId.Equals(warehouseId)).ToList();
             }
             return Ok(new
             {
                 msg = "",
                 code = 0,
-                count=ld.Count,
-                data = ld.Skip((page - 1) * limit).Take(limit)
+                data = ld
             });
 
 
@@ -60,7 +59,7 @@ namespace IOT.Core.Api.Controllers
 
         [HttpPut]
         [Route("/api/UptDelivery")]
-        public int UptDelivery(IOT.Core.Model.Delivery delivery)
+        public int UptDelivery([FromForm]IOT.Core.Model.Delivery delivery)
         {
             int i = _deliveryRepository.Update(delivery);
             return i;

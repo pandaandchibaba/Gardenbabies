@@ -24,31 +24,51 @@ namespace IOT.Core.Repository.Colonel
             return DapperHelper.GetList<IOT.Core.Model.Colonel>(sql).First();
         }
 
+        /// <summary>
+        /// 团长的显示查询
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public List<V_Colonel> GetColonel(string address = "", string key = "")
+        {
+            //获取全部数据
+            List<Model.V_Colonel> lst = DapperHelper.GetList<Model.V_Colonel>("select * from V_Colonel");
+            lst = lst.Where(x => (string.IsNullOrEmpty(address) ? true : x.Address.Contains(address)) && (string.IsNullOrEmpty(key) ? true : (x.UserName.Contains(key) || x.Phone == key))).ToList();
+            return lst;
+        }
+
         //显示
         public List<Model.Commodity> GetCommodities()
         {
-            string sql = "select CommodityPic,CommodityName,ShopPrice from Commodity";
+            string sql = "select CommodityId,CommodityPic,CommodityName,ShopPrice from Commodity";
             return DapperHelper.GetList<Model.Commodity>(sql);
         }
-       
+        /// <summary>
+        /// 商品显示
+        /// </summary>
+        /// <returns></returns>
         public List<Model.Users> GetUsers()
         {
-            string sql = "SELECT b.HeadPortrait,a.UserName,a.Phone from Users a join Colonel b on a.ColonelID =b.ColonelID ";
+            string sql = "SELECT a.ColonelID, b.HeadPortrait,a.UserName,a.Phone from Users a join Colonel b on a.ColonelID =b.ColonelID ";
             return DapperHelper.GetList<Model.Users>(sql);
         }
-   
+        /// <summary>
+        /// 团员显示
+        /// </summary>
+        /// <returns></returns>
         public List<Model.Colonel> ShowColonel()
         {
             string sql = "select  * from colonel";
             return DapperHelper.GetList<Model.Colonel>(sql);
         }
-        //商品显示
+        //修改
         public int UptColonel(Model.Colonel a)
         {
             string sql = $"Update Colonel set NickName= '{a.NickName}',Sex='{a.Sex}',Phone='{a.Phone}',ColonelName='{a.ColonelName}',MemberNum='{a.MemberNum}',PColonelId='{a.PColonelId}',Region='{a.Region}',Estate='{a.Estate}',Address='{a.Address}',Coordinates='{a.Coordinates}',RegisterTime='{a.RegisterTime}',Integral='{a.Integral}',Saleroom='{a.Saleroom}',DeliveryStatus='{a.DeliveryStatus}',Cost='{a.Cost}',Alipay='{a.Alipay}',BankSite='{a.BankSite}',CardName='{a.CardName}',BankCard='{a.BankCard}',HeadPortrait='{a.HeadPortrait}',CommIds='{a.CommIds}'where ColonelID ='{a.ColonelID}'";
             return DapperHelper.Execute(sql);
         }
 
-  
+
     }
 }

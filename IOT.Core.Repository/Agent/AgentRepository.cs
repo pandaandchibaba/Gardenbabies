@@ -20,30 +20,46 @@ namespace IOT.Core.Repository.Agent
             //添加
             if (agent.AgentId==0)
             {
-                //添加的SQL语句
-                string sql = $"insert into Agent values(null,'{agent.AgentName}','{agent.BackgroudColor}','{agent.Icon}','{agent.BCImg}','{agent.Fans}',{agent.Consume},{agent.Money},'{agent.NFans}',{agent.Two},{agent.Three},{agent.One},'{agent.Explaina}',{agent.AgentState})";
-                int i = DapperHelper.Execute(sql);
-                if (i>0)
+                try
                 {
-                    return "添加成功";
+                    //添加的SQL语句
+                    string sql = $"insert into Agent values(null,'{agent.AgentName}','{agent.BackgroudColor}','{agent.Icon}','{agent.BCImg}','{agent.Fans}',{agent.Consume},{agent.Money},'{agent.NFans}',{agent.Two},{agent.Three},{agent.One},'{agent.Explaina}',{agent.AgentState})";
+                    int i = DapperHelper.Execute(sql);
+                    if (i > 0)
+                    {
+                        return "添加成功";
+                    }
+                    else
+                    {
+                        return "添加失败";
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    return "添加失败";
+
+                    throw;
                 }
             }
             else  //修改
             {
-                //修改SQL语句
-                string sql = $"update Agent set AgentName='{agent.AgentName}',BackgroudColor='{agent.BackgroudColor}',Icon='{agent.Icon}',BCImg='{agent.BCImg}',Fans='{agent.Fans}',Consume={agent.Consume},Money={agent.Money},NFans='{agent.NFans}',Two={agent.Two},Three={agent.Three},One={agent.One},Explaina='{agent.Explaina}',AgentState={agent.AgentState} where AgentId={agent.AgentId}";
-                int i = DapperHelper.Execute(sql);
-                if (i > 0)
+                try
                 {
-                    return "修改成功";
+                    //修改SQL语句
+                    string sql = $"update Agent set AgentName='{agent.AgentName}',BackgroudColor='{agent.BackgroudColor}',Icon='{agent.Icon}',BCImg='{agent.BCImg}',Fans='{agent.Fans}',Consume={agent.Consume},Money={agent.Money},NFans='{agent.NFans}',Two={agent.Two},Three={agent.Three},One={agent.One},Explaina='{agent.Explaina}',AgentState={agent.AgentState} where AgentId={agent.AgentId}";
+                    int i = DapperHelper.Execute(sql);
+                    if (i > 0)
+                    {
+                        return "修改成功";
+                    }
+                    else
+                    {
+                        return "修改失败";
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    return "修改失败";
+
+                    throw;
                 }
             }
         }
@@ -53,7 +69,7 @@ namespace IOT.Core.Repository.Agent
         /// </summary>
         /// <param name="aid"></param>
         /// <returns></returns>
-        public int DeleteAgent(string aid)
+        public int DeleteAgent(int aid)
         {
             string sql = $"delete from Agent where AgentId ={aid}";
             return DapperHelper.Execute(sql);
@@ -85,17 +101,25 @@ namespace IOT.Core.Repository.Agent
         /// <returns></returns>
         public int UpdateState(int aid)
         {
-            Model.Agent agent= DapperHelper.GetList<IOT.Core.Model.Agent>($"select * from Agent where AgentId={aid}").FirstOrDefault();
-            if (agent.AgentState==1)
+            try
             {
-                agent.AgentState = 0;
+                Model.Agent agent = DapperHelper.GetList<IOT.Core.Model.Agent>($"select * from Agent where AgentId={aid}").FirstOrDefault();
+                if (agent.AgentState == 1)
+                {
+                    agent.AgentState = 0;
+                }
+                else
+                {
+                    agent.AgentState = 1;
+                }
+                string sql = $"update Agent set AgentState={agent.AgentState} where AgentId={agent.AgentId} ";
+                return DapperHelper.Execute(sql);
             }
-            else
+            catch (Exception)
             {
-                agent.AgentState = 1;
+
+                throw;
             }
-            string sql = $"update Agent set AgentState={agent.AgentState} where AgentId={agent.AgentId} ";
-            return DapperHelper.Execute(sql);
         }
     }
 }

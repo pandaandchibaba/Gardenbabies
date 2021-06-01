@@ -9,8 +9,6 @@ namespace IOT.Core.IRepository.Users
    public  interface IUsersRepository
     {
 
-       
-
 
 
         /// <summary>
@@ -31,7 +29,7 @@ namespace IOT.Core.IRepository.Users
         /// </summary>
         /// <param name="Model"></param>
         /// <returns></returns>
-        int UptUsers(IOT.Core.Model.Users Model);
+        int UptUsers(IOT.Core.Model.Users a);
         /// <summary>
         /// 修改状态
         /// </summary>
@@ -44,8 +42,17 @@ namespace IOT.Core.IRepository.Users
         /// <param name="ids"></param>
         /// <returns></returns>
         int DelUsers(int ids);
-
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="loginname"></param>
+        /// <param name="loginpwd"></param>
+        /// <returns></returns>
         int Login(string loginname, string loginpwd);
-
+        /// <summary>
+        /// 获取所有用户
+        /// </summary>
+        /// <returns></returns>
+        List<IOT.Core.Model.Users> GetAllUsers();
     }
 }

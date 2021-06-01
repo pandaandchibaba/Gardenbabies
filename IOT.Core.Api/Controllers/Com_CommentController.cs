@@ -31,7 +31,7 @@ namespace IOT.Core.Api.Controllers
         public IActionResult GetComments(int page, int limit, string cname = "", string uname = "")
         {
             //获取全部数据
-            List<IOT.Core.Model.V_Com_Comment> lst = _com_Comment.GetComments(cname, uname);
+            List<IOT.Core.Model.V_Com_Comment> lst = _com_Comment.GetComments(days, st, cname, uname);
             //总记录数
             int count = lst.Count;
             return Ok(new
@@ -63,6 +63,17 @@ namespace IOT.Core.Api.Controllers
         public int DeleteCom_Comment([FromForm] int cid)
         {
             return _com_Comment.DeleteCom_Comment(cid);
+        }
+
+        /// <summary>
+        /// 回复评论
+        /// </summary>
+        /// <param name="com"></param>
+        /// <returns></returns>
+        [HttpPost("/api/ReplyComment")]
+        public int ReplyComment([FromForm]IOT.Core.Model.Com_Comment com)
+        {
+            return _com_Comment.ReplyComment(com);
         }
     }
 }

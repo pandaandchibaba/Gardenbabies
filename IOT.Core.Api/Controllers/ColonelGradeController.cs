@@ -20,14 +20,17 @@ namespace IOT.Core.Api.Controllers
 
         [Route("/Api/colonelGrade")]
         [HttpGet]
-        public IActionResult colonelGrade(int page,int limit)
+        public IActionResult colonelGrade(string sname="")
         {
             var ls = _colonelGradeRepository.GetColonels();
-            ls = ls.Skip((page - 1) * limit).Take(limit).ToList();
-            return Ok(new {code=0,msg="",count=ls.Count, data = ls });
+            if (!string.IsNullOrEmpty(sname))
+            {
+                ls = ls.Where(x => x.CGradeName.Contains(sname)).ToList();
+            }
+            return Ok( new{data = ls });
         }
         [Route("/Api/delte")]
-        [HttpPost]
+        [HttpGet]
         public int  delte(string id)
         {
             int i = _colonelGradeRepository.Edit(id);
@@ -35,16 +38,19 @@ namespace IOT.Core.Api.Controllers
         }
         [Route("/Api/Uptdate")]
         [HttpPost]
-        public int Uptdate(Model.ColonelGrade a)
+        public int Uptdate([FromForm]Model.ColonelGrade a)
         {
             int i = _colonelGradeRepository.Upt(a);
             return i;
         }
         [Route("/api/Uptdatas")]
-        [HttpPost]
+        [HttpGet]
         public int Uptdatas(int id)
         {
-            return _colonelGradeRepository.UptState(id);
+            int i = _colonelGradeRepository.UptState(id);
+            return i;
+
+
         }
 
         [Route("/api/FTS")]

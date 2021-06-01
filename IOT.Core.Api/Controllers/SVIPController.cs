@@ -26,8 +26,8 @@ namespace IOT.Core.Api.Controllers
         /// </summary>
         /// <param name="sVIP"></param>
         /// <returns></returns>
-        [HttpPost("/SVIP/CreateSVIP")]
-        public string CreateSVIP(IOT.Core.Model.SVIP sVIP)
+        [HttpPost("/api/CreateSVIP")]
+        public string CreateSVIP([FromForm]IOT.Core.Model.SVIP sVIP)
         {
             return _iSVIP.CreateSVIP(sVIP);
         }

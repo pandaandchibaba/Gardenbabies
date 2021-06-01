@@ -19,33 +19,49 @@ namespace IOT.Core.Repository.Specification
         {
             if (specification.SId == 0)  //添加
             {
-                string sql = $"insert into Specification values(null,'{specification.SpecificationName}','{specification.CommSpec}','{specification.CommProp}',{specification.SpecificationValue})";
-                int i = DapperHelper.Execute(sql);
-                if (i > 0)
+                try
                 {
-                    return "添加成功";
+                    string sql = $"insert into Specification values(null,'{specification.SpecificationName}','{specification.CommSpec}','{specification.CommProp}',{specification.SpecificationValue})";
+                    int i = DapperHelper.Execute(sql);
+                    if (i > 0)
+                    {
+                        return "添加成功";
+                    }
+                    else
+                    {
+                        return "添加失败";
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    return "添加失败";
+
+                    throw;
                 }
 
             }
             else  //修改
             {
-                string sql = $"update Specification set SpecificationName='{specification.SpecificationName}',CommSpec='{specification.CommSpec}',CommProp='{specification.CommProp}',SpecificationValue={specification.SpecificationValue} where SId={specification.SId}";
-                int i = DapperHelper.Execute(sql);
-                if (i > 0)
+                try
                 {
-                    return "修改成功";
+                    string sql = $"update Specification set SpecificationName='{specification.SpecificationName}',CommSpec='{specification.CommSpec}',CommProp='{specification.CommProp}',SpecificationValue={specification.SpecificationValue} where SId={specification.SId}";
+                    int i = DapperHelper.Execute(sql);
+                    if (i > 0)
+                    {
+                        return "修改成功";
+                    }
+                    else
+                    {
+                        return "修改失败";
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    return "修改失败";
+
+                    throw;
                 }
+                
             }
         }
-
         /// <summary>
         /// 删除规格
         /// </summary>

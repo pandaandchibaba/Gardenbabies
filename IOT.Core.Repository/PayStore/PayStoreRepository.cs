@@ -11,14 +11,20 @@ namespace IOT.Core.Repository.PayStore
 {
     public class PayStoreRepository : IPayStoreRepository
     {
-    
-        public int UptCollection(Model.PayStore Model)
+        public List<Model.PayStore> GetPayStores()
+        {
+            string sql = "SELECT *FROM PayStore where Pid=1";
+            List<Model.PayStore> lp = DapperHelper.GetList<Model.PayStore>(sql);
+            return lp;
+        }
+
+        public int UptCollection()
         {
             string sql = "SELECT *FROM PayStore";
             List<IOT.Core.Model.PayStore> lp = DapperHelper.GetList<IOT.Core.Model.PayStore>(sql);
             IOT.Core.Model.PayStore payStore = lp.FirstOrDefault(x => x.Pid.Equals(1));
             string sqls = "";
-            if (payStore.Collection==0)
+            if (payStore.Collection == 0)
             {
                 sqls = "UPDATE PayStore SET Collection=Collection+1 where Pid=1";
             }
@@ -27,10 +33,9 @@ namespace IOT.Core.Repository.PayStore
                 sqls = "UPDATE PayStore SET Collection=Collection-1 where Pid=1";
             }
             return DapperHelper.Execute(sqls);
-
         }
 
-        public int UptWhether(Model.PayStore Model)
+        public int UptWhether()
         {
             string sql = "SELECT *FROM PayStore";
             List<IOT.Core.Model.PayStore> lp = DapperHelper.GetList<IOT.Core.Model.PayStore>(sql);
@@ -46,6 +51,5 @@ namespace IOT.Core.Repository.PayStore
             }
             return DapperHelper.Execute(sqls);
         }
-
     }
 }

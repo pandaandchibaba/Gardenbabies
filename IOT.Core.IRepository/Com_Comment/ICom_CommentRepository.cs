@@ -14,7 +14,7 @@ namespace IOT.Core.IRepository.Com_Comment
         /// <param name="cname"></param>
         /// <param name="uname"></param>
         /// <returns></returns>
-        List<IOT.Core.Model.V_Com_Comment> GetComments(string cname="",string uname="");
+        List<IOT.Core.Model.V_Com_Comment> GetComments(int days=0,string st="",string cname="",string uname="");
 
         /// <summary>
         /// 添加评论
@@ -29,5 +29,12 @@ namespace IOT.Core.IRepository.Com_Comment
         /// <param name="cid"></param>
         /// <returns></returns>
         int DeleteCom_Comment(int cid);
+
+        /// <summary>
+        /// 回复评论
+        /// </summary>
+        /// <param name="com"></param>
+        /// <returns></returns>
+        int ReplyComment(IOT.Core.Model.Com_Comment com);
     }
 }

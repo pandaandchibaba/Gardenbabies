@@ -34,10 +34,16 @@ namespace IOT.Core.IRepository.Commodity
         int UpdateState(int CId);
 
         /// <summary>
-        /// 添加分类
+        /// 添加商品
         /// </summary>
         /// <param name="commodity"></param>
         /// <returns></returns>
         int CreateCommodity(IOT.Core.Model.Commodity commodity);
+
+        /// <summary>
+        /// 获取所有商品
+        /// </summary>
+        /// <returns></returns>
+        List<IOT.Core.Model.Commodity> GetAllCommodities();
     }
 }

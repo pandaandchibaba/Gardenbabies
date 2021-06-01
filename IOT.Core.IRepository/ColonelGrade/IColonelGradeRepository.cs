@@ -16,7 +16,7 @@ namespace IOT.Core.IRepository.ColonelGrade
         int Upt(IOT.Core.Model.ColonelGrade a);
 
         //修改状态
-        int UptState(int Cid);
+        int UptState(int id);
 
         //反填
         IOT.Core.Model.ColonelGrade ft2(int id);

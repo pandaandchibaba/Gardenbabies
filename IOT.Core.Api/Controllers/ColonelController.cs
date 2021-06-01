@@ -24,20 +24,32 @@ namespace IOT.Core.Api.Controllers
         //显示
         [Route("/api/colonel")]
         [HttpGet]
-        public IActionResult colonel(int page, int limit, string nickname = "")
+        public IActionResult colonel(string nickname = "")
         {
             var ls = _colonelRepository.ShowColonel();
             if (!string.IsNullOrEmpty(nickname))
             {
                 ls = ls.Where(x => x.NickName.Contains(nickname)).ToList();
             }
-            ls = ls.Skip((page - 1) * limit).Take(limit).ToList();
-            return Ok(new { code = 0, msg = "", Count = ls.Count, data = ls });
+            
+            return Ok(new {data = ls });
+        }
+
+        /// <summary>
+        /// 显示查询
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        [HttpGet("/api/GetColonel")]
+        public IActionResult GetColonel(string address="",string key="")
+        {
+            return Ok(_colonelRepository.GetColonel(address, key));
         }
 
         [Route("/api/Colonelupt")]
         [HttpPost]
-        public int Colonelupt(Model.Colonel a)
+        public int Colonelupt([FromForm]Model.Colonel a)
         {
             int i = _colonelRepository.UptColonel(a);
             return i;

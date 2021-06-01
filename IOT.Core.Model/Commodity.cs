@@ -26,7 +26,7 @@ namespace IOT.Core.Model
         /// <summary>
         /// 商品售价
         /// </summary>
-        public string ShopPrice { get; set; }
+        public float ShopPrice { get; set; }
         /// <summary>
         /// 销量
         /// </summary>

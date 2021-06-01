@@ -20,7 +20,7 @@ namespace IOT.Core.IRepository.Agent
         /// </summary>
         /// <param name="aid"></param>
         /// <returns></returns>
-        int DeleteAgent(string aid);
+        int DeleteAgent(int aid);
 
         /// <summary>
         /// 分页显示代理商

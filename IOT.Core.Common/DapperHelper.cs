@@ -18,9 +18,17 @@ namespace IOT.Core.Common
         /// <returns></returns>
         public static List<T> GetList<T>(string sql)
         {
-            using (IDbConnection db = new MySqlConnection(ConfigurationManager.Conn))
+            try
             {
-                return db.Query<T>(sql).ToList();
+                using (IDbConnection db = new MySqlConnection(ConfigurationManager.Conn))
+                {
+                    return db.Query<T>(sql).ToList();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
         /// <summary>
@@ -30,9 +38,16 @@ namespace IOT.Core.Common
         /// <returns></returns>
         public static int Execute(string sql)
         {
-            using (IDbConnection db = new MySqlConnection(ConfigurationManager.Conn))
+            try
             {
-                return db.Execute(sql);
+                using (IDbConnection db = new MySqlConnection(ConfigurationManager.Conn))
+                {
+                    return db.Execute(sql);
+                }
+            } 
+            catch (Exception)
+            {
+                throw;
             }
         }
         /// <summary>
