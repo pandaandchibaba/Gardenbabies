@@ -8,7 +8,6 @@ namespace IOT.Core.IRepository.Users
 {
    public  interface IUsersRepository
     {
-    {    
 
 
 
