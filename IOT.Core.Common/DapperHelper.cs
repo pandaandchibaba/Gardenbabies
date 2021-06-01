@@ -69,6 +69,7 @@ namespace IOT.Core.Common
 
                 throw;
             }
+           
         }
     }
 }

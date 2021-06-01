@@ -17,8 +17,16 @@ namespace IOT.Core.Repository.Activity
         /// <returns></returns>
         public int AddActivity(Model.Activity a)
         {
-            string sql = $"insert into Activity values (null,'{a.ActivityName}', '{a.BeginTime}', '{a.EndTime}', '{a.Slideshow}', {a.State},'{a.CreateDate}', {a.ActivityTime})";
-            return DapperHelper.Execute(sql);
+            try
+            {
+                string sql = $"insert into Activity values (null,'{a.ActivityName}', '{a.BeginTime}', '{a.EndTime}', 'https://www.hualigs.cn/image/60b086b319dbb.jpg', {a.State},'{a.CreateDate}', 3)";
+                return DapperHelper.Execute(sql);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>
@@ -28,8 +36,16 @@ namespace IOT.Core.Repository.Activity
         /// <returns></returns>
         public int DelActivity(string id)
         {
-            string sql = $"delete from Activity where ActivityId={id}";
-            return DapperHelper.Execute(sql);
+            try
+            {
+                string sql = $"delete from Activity where ActivityId={id}";
+                return DapperHelper.Execute(sql);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>
@@ -38,8 +54,17 @@ namespace IOT.Core.Repository.Activity
         /// <returns></returns>
         public List<Model.Activity> ShowActivity()
         {
-            string sql = "select * from Activity"; 
-            return DapperHelper.GetList<Model.Activity>(sql);
+            try
+            {
+                string sql = "select * from Activity";
+                return DapperHelper.GetList<Model.Activity>(sql);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
         }
 
         /// <summary>
@@ -49,8 +74,17 @@ namespace IOT.Core.Repository.Activity
         /// <returns></returns>
         public int UptActivity(Model.Activity a)
         {
-            string sql = $"update Activity set ActivityName='{a.ActivityName}', BeginTime='{a.BeginTime}', EndTime='{a.EndTime}', Slideshow='{a.Slideshow}', State={a.State},CreateDate='{a.CreateDate}', ActivityTime={a.ActivityTime} where ActivityId={a.ActivityId}";
-            return DapperHelper.Execute(sql);
+            try
+            {
+                string sql = $"update Activity set ActivityName='{a.ActivityName}', BeginTime='{a.BeginTime}', EndTime='{a.EndTime}', Slideshow='{a.Slideshow}', State={a.State},CreateDate='{a.CreateDate}', ActivityTime={a.ActivityTime} where ActivityId={a.ActivityId}";
+                return DapperHelper.Execute(sql);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
 
         /// <summary>
@@ -58,20 +92,29 @@ namespace IOT.Core.Repository.Activity
         /// </summary>
         /// <param name="st"></param>
         /// <returns></returns>
-        public int Uptst(int id)
+        public int UptState(int id)
         {
-            IOT.Core.Model.Activity ls= DapperHelper.GetList<Model.Activity>($"select * from Activity where ActivityId={id}").FirstOrDefault();
-            if (ls.State == 0)
+            try
             {
-                ls.State = 1;
+                IOT.Core.Model.Activity ls = DapperHelper.GetList<Model.Activity>($"select * from Activity where ActivityId={id}").FirstOrDefault();
+                if (ls.State == 0)
+                {
+                    ls.State = 1;
+                }
+                else
+                {
+                    ls.State = 0;
+
+                }
+                string sql = $"update Activity set State ={ls.State} where ActivityId={id}";
+                return DapperHelper.Execute(sql);
             }
-            else
+            catch (Exception)
             {
-                ls.State = 0;
-                
+
+                throw;
             }
-            string sql = $"update Activity set State ={ls.State} where ActivityId={id}";
-            return DapperHelper.Execute(sql);
+           
         }
     }
 }

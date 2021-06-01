@@ -61,9 +61,9 @@ namespace IOT.Core.Api.Controllers
         [HttpPost]
         [Route("/api/UptUseres")]
 
-        public int UptUseres(Model.Users Model)
+        public int UptUseres(Model.Users a)
         {
-            int i = _usersRepository.UptUsers(Model);
+            int i = _usersRepository.UptUsers(a);
             return i;
         }
         /// <summary>

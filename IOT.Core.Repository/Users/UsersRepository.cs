@@ -62,9 +62,9 @@ namespace IOT.Core.Repository.Users
         /// </summary>
         /// <param name="Model"></param>
         /// <returns></returns>
-        public int UptUsers(Model.Users Model)
+        public int UptUsers(Model.Users a)
         {
-            string sql = $"UPDATE  Users SET UserName='{Model.UserName}',LoginName='{Model.LoginName}',NickName='{Model.NickName}',Address='{Model.Address}',State='{Model.State}' where UserId='{Model.UserId}'";
+            string sql = $"UPDATE  Users SET UserName='{a.UserName}',LoginName='{a.LoginName}',NickName='{a.NickName}',Address='{a.Address}',State='{a.State}',Mid='{a.Mid}' where UserId='{a.UserId}'";
             return DapperHelper.Execute(sql);
         }
         /// <summary>

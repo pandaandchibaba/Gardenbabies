@@ -30,8 +30,9 @@ namespace IOT.Core.Model
         public string BargainRemark  { get; set; }
         public int Template       { get; set; }
         public int LimitNum       { get; set; }
+        public string Job { get; set; }
+        public int Sort { get; set; }
         public float BargainSum     { get; set; }
-
         /// <summary>
         /// 商品名称
         /// </summary>
@@ -52,10 +53,6 @@ namespace IOT.Core.Model
         /// 库存
         /// </summary>
         public int Repertory { get; set; }
-        /// <summary>
-        /// 排序
-        /// </summary>
-        public int Sort { get; set; }
         /// <summary>
         /// 状态
         /// </summary>
@@ -85,10 +82,7 @@ namespace IOT.Core.Model
         /// 配送地址
         /// </summary>
         public string SendAddress { get; set; }
-        /// <summary>
-        /// 单位
-        /// </summary>
-        public string Job { get; set; }
+
         /// <summary>
         /// 积分
         /// </summary>

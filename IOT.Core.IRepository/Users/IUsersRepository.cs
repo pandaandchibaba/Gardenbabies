@@ -8,6 +8,9 @@ namespace IOT.Core.IRepository.Users
 {
    public  interface IUsersRepository
     {
+
+
+
         /// <summary>
         /// 显示查询
         /// </summary>
@@ -26,7 +29,7 @@ namespace IOT.Core.IRepository.Users
         /// </summary>
         /// <param name="Model"></param>
         /// <returns></returns>
-        int UptUsers(IOT.Core.Model.Users Model);
+        int UptUsers(IOT.Core.Model.Users a);
         /// <summary>
         /// 修改状态
         /// </summary>
