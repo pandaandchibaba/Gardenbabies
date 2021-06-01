@@ -72,7 +72,7 @@ namespace IOT.Core.Api.Controllers
         /// <param name="commodity"></param>
         /// <returns></returns>
         [HttpPost("/api/CreateCommodity")]
-        public int CreateCommodity(Model.Commodity commodity)
+        public int CreateCommodity([FromForm]Model.Commodity commodity)
         {
             return _commodity.CreateCommodity(commodity);
         }

@@ -1,9 +1,12 @@
 ﻿using IOT.Core.IRepository.Users;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 /// <summary>
@@ -15,6 +18,7 @@ namespace IOT.Core.Api.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        Logger logger = NLog.LogManager.GetCurrentClassLogger();//实例化
         private readonly IUsersRepository  _usersRepository;
 
         public UsersController(IUsersRepository  usersRepository)
@@ -33,6 +37,18 @@ namespace IOT.Core.Api.Controllers
         public int GetLogin(string loginname, string loginpwd)
         {
             int i = _usersRepository.Login(loginname,loginpwd);
+            StringBuilder builder = new StringBuilder();
+            builder.Append("登录名："+loginname+"\n");
+            builder.Append("时间：" + DateTime.Now + "\n");
+            if (i>0)
+            {
+                builder.Append("登录成功");
+            }
+            else
+            {
+                builder.Append("登录失败");
+            }
+            logger.Debug(builder.ToString());
             return i;
         }
 
