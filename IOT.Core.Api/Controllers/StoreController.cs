@@ -89,10 +89,11 @@ namespace IOT.Core.Api.Controllers
             int i = _storeRepository.DelStore(ids);
             return i;
         }
+
         [HttpPost]
         [Route("/api/InsertStore")]
 
-        public int InsertStore(Model.Store Model)
+        public int InsertStore([FromForm]Model.Store Model)
         {
             int i = _storeRepository.InsertStore(Model);
             return i;
@@ -100,7 +101,7 @@ namespace IOT.Core.Api.Controllers
         [HttpPost]
         [Route("/api/UptStore")]
 
-        public int UptStore(Model.Store Model)
+        public int UptStore([FromForm] Model.Store Model)
         {
             int i = _storeRepository.UptStore(Model);
             return i;
