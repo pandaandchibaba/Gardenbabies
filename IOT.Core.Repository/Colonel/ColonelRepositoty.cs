@@ -27,7 +27,7 @@ namespace IOT.Core.Repository.Colonel
         //显示
         public List<Model.Commodity> GetCommodities()
         {
-            string sql = "select CommodityPic,CommodityName,ShopPrice from Commodity";
+            string sql = "select CommodityId,CommodityPic,CommodityName,ShopPrice from Commodity";
             return DapperHelper.GetList<Model.Commodity>(sql);
         }
        /// <summary>
@@ -36,7 +36,7 @@ namespace IOT.Core.Repository.Colonel
        /// <returns></returns>
         public List<Model.Users> GetUsers()
         {
-            string sql = "SELECT b.HeadPortrait,a.UserName,a.Phone from Users a join Colonel b on a.ColonelID =b.ColonelID ";
+            string sql = "SELECT a.ColonelID, b.HeadPortrait,a.UserName,a.Phone from Users a join Colonel b on a.ColonelID =b.ColonelID ";
             return DapperHelper.GetList<Model.Users>(sql);
         }
    /// <summary>

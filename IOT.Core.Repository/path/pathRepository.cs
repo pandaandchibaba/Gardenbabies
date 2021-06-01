@@ -41,7 +41,7 @@ namespace IOT.Core.Repository.Path
             return DapperHelper.GetList< Model.Path>(sql);
         }
 
-        public int Update(int cid)
+        public int Update(string cid)
         {
             IOT.Core.Model.Path ls = DapperHelper.GetList<IOT.Core.Model.Path>($"select * from Path  where RathID   ={cid}").FirstOrDefault();
             if (ls.State == 0)

@@ -37,7 +37,7 @@ namespace IOT.Core.Api.Controllers
 
         [Route("/api/Colonelupt")]
         [HttpPost]
-        public int Colonelupt(Model.Colonel a)
+        public int Colonelupt([FromForm]Model.Colonel a)
         {
             int i = _colonelRepository.UptColonel(a);
             return i;
