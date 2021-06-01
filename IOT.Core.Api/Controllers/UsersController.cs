@@ -57,7 +57,7 @@ namespace IOT.Core.Api.Controllers
                 builder.Append("登录失败");
             }
             logger.Debug(builder.ToString());
-            return i;
+            return Ok(new { Token = BuildToken(loginname), Id = i }) ;
         }
 
 
