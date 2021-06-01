@@ -145,7 +145,7 @@ namespace IOT.Core.Repository.Users
         public int Login(string loginname, string loginpwd)
         {
             
-                string sql = $"select * from Users where LoginName={loginname} and LoginPwd={loginpwd}";
+                string sql = $"select * from Users where LoginName='{loginname}' and LoginPwd='{loginpwd}'";
             //List<Model.Users> lists=lists; 
             IOT.Core.Model.Users users = DapperHelper.GetList<Model.Users>(sql).FirstOrDefault();
             if (users!=null)
