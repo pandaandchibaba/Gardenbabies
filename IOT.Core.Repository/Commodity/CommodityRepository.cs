@@ -32,7 +32,7 @@ namespace IOT.Core.Repository.Commodity
             //添加的SQL语句
             try
             {
-                string sql = $"insert into Commodity values (null,'{commodity.CommodityName}','{commodity.CommodityPic}',{commodity.ShopPrice},{commodity.ShopNum},{commodity.Repertory},{commodity.Sort},0,now(),{commodity.TId},'{commodity.Remark}',{commodity.TemplateId},'{commodity.CommodityKey}','{commodity.SendAddress}','{commodity.Job}',{commodity.Integral},{commodity.SId},'{commodity.Color}','{commodity.Size}',0,0,{commodity.CostPrice},{commodity.ColonelID},{commodity.Mid})";
+                string sql = $"insert into Commodity values (null,'{commodity.CommodityName}','{commodity.CommodityPic}',{commodity.ShopPrice},{commodity.ShopNum},{commodity.Repertory},{commodity.Sort},1,now(),{commodity.TId},'{commodity.Remark}',{commodity.TemplateId},'{commodity.CommodityKey}','{commodity.SendAddress}','{commodity.Job}',{commodity.Integral},{commodity.SId},'{commodity.Color}','{commodity.Size}',0,0,{commodity.CostPrice},{commodity.ColonelID},{commodity.Mid})";
                 return DapperHelper.Execute(sql);
             }
             catch (Exception)
