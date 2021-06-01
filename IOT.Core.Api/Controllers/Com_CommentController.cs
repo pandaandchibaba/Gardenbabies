@@ -28,7 +28,7 @@ namespace IOT.Core.Api.Controllers
         /// <param name="uname"></param>
         /// <returns></returns>
         [HttpGet("/api/GetComments")]
-        public IActionResult GetComments(int page, int limit, string cname = "", string uname = "")
+        public IActionResult GetComments(int page, int limit,int days=0,string st="", string cname = "", string uname = "")
         {
             //获取全部数据
             List<IOT.Core.Model.V_Com_Comment> lst = _com_Comment.GetComments(days, st, cname, uname);
