@@ -11,10 +11,40 @@ namespace IOT.Core.Repository.CommType
 {
     public class CommTypeRepository : ICommTypeRepository
     {
-        public List<Model.CommType> BindType(int pid)
+        public List<Dictionary<string, object>> BindType()
         {
-            string sql = $"select * from CommType where ParentId={pid} and State=1";
-            return DapperHelper.GetList<Model.CommType>(sql);
+            string sql = $"select * from CommType where State=1";
+            //获取所有分类
+            List<Model.CommType> lst = DapperHelper.GetList<Model.CommType>(sql);
+            return Recursion(lst, 0);
+        }
+
+        /// <summary>
+        /// 递归获取层级分类
+        /// </summary>
+        /// <param name="lst"></param>
+        /// <param name="pid"></param>
+        /// <returns></returns>
+        private List<Dictionary<string,object>> Recursion(List<Model.CommType> lst,int pid)
+        {
+            //实例化一个集合
+            List<Dictionary<string, object>> json = new List<Dictionary<string, object>>();
+            //获取所有子菜单
+            List<Model.CommType> subLst = lst.Where(x => x.ParentId == pid).ToList();
+            //遍历所有子菜单
+            foreach (var item in subLst)
+            {
+                //实例化一个字典
+                Dictionary<string, object> jsonSub = new Dictionary<string, object>();
+                jsonSub.Add("value", item.TId);
+                jsonSub.Add("label", item.TName);
+                if (lst.Count(x=>x.ParentId==item.TId)>0)
+                {
+                    jsonSub.Add("children", Recursion(lst, item.TId));
+                }
+                json.Add(jsonSub);
+            }
+            return json;
         }
 
         /// <summary>
@@ -97,7 +127,7 @@ namespace IOT.Core.Repository.CommType
             List<IOT.Core.Model.V_CommType> lst = DapperHelper.GetList<IOT.Core.Model.V_CommType>("select * from V_CommType order by sort");
             //状态
             if (!string.IsNullOrEmpty(st))
-            { 
+            {
                 lst = lst.Where(x => x.State == Convert.ToInt32(st)).ToList();
             }
             if (!string.IsNullOrEmpty(key))

@@ -1,5 +1,6 @@
 ﻿using IOT.Core.Common;
 using IOT.Core.IRepository.Commodity;
+using IOT.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace IOT.Core.Repository.Commodity
             //添加的SQL语句
             try
             {
-                string sql = $"insert into Commodity values (null,'{commodity.CommodityName}','{commodity.CommodityPic}',{commodity.ShopPrice},{commodity.ShopNum},{commodity.Repertory},{commodity.Sort},0,now(),{commodity.TId},'{commodity.Remark}',{commodity.TemplateId},'{commodity.CommodityKey}','{commodity.SendAddress}','{commodity.Job}',{commodity.Integral},{commodity.SId},'{commodity.Color}','{commodity.Size}',0,0,{commodity.CostPrice},{commodity.ColonelID},{commodity.Mid})";
+                string sql = $"insert into Commodity values (null,'{commodity.CommodityName}','{commodity.CommodityPic}',{commodity.ShopPrice},{commodity.ShopNum},{commodity.Repertory},{commodity.Sort},1,now(),{commodity.TId},'{commodity.Remark}',{commodity.TemplateId},'{commodity.CommodityKey}','{commodity.SendAddress}','{commodity.Job}',{commodity.Integral},{commodity.SId},'{commodity.Color}','{commodity.Size}',0,0,{commodity.CostPrice},{commodity.ColonelID},{commodity.Mid})";
                 return DapperHelper.Execute(sql);
             }
             catch (Exception)
@@ -82,6 +83,22 @@ namespace IOT.Core.Repository.Commodity
                 lst = lst.Where(x => x.CommodityName.Contains(key) || x.CommodityKey == key || x.CommodityId.ToString() == key).ToList();
             }
             return lst;
+        }
+
+
+        //纯显示
+        public List<V_Commodity> ShowCommodities()
+        {
+            try
+            {
+                string sql = "select * from V_Commodity where DeleteState=0";
+                return DapperHelper.GetList<V_Commodity>(sql);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>

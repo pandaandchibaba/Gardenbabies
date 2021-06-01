@@ -68,9 +68,9 @@ namespace IOT.Core.Api.Controllers
         }
         [Route("/api/Uptdates")]
         [HttpPost]
-        public int Uptdates(int id)
+        public int Uptdates(string cid)
         {
-            return _pathRepository.Update(id);
+            return _pathRepository.Update(cid);
         }
 
         [Route("/api/FTES")]

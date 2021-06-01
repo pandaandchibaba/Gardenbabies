@@ -16,7 +16,9 @@ namespace IOT.Core.IRepository.Commodity
         /// <param name="key">查询关键词</param>
         /// <returns></returns>
         List<IOT.Core.Model.V_Commodity> GetCommodities(int code=1,int tid=0,string key="");
-        
+
+
+        List<IOT.Core.Model.V_Commodity> ShowCommodities();
         /// <summary>
         /// 修改删除状态
         /// </summary>

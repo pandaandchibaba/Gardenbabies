@@ -4,10 +4,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Logging;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Text;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +24,7 @@ namespace IOT.Core.Api.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        Logger logger = NLog.LogManager.GetCurrentClassLogger();//实例化
         private readonly IUsersRepository  _usersRepository;
 
         public UsersController(IUsersRepository  usersRepository)
@@ -40,9 +44,20 @@ namespace IOT.Core.Api.Controllers
        // [HttpGet("Get"), Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult GetLogin(string loginname, string loginpwd)
         {
-            var i = _usersRepository.Login(loginname,loginpwd);
-
-            return Ok(new { Token = BuildToken(loginname+i) });
+            int i = _usersRepository.Login(loginname,loginpwd);
+            StringBuilder builder = new StringBuilder();
+            builder.Append("登录名："+loginname+"\n");
+            builder.Append("时间：" + DateTime.Now + "\n");
+            if (i>0)
+            {
+                builder.Append("登录成功");
+            }
+            else
+            {
+                builder.Append("登录失败");
+            }
+            logger.Debug(builder.ToString());
+            return i;
         }
 
 
@@ -87,9 +102,9 @@ namespace IOT.Core.Api.Controllers
         [HttpPost]
         [Route("/api/UptUsers")]
 
-        public int UptUsers(Model.Users Model)
+        public int UptUsers(Model.Users a)
         {
-            int i = _usersRepository.UptUsers(Model);
+            int i = _usersRepository.UptUsers(a);
             return i;
         }
         /// <summary>

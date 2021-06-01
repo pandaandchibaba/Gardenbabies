@@ -21,6 +21,6 @@ namespace IOT.Core.IRepository.Activity
         int UptActivity(IOT.Core.Model.Activity a);
 
         //修改状态
-        int Uptst(int id);
+        int UptState(int id);
     }
 }

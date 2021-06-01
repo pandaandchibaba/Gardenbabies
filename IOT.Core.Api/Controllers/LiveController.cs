@@ -22,7 +22,7 @@ namespace IOT.Core.Api.Controllers
         //添加
         [Route("/api/LiveAdd")]
         [HttpPost]
-        public int LiveAdd(IOT.Core.Model.Live a)
+        public int LiveAdd([FromForm]IOT.Core.Model.Live a)
         {
             int i = _liveRepository.AddLive(a);
             return i;
@@ -31,23 +31,34 @@ namespace IOT.Core.Api.Controllers
         //显示
         [Route("/api/LiveShow")]
         [HttpGet]
-        public IActionResult LiveShow(int st, string nm)
+        public IActionResult LiveShow(int st=-1, string nm="")
         {
             //获取全部数据
             var ls = _liveRepository.ShowLive();
             if (!string.IsNullOrEmpty(nm))
             {
-                ls = ls.Where(x => x.LiveId.Equals(nm)).ToList();
+                ls = ls.Where(x => x.LiveId.Equals(nm) || x.AnchorName.Contains(nm)).ToList();
             }
-            ls = ls.Where(x => x.IsEnable.Equals(st)).ToList();
+            if (st != -1)
+            {
+                ls = ls.Where(x => x.IsEnable.Equals(st)).ToList();
+            }
+           
             return Ok(new { msg = "", code = 0, data = ls });
         }
 
+        //反填
+        [Route("/api/LiveFT")]
+        [HttpGet]
+        public IActionResult LiveFT(int id)
+        {
+            return Ok(_liveRepository.FT(id));
+        }
 
         //删除
         [Route("/api/LiveDel")]
-        [HttpDelete]
-        public int LiveDel(string id)
+        [HttpGet]
+        public int LiveDel(int id)
         {
             return _liveRepository.DelLive(id);
         }
@@ -62,7 +73,7 @@ namespace IOT.Core.Api.Controllers
         }
 
         //修改状态
-        [HttpPost]
+        [HttpGet]
         [Route("/api/LiveUptst")]
         public int LiveUptst(int id)
         {
