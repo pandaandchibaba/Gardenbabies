@@ -7,14 +7,18 @@ using System.Threading.Tasks;
 using IOT.Core.IRepository.PutLibrary;
 using IOT.Core.Repository.PutLibrary;
 using IOT.Core.Model;
+using NLog;
 namespace IOT.Core.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class PutLibraryController : ControllerBase
     {
-        private readonly IPutLibraryRepository _putLibraryRepository;
+        //实例化log
+        Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
+        private readonly IPutLibraryRepository _putLibraryRepository;
+        
         public PutLibraryController(IPutLibraryRepository putLibraryRepository)
         {
             _putLibraryRepository = putLibraryRepository;
@@ -53,6 +57,7 @@ namespace IOT.Core.Api.Controllers
         [Route("/api/AddPutLibrary")]
         public int AddPutLibrary([FromForm]IOT.Core.Model.PutLibrary putLibrary)
         {
+            logger.Debug($"用户添加了入库表信息,添加入库单号为:{putLibrary.PutNO}");
             int i = _putLibraryRepository.Insert(putLibrary);
             return i;
         }
@@ -61,6 +66,7 @@ namespace IOT.Core.Api.Controllers
         [Route("/api/DelPutLibrary")]
         public int DelPutLibrary(string ids)
         {
+            logger.Debug($"用户删除了入库表信息,删除ID为:{ids}");
             int i = _putLibraryRepository.Delete(ids);
             return i;
         }
@@ -68,6 +74,7 @@ namespace IOT.Core.Api.Controllers
         [Route("/api/UptPutLibrary")]
         public int UptPutLibrary([FromForm]IOT.Core.Model.PutLibrary putLibrary)
         {
+            logger.Debug($"用户修改了入库表信息,修改入库单号为:{putLibrary.PutNO}");
             int i = _putLibraryRepository.Update(putLibrary);
             return i;
         }

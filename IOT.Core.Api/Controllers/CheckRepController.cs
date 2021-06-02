@@ -5,13 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IOT.Core.IRepository.CheckRep;
-
+using NLog;
 namespace IOT.Core.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class CheckRepController : ControllerBase
     {
+        //实例化log
+        Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
         private readonly ICheckRepRepository _checkRepRepository;
 
         public CheckRepController(ICheckRepRepository checkRepRepository)
@@ -67,6 +70,7 @@ namespace IOT.Core.Api.Controllers
         [Route("/api/AddCheckRep")]
         public int AddCheckRep(IOT.Core.Model.CheckRep checkRep)
         {
+            logger.Debug($"用户添加了盘点管理表信息,添加盘点单号为:{checkRep.CheckNo}");
             int i = _checkRepRepository.Insert(checkRep);
             return i;
         }
