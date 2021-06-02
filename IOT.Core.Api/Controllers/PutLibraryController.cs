@@ -14,9 +14,11 @@ namespace IOT.Core.Api.Controllers
     [ApiController]
     public class PutLibraryController : ControllerBase
     {
-        private readonly IPutLibraryRepository _putLibraryRepository;
         //实例化log
         Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
+        private readonly IPutLibraryRepository _putLibraryRepository;
+        
         public PutLibraryController(IPutLibraryRepository putLibraryRepository)
         {
             _putLibraryRepository = putLibraryRepository;

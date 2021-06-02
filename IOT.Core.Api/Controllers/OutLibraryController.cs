@@ -5,13 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IOT.Core.IRepository.OutLibrary;
-
+using NLog;
 namespace IOT.Core.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class OutLibraryController : ControllerBase
     {
+        //实例化log
+        Logger logger = NLog.LogManager.GetCurrentClassLogger();
         //注入
         public readonly IOutLibraryRepository _outLibraryRepository;
         public OutLibraryController(IOutLibraryRepository outLibraryRepository)
@@ -55,6 +57,7 @@ namespace IOT.Core.Api.Controllers
         [Route("/api/AddOutLibrary")]
         public int AddOutLibrary([FromForm]IOT.Core.Model.OutLibrary outLibrary)
         {
+            logger.Debug($"用户添加了出库表信息,添加的单号为:{outLibrary.OutNO}");
             int i = _outLibraryRepository.Insert(outLibrary);
             return i;
         }
@@ -63,6 +66,7 @@ namespace IOT.Core.Api.Controllers
         [Route("/api/DelOutLibrary")]
         public int DelOutLibrary(string ids)
         {
+            logger.Debug($"用户删除了出库表信息,删除ID为:{ids}");
             int i = _outLibraryRepository.Delete(ids);
             return i;
 
@@ -72,6 +76,7 @@ namespace IOT.Core.Api.Controllers
         [Route("/api/UptOutLibrary")]
         public int UptOutLibrary([FromForm]IOT.Core.Model.OutLibrary outLibrary)
         {
+            logger.Debug($"用户修改了出库表信息,修改的单号为:{outLibrary.OutNO}");
             int i = _outLibraryRepository.Update(outLibrary);
             return i;
         }
