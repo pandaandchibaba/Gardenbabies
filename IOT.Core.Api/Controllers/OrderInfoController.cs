@@ -100,9 +100,9 @@ namespace IOT.Core.Api.Controllers
             }
             
         }
-       [HttpGet]
-        [Route("/api/GetOrderInfo")]
-       //[HttpGet("/api/GetOrderInfo"), Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+      [HttpGet]
+       [Route("/api/GetOrderInfo")]
+      // [HttpGet("/api/GetOrderInfo"), Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult GetOrderInfo()
         {
             try
