@@ -5,15 +5,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using NLog;
 namespace IOT.Core.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class StoreController : ControllerBase
     {
-        private readonly IStoreRepository _storeRepository;
+        //实例化log
+        Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
+        private readonly IStoreRepository _storeRepository;
 
         public StoreController(IStoreRepository storeRepository)
         {
@@ -77,6 +79,7 @@ namespace IOT.Core.Api.Controllers
 
         public int DelCom(int ids)
         {
+            logger.Debug($"用户删除了商品表信息,删除的商品的ID为:{ids}");
             int i = _storeRepository.DelCom(ids);
             return i;
         }
@@ -86,23 +89,29 @@ namespace IOT.Core.Api.Controllers
 
         public int DelStore(int ids)
         {
+            logger.Debug($"用户删除了门店表信息,删除的门店的ID为:{ids}");
             int i = _storeRepository.DelStore(ids);
             return i;
         }
 
+
+        //添加门店
         [HttpPost]
         [Route("/api/InsertStore")]
 
         public int InsertStore([FromForm]Model.Store Model)
         {
+            logger.Debug($"用户添加了门店表信息,添加的门店的名称为:{Model.MName}");
             int i = _storeRepository.InsertStore(Model);
             return i;
         }
-        [HttpPost]
-        [Route("/api/UptStore")]
 
+        //修改门店
+        [HttpPost]
+        [Route ("/api/UptStore")]
         public int UptStore([FromForm] Model.Store Model)
         {
+            logger.Debug($"用户修改了门店表信息,修改的门店的名称为:{Model.MName}");
             int i = _storeRepository.UptStore(Model);
             return i;
         }
@@ -116,6 +125,7 @@ namespace IOT.Core.Api.Controllers
         [Route("/api/UptCom")]
         public int UptCom(int cid)
         {
+            logger.Debug($"用户修改了商品表状态,修改的商品的ID为:{cid}");
             int i = _storeRepository.UptCom(cid);
             return i;
         }
@@ -125,6 +135,7 @@ namespace IOT.Core.Api.Controllers
 
         public int UptStoreState(int id)
         {
+            logger.Debug($"用户修改了门店表状态,修改的门店的ID为:{id}");
             int i = _storeRepository.UptStoreState(id);
             return i;
         }

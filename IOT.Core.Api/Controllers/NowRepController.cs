@@ -5,12 +5,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IOT.Core.IRepository.NowRep;
+using NLog;
+
 namespace IOT.Core.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class NowRepController : ControllerBase
     {
+        //实例化log
+        Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
         private readonly INowRepRepository _nowRepRepository;
         public NowRepController(INowRepRepository nowRepRepository)
         {
@@ -42,6 +47,7 @@ namespace IOT.Core.Api.Controllers
         [Route("/api/DelNowRep")]
         public int DelNowRep(string ids)
         {
+            logger.Debug($"用户删除了现有库存表信息,删除现有库存的ID为:{ids}");
             int i = _nowRepRepository.Delete(ids);
             return i;
         }
