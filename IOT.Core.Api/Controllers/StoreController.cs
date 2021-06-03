@@ -108,7 +108,7 @@ namespace IOT.Core.Api.Controllers
 
         //修改门店
         [HttpPost]
-        [Route("/api/UptStore")]
+        [Route ("/api/UptStore")]
         public int UptStore([FromForm] Model.Store Model)
         {
             logger.Debug($"用户修改了门店表信息,修改的门店的名称为:{Model.MName}");

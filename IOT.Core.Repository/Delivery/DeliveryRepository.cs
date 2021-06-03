@@ -14,6 +14,7 @@ namespace IOT.Core.Repository.Delivery
         public int Delete(string ids)
         {
             string sql = $"DELETE FROM Delivery WHERE DeliveryId IN({ids})";
+            DapperHelper.Execute($"INSERT INTO Lognote VALUES(NULL,'删除配送ID为{ids}的配送表信息',NOW(),'配送表')");
             return DapperHelper.Execute(sql);
         }
 
@@ -32,6 +33,7 @@ namespace IOT.Core.Repository.Delivery
         public int Update(Model.Delivery Model)
         {
             string sql = $"UPDATE Delivery SET DeliveryName='{Model.DeliveryName}',DeliveryPath='{Model.DeliveryPath}' WHERE DeliveryId={Model.DeliveryId}";
+            DapperHelper.Execute($"INSERT INTO Lognote VALUES(NULL,'修改配送小区名称为{Model.DeliveryName}的配送表信息',NOW(),'配送表')");
             return DapperHelper.Execute(sql);
         }
     }
