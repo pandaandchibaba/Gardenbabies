@@ -11,6 +11,16 @@ namespace IOT.Core.Repository.GroupBooking
 {
     public class GroupBookingRepository : IGroupBookingRepository
     {
+        public enum Days
+        {
+            全部 = 0,
+            今天 = 1,
+            昨天 = 2,
+            最近七天 = 3,
+            最近三十天 = 4,
+            本月 = 5,
+            本年 = 6,
+        }
         //添加
         public int AddGroupBooking(Model.GroupBooking a)
         {
@@ -49,12 +59,39 @@ namespace IOT.Core.Repository.GroupBooking
         }
 
         //显示
-        public List<Model.V_GroupBooking> ShowGroupBooking()
+        public List<Model.V_GroupBooking> ShowGroupBooking(int days = 0)
         {
             try
             {
-                string sql = "select * from V_GroupBooking";
-                return DapperHelper.GetList<Model.V_GroupBooking>(sql);
+                StringBuilder sql = new StringBuilder();
+                sql.Append("select * from V_GroupBooking");
+                Days day = (Days)days;
+                switch (day)
+                {
+                    case Days.今天:
+                        sql.Append(" where Days < 1");
+                        break;
+                    case Days.昨天:
+                        sql.Append(" where Days = 1");
+                        break;
+                    case Days.最近七天:
+                        sql.Append(" where Days <= 7");
+                        break;
+                    case Days.最近三十天:
+                        sql.Append(" where Days <= 30");
+                        break;
+                    case Days.本月:
+                        sql.Append($" where months ={DateTime.Now.Month} and years={DateTime.Now.Year}");
+                        break;
+                    case Days.本年:
+                        sql.Append($" where years ={DateTime.Now.Year}");
+                        break;
+                    default:
+                        break;
+                }
+                //获取全部数据
+                List<V_GroupBooking> lst = DapperHelper.GetList<V_GroupBooking>(sql.ToString());
+                return lst;
             }
             catch (Exception)
             {

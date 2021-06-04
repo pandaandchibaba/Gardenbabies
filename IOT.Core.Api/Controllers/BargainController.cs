@@ -49,10 +49,10 @@ namespace IOT.Core.Api.Controllers
         //显示砍价列表
         [Route("/api/ShowBargains")]
         [HttpGet]
-        public IActionResult ShowBargains(string nmid="", int st=-1)
+        public IActionResult ShowBargains(string nmid="", int st=-1,int days=0)
         {
             //获取全部数据
-            var ls = _bargainRepository.BargainShow();
+            var ls = _bargainRepository.BargainShow(days);
             if (!string.IsNullOrEmpty(nmid))
             {
                 ls = ls.Where(x => x.CommodityName.Contains(nmid) || x.BargainId.Equals(nmid)).ToList();
