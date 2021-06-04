@@ -37,6 +37,7 @@ namespace IOT.Core.Repository.Specification
                     int i = DapperHelper.Execute(sql);
                     if (i > 0)
                     {
+                        specification = DapperHelper.GetList<Model.Specification>("select * from Specification order by sid desc LIMIT 1").FirstOrDefault();
                         lst.Add(specification);
                         //存入
                         rh.SetList(lst, redisKey);
