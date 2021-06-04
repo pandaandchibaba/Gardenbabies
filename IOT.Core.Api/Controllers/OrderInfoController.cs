@@ -1,4 +1,6 @@
 ﻿using IOT.Core.IRepository.OrderInfo;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -98,9 +100,9 @@ namespace IOT.Core.Api.Controllers
             }
             
         }
-        [HttpGet]
-        [Route("/api/GetOrderInfo")]
-        
+      [HttpGet]
+       [Route("/api/GetOrderInfo")]
+      // [HttpGet("/api/GetOrderInfo"), Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult GetOrderInfo()
         {
             try

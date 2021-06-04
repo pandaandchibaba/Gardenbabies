@@ -13,6 +13,7 @@ namespace IOT.Core.Repository.NowRep
         public int Delete(string ids)
         {
             string sql = $"DELETE  FROM NowRep WHERE NowRepId in({ids})";
+            DapperHelper.Execute($"INSERT INTO Lognote VALUES(NULL,'删除现有库存ID为{ids}的现有库存表信息',NOW(),'现有库存表')");
             return DapperHelper.Execute(sql);
         }
 

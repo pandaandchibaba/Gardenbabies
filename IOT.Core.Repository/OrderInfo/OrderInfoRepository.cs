@@ -38,6 +38,7 @@ namespace IOT.Core.Repository.OrderInfo
         public int Delete(string ids)
         {
             string sql = $@"delete from OrderInfo where Orderid={ids}";
+            DapperHelper.Execute($"INSERT INTO Lognote VALUES(NULL,'删除订单ID为{ids}的订单',NOW(),'订单表')");
             return DapperHelper.Execute(sql);
         }
 
@@ -64,18 +65,21 @@ namespace IOT.Core.Repository.OrderInfo
         public int UptRemark(Model.OrderInfo Model)
         {
             string sql = $"UPDATE OrderInfo SET Remark='{Model.Remark}' where Orderid={Model.Orderid}";
+            DapperHelper.Execute($"INSERT INTO Lognote VALUES(NULL,'修改备注订单ID为{Model.Orderid}的订单',NOW(),'订单表')");
             return DapperHelper.Execute(sql);
         }
 
         public int UptSendWay(Model.OrderInfo Model)
         {
             string sql = $"UPDATE OrderInfo SET SendWay='{Model.SendWay}' where Orderid={Model.Orderid}";
+            DapperHelper.Execute($"INSERT INTO Lognote VALUES(NULL,'修改送货方式订单ID为{Model.Orderid}的订单',NOW(),'订单表')");
             return DapperHelper.Execute(sql);
         }
 
         public int UptOrderState(Model.OrderInfo Model)
         {
             string sql = $"UPDATE OrderInfo SET OrderState='{Model.OrderState}' where Orderid={Model.Orderid}";
+            DapperHelper.Execute($"INSERT INTO Lognote VALUES(NULL,'修改状态订单ID为{Model.Orderid}的订单',NOW(),'订单表')");
             return DapperHelper.Execute(sql);
         }
 

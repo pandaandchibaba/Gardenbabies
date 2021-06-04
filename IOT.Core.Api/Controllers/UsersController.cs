@@ -12,7 +12,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
 using System.Security.Claims;
-using System.Text;
+
 using System.Threading.Tasks;
 
 /// <summary>
@@ -39,7 +39,6 @@ namespace IOT.Core.Api.Controllers
         /// <param name="loginpwd"></param>
         /// <returns></returns>
         [Route("/api/GetLogin")]
-
         [HttpGet]
        // [HttpGet("Get"), Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult GetLogin(string loginname, string loginpwd)
