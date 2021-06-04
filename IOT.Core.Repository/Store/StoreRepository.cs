@@ -12,14 +12,15 @@ namespace IOT.Core.Repository.Store
     public class StoreRepository : IStoreRepository
     {
         public int DelCom(int ids)
-        {
-            string sql = $"DELETE FROM Commodity WHERE CommodityId=({ids})";
+            {
+                string sql = $"DELETE FROM Commodity WHERE CommodityId=({ids})";
             return DapperHelper.Execute(sql);
         }
 
         public int DelStore(int ids)
         {
             string sql = $"delete from Store where Mid in ({ids})";
+            DapperHelper.Execute($"INSERT INTO Lognote VALUES(NULL,'删除门店ID为{ids}的门店表信息',NOW(),' ')");
             return DapperHelper.Execute(sql);
         }
 
