@@ -21,5 +21,8 @@ namespace IOT.Core.Model
         public int ActionState { get; set; }
         public string Remark { get; set; }
         public string BargainName { get; set; }
+        public int Days { get; set; }
+        public int months { get; set; }
+        public int years { get; set; }
     }
 }

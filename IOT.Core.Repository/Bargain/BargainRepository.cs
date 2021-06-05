@@ -11,6 +11,16 @@ namespace IOT.Core.Repository.Bargain
 {
     public class BargainRepository : IBargainRepository
     {
+        public enum Days 
+        {
+            全部 = 0,
+            今天 = 1,
+            昨天 = 2,
+            最近七天 = 3,
+            最近三十天 = 4,
+            本月 = 5,
+            本年 = 6,
+        }
         //添加
         public int AddBargain(Model.Bargain a)
         {
@@ -28,12 +38,53 @@ namespace IOT.Core.Repository.Bargain
         }
 
         //显示砍价列表
-        public List<Model.V_Bargain> BargainShow()
+        //public List<Model.V_Bargain> BargainShow()
+        //{
+        //    try
+        //    {
+        //        string sql = "select * from V_Bargain";
+        //        return DapperHelper.GetList<Model.V_Bargain>(sql);
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //}
+
+        public List<Model.V_Bargain> BargainShow(int days = 0)
         {
             try
             {
-                string sql = "select * from V_Bargain";
-                return DapperHelper.GetList<Model.V_Bargain>(sql);
+                StringBuilder sql = new StringBuilder();
+                sql.Append("select * from V_Bargain");
+                Days day = (Days)days;
+                switch (day)
+                {
+                    case Days.今天:
+                        sql.Append(" where Days < 1");
+                        break;
+                    case Days.昨天:
+                        sql.Append(" where Days = 1");
+                        break;
+                    case Days.最近七天:
+                        sql.Append(" where Days <= 7");
+                        break;
+                    case Days.最近三十天:
+                        sql.Append(" where Days <= 30");
+                        break;
+                    case Days.本月:
+                        sql.Append($" where months ={DateTime.Now.Month} and years={DateTime.Now.Year}");
+                        break;
+                    case Days.本年:
+                        sql.Append($" where years ={DateTime.Now.Year}");
+                        break;
+                    default:
+                        break;
+                }
+                //获取全部数据
+                List<V_Bargain> lst = DapperHelper.GetList<V_Bargain>(sql.ToString());
+                return lst;
             }
             catch (Exception)
             {

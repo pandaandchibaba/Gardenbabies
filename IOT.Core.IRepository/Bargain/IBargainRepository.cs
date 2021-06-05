@@ -15,7 +15,7 @@ namespace IOT.Core.IRepository.Bargain
         List<IOT.Core.Model.Bargain> ShowBargain();
 
         //显示砍价列表
-        List<IOT.Core.Model.V_Bargain> BargainShow();
+        List<IOT.Core.Model.V_Bargain> BargainShow(int days = 0);
 
         //删除
         int DelBargain(string id);
