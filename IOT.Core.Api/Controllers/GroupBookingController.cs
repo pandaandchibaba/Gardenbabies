@@ -31,10 +31,10 @@ namespace IOT.Core.Api.Controllers
         //显示
         [Route("/api/GroupBookingShow")]
         [HttpGet]
-        public IActionResult GroupBookingShow(int st = -1, string nm = "")
+        public IActionResult GroupBookingShow(int st = -1, string nm = "",int days=0)
         {
             //获取全部数据
-            var ls = _groupBookingRepository.ShowGroupBooking();
+            var ls = _groupBookingRepository.ShowGroupBooking(days);
             if (!string.IsNullOrEmpty(nm))
             {
                 ls = ls.Where(x => x.GroupBookingName.Contains(nm)).ToList();

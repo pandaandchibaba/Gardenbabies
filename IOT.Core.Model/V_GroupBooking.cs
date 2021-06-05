@@ -37,5 +37,8 @@ namespace IOT.Core.Model
         public string BankCard { get; set; }
         public string HeadPortrait { get; set; }
         public string CommIds { get; set; }
+        public int Days { get; set; }
+        public int months { get; set; }
+        public int years { get; set; }
     }
 }

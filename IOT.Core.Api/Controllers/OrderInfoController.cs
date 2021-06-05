@@ -142,6 +142,23 @@ namespace IOT.Core.Api.Controllers
                 throw;
             }
         }
+
+        [HttpPost]
+        [Route("/api/Delete")]
+
+        public int Delete(string ids)
+        {
+            try
+            {
+                int i = _orderInfoRepository.Delete(ids);
+                return i;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         [HttpPost]
         [Route("/api/UptOrderInfoRemark")]
         
