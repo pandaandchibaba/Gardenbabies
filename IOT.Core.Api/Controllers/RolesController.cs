@@ -35,7 +35,7 @@ namespace IOT.Core.Api.Controllers
         /// <returns></returns>
         [Route("/Api/Addshow")]
         [HttpPost]
-        public int  Addshow(Model.Roles a)
+        public int  Addshow([FromForm]Model.Roles a)
         {
            int  i = _rolesRepository.AddRoles(a);
             return i;
@@ -46,8 +46,8 @@ namespace IOT.Core.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [Route("/Api/deleteshow")]
-        [HttpPost]
-        public int deleteshow(string id)
+        [HttpGet]
+        public int deleteshow(int id)
         {
             return _rolesRepository.DeleteRoles(id);
         }
@@ -58,7 +58,7 @@ namespace IOT.Core.Api.Controllers
         /// <returns></returns>
         [Route("/Api/EditRoles")]
         [HttpPost]
-        public int EditRoles(Model.Roles a)
+        public int EditRoles([FromForm]Model.Roles a)
         {
             return _rolesRepository.UptRoles(a);
         }

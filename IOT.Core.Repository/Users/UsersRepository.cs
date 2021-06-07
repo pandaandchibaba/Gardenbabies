@@ -64,7 +64,7 @@ namespace IOT.Core.Repository.Users
         /// <returns></returns>
         public int UptUsers(Model.Users a)
         {
-            string sql = $"UPDATE  Users SET UserName='{a.UserName}',LoginName='{a.LoginName}',NickName='{a.NickName}',Address='{a.Address}',State='{a.State}',Mid='{a.Mid}' where UserId='{a.UserId}'";
+            string sql = $"UPDATE  Users SET UserName='{a.UserName}',LoginName='{a.LoginName}',LoginPwd='{a.LoginPwd}',NickName='{a.NickName}',Address='{a.Address}',State='{a.State}' where UserId='{a.UserId}'";
             return DapperHelper.Execute(sql);
         }
         /// <summary>
@@ -80,22 +80,19 @@ namespace IOT.Core.Repository.Users
         /// <returns></returns>
         public int UptUsersState(int id)
         {
-            string sql = $"select * from Users ";
-
-            List<IOT.Core.Model.Users> list = DapperHelper.GetList<IOT.Core.Model.Users>(sql);
-
-            IOT.Core.Model.Users order = list.FirstOrDefault(x => x.UserId.Equals(id));
-            string sqlq = "";
-            if (order.State == 0)
+            IOT.Core.Model.Users ls = DapperHelper.GetList<IOT.Core.Model.Users>($"select * from Users  where UserId={id}").FirstOrDefault();
+            if (ls.State == 0)
             {
-                sqlq = $"UPDATE Users SET State=State+1 where  UserId={id}";
+                ls.State = 1;
             }
             else
             {
-                sqlq = $"UPDATE Users SET State=State-1 where UserId={id}";
+                ls.State = 0;
 
             }
-            return DapperHelper.Execute(sqlq);
+            string sql = $"Update Users set State={ls.State} where UserId={ls.UserId}";
+            return DapperHelper.Execute(sql);
+
         }
 
         /// <summary>
@@ -145,7 +142,7 @@ namespace IOT.Core.Repository.Users
         public int Login(string loginname, string loginpwd)
         {
             
-                string sql = $"select * from Users where LoginName={loginname} and LoginPwd={loginpwd}";
+            string sql = $"select * from Users where LoginName={loginname} and LoginPwd={loginpwd}";
             //List<Model.Users> lists=lists; 
             IOT.Core.Model.Users users = DapperHelper.GetList<Model.Users>(sql).FirstOrDefault();
             if (users!=null)

@@ -11,13 +11,18 @@ namespace IOT.Core.Repository.Colonel
 {
     public class ColonelRepositoty : IColonelRepository
     {
+        public int ColoneluptGoods(int CommIds, int ColonelID)
+        {
+            string sql = $"Update Colonel set CommIds={CommIds} where ColonelID={ColonelID} ";
+            return DapperHelper.Execute(sql);
+        }
 
         //删除
         public int DelColonel(string id)
         {
             throw new NotImplementedException();
         }
-
+        //反填
         public Model.Colonel FT1(int id)
         {
             string sql = $"select  * from colonel where ColonelID={id} ";
@@ -38,14 +43,26 @@ namespace IOT.Core.Repository.Colonel
             return lst;
         }
 
-        //显示
-        public List<Model.Commodity> GetCommodities()
+        public List<Model.Colonel> GetCommdit()
         {
-            string sql = "select CommodityId,CommodityPic,CommodityName,ShopPrice from Commodity";
-            return DapperHelper.GetList<Model.Commodity>(sql);
+            string sql = $"select b.CommodityId,b.CommodityPic,b.CommodityName,ShopPrice from Colonel a join Commodity b on a.CommIds=b.CommodityId ";
+            return DapperHelper.GetList<Model.Colonel>(sql);
         }
+
+        public int GetUser(int ColonelID, int UserId)
+        {
+            string sql = $"Update  Users set ColonelID={ColonelID} where UserId={UserId} ";
+            return DapperHelper.Execute(sql);
+        }
+
+        ////商品显示
+        //public List<Model.Commodity> GetCommodities()
+        //{
+        //    string sql = "select b.CommodityId,b.CommodityPic,b.CommodityName,ShopPrice from Colonel a join Commodity b on a.ColonelID=b.ColonelID";
+        //    return DapperHelper.GetList<Model.Commodity>(sql);
+        //}
         /// <summary>
-        /// 商品显示
+        /// 团员显示
         /// </summary>
         /// <returns></returns>
         public List<Model.Users> GetUsers()
@@ -54,7 +71,7 @@ namespace IOT.Core.Repository.Colonel
             return DapperHelper.GetList<Model.Users>(sql);
         }
         /// <summary>
-        /// 团员显示
+        /// 团长显示
         /// </summary>
         /// <returns></returns>
         public List<Model.Colonel> ShowColonel()
@@ -62,6 +79,23 @@ namespace IOT.Core.Repository.Colonel
             string sql = "select  * from colonel";
             return DapperHelper.GetList<Model.Colonel>(sql);
         }
+        //修改状态
+        public int Updates(int  id)
+        {
+            IOT.Core.Model.Colonel ls = DapperHelper.GetList<IOT.Core.Model.Colonel>($"select * from colonel  where ColonelID={id}").FirstOrDefault();
+            if (ls.DeliveryStatus == 0)
+            {
+                ls.DeliveryStatus = 1;
+            }
+            else
+            {
+                ls.DeliveryStatus = 2; 
+            }
+            string sql = $"Update colonel set DeliveryStatus={ls.DeliveryStatus} where ColonelID={ls.ColonelID} ";
+            return DapperHelper.Execute(sql);
+        }
+
+
         //修改
         public int UptColonel(Model.Colonel a)
         {
