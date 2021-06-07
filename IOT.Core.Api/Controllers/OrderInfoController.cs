@@ -103,17 +103,44 @@ namespace IOT.Core.Api.Controllers
       [HttpGet]
        [Route("/api/GetOrderInfo")]
       // [HttpGet("/api/GetOrderInfo"), Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult GetOrderInfo()
+        public IActionResult GetOrderInfo(int pm,int ps,int sts)
         {
             try
             {
-                List<Model.OrderInfo> list = _orderInfoRepository.Query();
-                return Ok(new
+                if (pm!=0&&ps!=0&&sts!=0)
                 {
-                    msg = "",
-                    code = 0,
-                    data = list
-                });
+                    List<Model.OrderInfo> list = _orderInfoRepository.Query(pm, ps, sts);
+                    if (pm!=0)
+                    {
+                        list = list.Where(x => x.PrintMode ==pm).ToList();
+                    }
+                    if (ps != 0)
+                    {
+                        list = list.Where(x => x.PrintStatus == ps).ToList();
+                    }
+                    if (sts != 0)
+                    {
+                        list = list.Where(x => x.SelTimeStatus == sts).ToList();
+                    }
+                    return Ok(new
+                    {
+                        msg = "",
+                        code = 0,
+                        data = list
+                    });
+                }
+                else
+                {
+                    List<Model.OrderInfo> list = _orderInfoRepository.Query(pm, ps, sts);
+
+
+                    return Ok(new
+                    {
+                        msg = "",
+                        code = 0,
+                        data = list
+                    });
+                }
             }
             catch (Exception)
             {

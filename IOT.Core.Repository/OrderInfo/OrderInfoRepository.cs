@@ -77,7 +77,7 @@ namespace IOT.Core.Repository.OrderInfo
         /// 查询订单表
         /// </summary>
         /// <returns></returns>
-        public List<Model.OrderInfo> Query()
+        public List<Model.OrderInfo> Query(int pm,int ps,int sts)
         {
             if (lt==null||lt.Count==0)
             {
