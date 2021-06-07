@@ -22,7 +22,7 @@ namespace IOT.Core.Api.Controllers
         //添加
         [Route("/api/ActivityAdd")]
         [HttpPost]
-        public int ActivityAdd(IOT.Core.Model.Activity a)
+        public int ActivityAdd([FromForm]IOT.Core.Model.Activity a)
         {
             int i = _activityRepository.AddActivity(a);
             return i;
@@ -39,7 +39,7 @@ namespace IOT.Core.Api.Controllers
             {
                 ls = ls.Where(x => x.ActivityName.Contains(nm)).ToList();
             }
-            if (st!=-1)
+            if (st != -1)
             {
                 ls = ls.Where(x => x.State.Equals(st)).ToList();
             }
@@ -53,7 +53,7 @@ namespace IOT.Core.Api.Controllers
 
         //删除
         [Route("/api/ActivityDel")]
-        [HttpDelete]
+        [HttpGet]
         public int ActivityDel(string id)
         {
             return _activityRepository.DelActivity(id);
@@ -63,17 +63,17 @@ namespace IOT.Core.Api.Controllers
         //修改
         [HttpPost]
         [Route("/api/ActivityUpt")]
-        public int ActivityUpt(IOT.Core.Model.Activity a)
+        public int ActivityUpt([FromForm]IOT.Core.Model.Activity a)
         {
             return _activityRepository.UptActivity(a);
         }
 
         //修改状态
-        [HttpPost]
+        [HttpGet]
         [Route("/api/ActivityUptst")]
         public int ActivityUptst(int id)
         {
-            return _activityRepository.Uptst(id);
+            return _activityRepository.UptState(id);
         }
     }
 }

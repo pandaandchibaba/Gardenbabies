@@ -97,8 +97,7 @@ namespace IOT.Core.Repository.Com_Comment
             }
             //获取全部数据
             List<V_Com_Comment> lst = DapperHelper.GetList<V_Com_Comment>(sql.ToString());
-            
-            lst= lst.Where(x => (string.IsNullOrEmpty(cname) ? true : x.CommodityName.Contains(cname)) && (string.IsNullOrEmpty(uname) ? true : x.UserName.Contains(uname)) && (string.IsNullOrEmpty(st) ? true : x.CommentState.ToString() == st)).ToList();
+            lst = lst.Where(x => (string.IsNullOrEmpty(uname) ? true : x.UserName.Contains(uname)) && (string.IsNullOrEmpty(cname) ? true : x.CommodityName.Contains(cname)) && (string.IsNullOrEmpty(st) ? true : x.CommentState.ToString() == st)).ToList();
             return lst;
         }
 
@@ -119,7 +118,7 @@ namespace IOT.Core.Repository.Com_Comment
 
                 throw;
             }
-            
+
         }
     }
 }

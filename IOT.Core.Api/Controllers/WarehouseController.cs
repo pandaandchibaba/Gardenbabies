@@ -47,13 +47,6 @@ namespace IOT.Core.Api.Controllers
             int i = _warehouseRepository.Delete(ids);
             return i;
         }
-        [HttpPost]
-        [Route("/api/UptWarehouse")]
-        public int UptWarehouse([FromForm]IOT.Core.Model.Warehouse warehouse)
-        {
-            int i = _warehouseRepository.Update(warehouse);
-            return i;
-        }
 
         [HttpPut]
         [Route("/api/UptWarehouseState")]

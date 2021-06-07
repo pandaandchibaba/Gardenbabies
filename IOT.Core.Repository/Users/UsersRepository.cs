@@ -13,12 +13,7 @@ namespace IOT.Core.Repository.Users
     /// </summary>
     public class UsersRepository : IUsersRepository
     {
-        /// <summary>
-        /// 查询显示用户
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-       
+        
         /// <summary>
         /// /显示
         /// </summary>
@@ -67,12 +62,7 @@ namespace IOT.Core.Repository.Users
             string sql = $"UPDATE  Users SET UserName='{a.UserName}',LoginName='{a.LoginName}',LoginPwd='{a.LoginPwd}',NickName='{a.NickName}',Address='{a.Address}',State='{a.State}' where UserId='{a.UserId}'";
             return DapperHelper.Execute(sql);
         }
-        /// <summary>
-        /// 修改状态
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-
+        
         /// <summary>
         /// 修改用户状态
         /// </summary>

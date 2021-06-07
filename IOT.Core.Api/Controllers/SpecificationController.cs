@@ -27,7 +27,7 @@ namespace IOT.Core.Api.Controllers
         /// <param name="specification"></param>
         /// <returns></returns>
         [HttpPost("/api/CreateSpecification")]
-        public string CreateSpecification(IOT.Core.Model.Specification specification)
+        public string CreateSpecification([FromForm]IOT.Core.Model.Specification specification)
         {
             return _specification.CreateSpecification(specification);
         }

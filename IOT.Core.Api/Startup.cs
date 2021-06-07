@@ -78,6 +78,9 @@ using IOT.Core.IRepository.Agent;
 using IOT.Core.Repository.Agent;
 using IOT.Core.IRepository.CommissionRecord;
 using IOT.Core.Repository.CommissionRecord;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using IOT.Core.IRepository.Menu;
 using IOT.Core.Repository.Menu;
 using IOT.Core.IRepository.StaffAuthority;
@@ -101,7 +104,26 @@ namespace IOT.Core.Api
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "IOT.Core.Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
+                var securityScheme = new OpenApiSecurityScheme
+                {
+                    Name = "JWT Authentication",
+                    Description = "Enter JWT Bearer token **_only_**",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    Reference = new OpenApiReference
+                    {
+                        Id = JwtBearerDefaults.AuthenticationScheme,
+                        Type = ReferenceType.SecurityScheme
+                    }
+                };
+                c.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    { securityScheme, new string[] { } }
+                });
             });
             #region  注入
             services.AddSingleton<IActivityRepository, ActivityRepository>();
@@ -148,6 +170,24 @@ namespace IOT.Core.Api
             #endregion
             //IMiniProgramRepository
 
+            #region
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = "Security:Tokens:Issuer",
+                        ValidateAudience = true,
+                        ValidAudience = "Security:Tokens:Audience",
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Security:Tokens:Key"))
+                    };
+                });
+            #endregion
+
+
             services.AddCors(options => 
             options.AddPolicy("cors",
             p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
@@ -159,11 +199,13 @@ namespace IOT.Core.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "IOT.Core.Api v1"));
+          
             }
             app.UseCors("cors");
             app.UseRouting();
+            app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
+           
 
             app.UseAuthorization();
 

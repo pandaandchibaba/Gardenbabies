@@ -12,10 +12,13 @@ namespace IOT.Core.IRepository.GroupBooking
         int AddGroupBooking(IOT.Core.Model.GroupBooking a);
 
         //显示
-        List<IOT.Core.Model.V_GroupBooking> ShowGroupBooking();
+        List<IOT.Core.Model.V_GroupBooking> ShowGroupBooking(int days=0);
 
         //删除
         int DelGroupBooking(string id);
+
+        //反填
+        IOT.Core.Model.V_GroupBooking FTV_GroupBooking(int id);
 
         //修改
         int UptGroupBooking(IOT.Core.Model.GroupBooking a);

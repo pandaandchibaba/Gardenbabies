@@ -1,9 +1,18 @@
 ﻿using IOT.Core.IRepository.Users;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Logging;
+using NLog;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Text;
+using System.Security.Claims;
+
 using System.Threading.Tasks;
 
 /// <summary>
@@ -15,6 +24,7 @@ namespace IOT.Core.Api.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        Logger logger = NLog.LogManager.GetCurrentClassLogger();//实例化
         private readonly IUsersRepository  _usersRepository;
 
         public UsersController(IUsersRepository  usersRepository)
@@ -30,12 +40,24 @@ namespace IOT.Core.Api.Controllers
         /// <returns></returns>
         [Route("/api/GetLogin")]
         [HttpGet]
-        public int GetLogin(string loginname, string loginpwd)
+       // [HttpGet("Get"), Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult GetLogin(string loginname, string loginpwd)
         {
             int i = _usersRepository.Login(loginname,loginpwd);
-            return i;
+            StringBuilder builder = new StringBuilder();
+            builder.Append("登录名："+loginname+"\n");
+            builder.Append("时间：" + DateTime.Now + "\n");
+            if (i>0)
+            {
+                builder.Append("登录成功");
+            }
+            else
+            {
+                builder.Append("登录失败");
+            }
+            logger.Debug(builder.ToString());
+            return Ok(new { Token = BuildToken(loginname), Id = i }) ;
         }
-
 
         /// <summary>
         /// 显示
@@ -121,6 +143,29 @@ namespace IOT.Core.Api.Controllers
                 code = 0,
                 data = list
             });
+        }
+
+        [HttpGet("GetToken")]
+        public IActionResult GetToken()
+        {
+            return Ok(new { Token = BuildToken("admin") });
+        }
+
+
+        private string BuildToken(string userId)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes("Security:Tokens:Key");
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Issuer = "Security:Tokens:Issuer",
+                Audience = "Security:Tokens:Audience",
+                Subject = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, userId) }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
     }
 }

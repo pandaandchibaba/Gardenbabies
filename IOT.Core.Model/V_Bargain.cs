@@ -18,5 +18,11 @@ namespace IOT.Core.Model
         public string BTime { get { return BeginDate.ToString("yyyy-MM-dd HH:MM:ss"); } }
         public DateTime EndDate { get; set; }
         public string ETime { get { return EndDate.ToString("yyyy-MM-dd HH:MM:ss"); } }
+        public int ActionState { get; set; }
+        public string Remark { get; set; }
+        public string BargainName { get; set; }
+        public int Days { get; set; }
+        public int months { get; set; }
+        public int years { get; set; }
     }
 }

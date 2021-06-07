@@ -44,6 +44,24 @@ namespace IOT.Core.Api.Controllers
             });
         }
 
+
+        //纯显示
+        [HttpGet("/api/ShoCommodities")]
+        public IActionResult ShoCommodities(int st=-1, string nm = "")
+        {
+            //获取全部数据
+            var ls = _commodity.ShowCommodities();
+            if (!string.IsNullOrEmpty(nm))
+            {
+                ls = ls.Where(x => x.CommodityName.Contains(nm)).ToList();
+            }
+            if (st != -1)
+            {
+                ls = ls.Where(x => x.State.Equals(st)).ToList();
+            }
+
+            return Ok(new { msg = "", code = 0, data = ls });
+        }
         /// <summary>
         /// 修改状态
         /// </summary>
@@ -72,7 +90,7 @@ namespace IOT.Core.Api.Controllers
         /// <param name="commodity"></param>
         /// <returns></returns>
         [HttpPost("/api/CreateCommodity")]
-        public int CreateCommodity(Model.Commodity commodity)
+        public int CreateCommodity([FromForm]Model.Commodity commodity)
         {
             return _commodity.CreateCommodity(commodity);
         }

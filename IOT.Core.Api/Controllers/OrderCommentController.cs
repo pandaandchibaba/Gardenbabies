@@ -44,7 +44,7 @@ namespace IOT.Core.Api.Controllers
         [HttpDelete]
         [Route("/api/DelOrderComment")]
 
-        public int Del(int id)
+        public int Del(string id)
         {
             int i = _orderCommentRepository.Del(id);
             return i;

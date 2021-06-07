@@ -22,7 +22,7 @@ namespace IOT.Core.IRepository.OrderInfo
         int insert(IOT.Core.Model.OrderInfo orderInfo);
         int Delete(string ids);
         int Insert(IOT.Core.Model.OrderInfo Model);
-        List<IOT.Core.Model.OrderInfo> Query();
+        List<IOT.Core.Model.OrderInfo> Query(int pm,int ps,int sts);
         /// <summary>
         /// 修改备注
         /// </summary>
