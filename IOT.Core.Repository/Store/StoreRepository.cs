@@ -20,7 +20,7 @@ namespace IOT.Core.Repository.Store
         public int DelStore(int ids)
         {
             string sql = $"delete from Store where Mid in ({ids})";
-            DapperHelper.Execute($"INSERT INTO Lognote VALUES(NULL,'删除门店ID为{ids}的门店表信息',NOW(),' ')");
+            DapperHelper.Execute($"INSERT INTO Lognote VALUES(NULL,'删除门店ID为{ids}的门店表信息',NOW(),'门店表')");
             return DapperHelper.Execute(sql);
         }
 
@@ -60,6 +60,7 @@ namespace IOT.Core.Repository.Store
         public int InsertStore(Model.Store Model)
         {
             string sql = $"INSERT INTO Store VALUES(NULL,'{Model.MName}','{Model.Shopowner}','{Model.Goods}','{Model.Volume}','{Model.StoreType}','{Model.Extraction}','{Model.State}','{Model.StoreNo}','{Model.Pwd}','{Model.Phone}','{Model.Background}','{Model.Logo}','{Model.Approve}')";
+            DapperHelper.Execute($"INSERT INTO Lognote VALUES(NULL,'添加门店名称为{Model.MName}的门店表信息',NOW(),'门店表')");
             return DapperHelper.Execute(sql);
         }
         /// <summary>
@@ -90,6 +91,7 @@ namespace IOT.Core.Repository.Store
         public int UptStore(Model.Store Model)
         {
             string sql = $"UPDATE Store SET MName ='{Model.MName}',Shopowner='{Model.Shopowner}',Goods='{Model.Goods}',Volume='{Model.Volume}',StoreType='{Model.StoreType}',Extraction='{Model.Extraction}',State='{Model.State}',StoreNo='{Model.StoreNo}',Pwd='{Model.Pwd}',Phone='{Model.Phone}',Background='{Model.Background}',Logo='{Model.Logo}',Approve='{Model.Approve}' where Mid='{Model.Mid}'";
+            DapperHelper.Execute($"INSERT INTO Lognote VALUES(NULL,'修改门店名称为{Model.MName}的门店表信息',NOW(),'门店表')");
             return DapperHelper.Execute(sql);
         }
 
@@ -110,6 +112,7 @@ namespace IOT.Core.Repository.Store
                 sqlq = $"UPDATE Store SET State=State-1 where Mid={id}";
 
             }
+            DapperHelper.Execute($"INSERT INTO Lognote VALUES(NULL,'修改门店状态ID为{id}的门店表信息',NOW(),'门店表')");
             return DapperHelper.Execute(sqlq);
         }
     }
