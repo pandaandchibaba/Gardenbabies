@@ -12,8 +12,9 @@ namespace IOT.Core.Repository.Store
     public class StoreRepository : IStoreRepository
     {
         public int DelCom(int ids)
-            {
-                string sql = $"DELETE FROM Commodity WHERE CommodityId=({ids})";
+        {
+            string sql = $"DELETE FROM Commodity WHERE CommodityId=({ids})";
+            DapperHelper.Execute($"INSERT INTO Lognote VALUES(NULL,'删除商品状态ID为{ids}的商品表信息',NOW(),'商品表')");
             return DapperHelper.Execute(sql);
         }
 
@@ -85,6 +86,7 @@ namespace IOT.Core.Repository.Store
                 sqlq = $"UPDATE Commodity SET State=State-1 where CommodityId={cid}";
 
             }
+            DapperHelper.Execute($"INSERT INTO Lognote VALUES(NULL,'修改商品状态ID为{cid}的商品表信息',NOW(),'商品表')");
             return DapperHelper.Execute(sqlq);
         }
 
