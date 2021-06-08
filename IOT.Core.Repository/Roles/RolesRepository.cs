@@ -16,9 +16,9 @@ namespace IOT.Core.Repository.Roles
             return DapperHelper.Execute(sql);
         }
 
-        public int DeleteRoles(string id)
+        public int DeleteRoles(int  id)
         {
-            string sql = $"delete from Roles where RoleId in ({id}) ";
+            string sql = $"delete from Roles where RoleId ={id} ";
             return DapperHelper.Execute(sql);
         }
 

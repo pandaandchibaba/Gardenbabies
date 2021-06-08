@@ -28,11 +28,18 @@ namespace IOT.Core.IRepository.Colonel
         List<IOT.Core.Model.Users>GetUsers();
 
         //商品显示
-        List<IOT.Core.Model.Commodity> GetCommodities();
+        int ColoneluptGoods(int CommIds, int ColonelID);
 
         //反填
         IOT.Core.Model.Colonel FT1(int id);
+        //修改状态
+        int Updates(int  id);
 
+        //获取商品ID
+        List<IOT.Core.Model.Colonel> GetCommdit();
+
+        //获取团员IP
+        int GetUser(int ColonelID, int UserId);
      
 
     }

@@ -20,7 +20,7 @@ namespace IOT.Core.Repository.ColonelManagement
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public int Uptdata(int id)
+        public int Uptdata(string id)
         {
             IOT.Core.Model.ColonelManagement ls = DapperHelper.GetList<IOT.Core.Model.ColonelManagement>($"select * from ColonelManagement where CMId ={id}").FirstOrDefault();
             if (ls.CheckStatus == 0)
@@ -29,8 +29,9 @@ namespace IOT.Core.Repository.ColonelManagement
             }
             else
             {
-                ls.CheckStatus = 0;
+                ls.CheckStatus = 2;
             }
+            
             string sql = $"update ColonelManagement set CheckStatus={ls.CheckStatus} where CMId ={id} ";
             return DapperHelper.Execute(sql);
         }

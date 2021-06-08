@@ -24,13 +24,18 @@ namespace IOT.Core.Api.Controllers
         //显示
         [Route("/api/colonel")]
         [HttpGet]
-        public IActionResult colonel(string nickname = "")
+        public IActionResult colonel(string nickname="",int res=2)
         {
             var ls = _colonelRepository.ShowColonel();
             if (!string.IsNullOrEmpty(nickname))
             {
                 ls = ls.Where(x => x.NickName.Contains(nickname)).ToList();
             }
+            if (res != 2)
+            {
+                ls = ls.Where(m => m.DeliveryStatus == res).ToList();
+            }
+      
             
             return Ok(new {data = ls });
         }
@@ -46,7 +51,11 @@ namespace IOT.Core.Api.Controllers
         {
             return Ok(_colonelRepository.GetColonel(address, key));
         }
-
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
         [Route("/api/Colonelupt")]
         [HttpPost]
         public int Colonelupt([FromForm]Model.Colonel a)
@@ -66,21 +75,45 @@ namespace IOT.Core.Api.Controllers
         //用户显示
         [Route("/api/Users")]
         [HttpGet]
-        public IActionResult Users(int page, int limit)
+        public IActionResult Users()
         {
             var As = _colonelRepository.GetUsers();
-            As = As.Skip((page - 1) * limit).Take(limit).ToList();
-            return Ok(new { code = 0, msg = "", Count = As.Count, data = As });
-        }
-        //商品显示
-        [Route("/api/Commoditys")]
-        [HttpGet]
-        public IActionResult Commoditys(int page, int limit)
-        {
-            var As = _colonelRepository.GetCommodities();
-            As = As.Skip((page - 1) * limit).Take(limit).ToList();
-            return Ok(new { code = 0, msg = "", Count = As.Count, data = As });
+            return Ok(new { data = As });
         }
 
+        //商品修改
+        [Route("/api/coloneuptAa")]
+        [HttpGet]
+        public int coloneuptAa(int CommIds, int ColonelID)
+        {
+            return _colonelRepository.ColoneluptGoods(CommIds,ColonelID);
+        }
+
+        //团员修改
+        [Route("/api/UptAa")]
+        [HttpGet]
+        public int UptAa(int ColonelID, int UserId)
+        {
+            return _colonelRepository.GetUser(ColonelID, UserId);
+        }
+
+        //商品显示
+        [Route("/api/cemdisys")]
+        [HttpGet]
+        public IActionResult cemdisys()
+        {
+            var As = _colonelRepository.GetCommdit();
+
+            return Ok(new { data = As });
+        }
+
+        //修改状态
+        [Route("/api/Uptstates")]
+        [HttpPost]
+        public int Uptstates(int id)
+        {
+            return _colonelRepository.Updates(id);
+        }
+   
     }
 }

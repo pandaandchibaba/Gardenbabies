@@ -13,7 +13,7 @@ namespace IOT.Core.IRepository.Roles
         //添加
         int AddRoles(IOT.Core.Model.Roles a);
         //删除
-        int DeleteRoles(string id);
+        int DeleteRoles(int id);
         //修改
         int UptRoles(IOT.Core.Model.Roles a);
         //反填
