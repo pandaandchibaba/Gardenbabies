@@ -104,5 +104,15 @@ namespace IOT.Core.Api.Controllers
         {
             return Ok(_commodity.GetAllCommodities());
         }
+        /// <summary>
+        /// 商品下拉
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("/api/BindGoods")]
+        public IActionResult BindGoods(int tid)
+        {
+            return Ok(_commodity.BindGoods(tid));
+        }
+        
     }
 }

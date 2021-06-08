@@ -161,5 +161,14 @@ namespace IOT.Core.Repository.Commodity
         {
             return DapperHelper.GetList<Model.Commodity>("select * from Commodity where DeleteState=0");
         }
+
+        /// <summary>
+        /// 商品下拉
+        /// </summary>
+        /// <returns></returns>
+        public List<Model.Commodity> BindGoods(int tid)
+        {
+            return DapperHelper.GetList<Model.Commodity>($"select * from Commodity where TId={tid}");
+        }
     }
 }

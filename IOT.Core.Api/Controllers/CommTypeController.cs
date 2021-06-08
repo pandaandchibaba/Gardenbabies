@@ -32,6 +32,16 @@ namespace IOT.Core.Api.Controllers
         }
 
         /// <summary>
+        /// 获取所有二级分类
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("/api/GetTwoType")]
+        public IActionResult GetTwoType(int pid)
+        {
+            return Ok(_commType.GetTwoType(pid));
+        }
+
+        /// <summary>
         /// 添加 or 修改
         /// </summary>
         /// <param name="comm"></param>

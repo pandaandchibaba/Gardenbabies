@@ -13,7 +13,11 @@ namespace IOT.Core.IRepository.CommType
         /// </summary>
         /// <returns></returns>
         List<IOT.Core.Model.CommType> GetOneType();
-
+        /// <summary>
+        /// 获取所有二级分类
+        /// </summary>
+        /// <returns></returns>
+        List<IOT.Core.Model.CommType> GetTwoType(int pid);
         /// <summary>
         /// 添加  or  修改
         /// </summary>

@@ -45,5 +45,11 @@ namespace IOT.Core.IRepository.Commodity
         /// </summary>
         /// <returns></returns>
         List<IOT.Core.Model.Commodity> GetAllCommodities();
+
+        /// <summary>
+        /// 商品下拉
+        /// </summary>
+        /// <returns></returns>
+        List<IOT.Core.Model.Commodity> BindGoods(int tid);
     }
 }
