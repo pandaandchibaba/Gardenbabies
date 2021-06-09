@@ -12,5 +12,6 @@ namespace IOT.Core.Model
         public string Operation { get; set; }
         public DateTime Operationtime { get; set; }
         public string TableName { get; set; }
+        public int days { get; set; }
     }
 }

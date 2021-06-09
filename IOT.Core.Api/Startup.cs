@@ -81,6 +81,8 @@ using IOT.Core.Repository.CommissionRecord;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using IOT.Core.IRepository.WorkBench;
+using IOT.Core.Repository.WorkBench;
 
 namespace IOT.Core.Api
 {
@@ -161,6 +163,7 @@ namespace IOT.Core.Api
             services.AddSingleton<ISVIPRepository, SVIPRepository>();
             services.AddSingleton<IAgentRepository, AgentRepository>();
             services.AddSingleton<ICommissionRecordRepository, CommissionRecordRepository>();
+            services.AddSingleton<IWorkBenchRepository, WorkBenchRepository>();
             #endregion
             //IMiniProgramRepository
 
