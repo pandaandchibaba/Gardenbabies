@@ -34,5 +34,15 @@ namespace IOT.Core.Model
         public string BankCard       { get; set; }
         public string HeadPortrait   { get; set; }
         public string CommIds        { get; set; }
+
+
+
+
+
+        /////////////
+        public int CommodityId { get; set; }
+        public string CommodityPic { get; set; }
+        public string CommodityName { get; set; }
+        public float ShopPrice { get; set; }
     }
 }

@@ -61,7 +61,7 @@ namespace IOT.Core.Api.Controllers
         }
         [Route("/Api/Upts")]
         [HttpPost]
-        public int Upts(IOT.Core.Model.Path a)
+        public int Upts([FromForm]IOT.Core.Model.Path a)
         {
             int i = _pathRepository.Edit(a);
             return i;

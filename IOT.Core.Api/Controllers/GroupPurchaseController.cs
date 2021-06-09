@@ -29,9 +29,10 @@ namespace IOT.Core.Api.Controllers
             ls = ls.Skip((page - 1) * limit).Take(limit).ToList();
             return Ok(new { code = 0, msg = "", Count = ls.Count, data = ls });
         }
+
         [Route("/Api/Add")]
         [HttpPost]
-        public int Add(IOT.Core.Model.GroupPurchase a)
+        public int Add([FromForm]IOT.Core.Model.GroupPurchase a)
         {
             int i = _groupPurchaseRepository.insert(a);
             return i;

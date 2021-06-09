@@ -157,6 +157,15 @@ namespace IOT.Core.Repository.CommType
         }
 
         /// <summary>
+        /// 获取二级分类
+        /// </summary>
+        /// <returns></returns>
+        public List<Model.CommType> GetTwoType(int pid)
+        {
+            return DapperHelper.GetList<Model.CommType>($"select * from CommType where ParentId={pid} and State=1");
+        }
+
+        /// <summary>
         /// 修改状态
         /// </summary>
         /// <param name="tid"></param>

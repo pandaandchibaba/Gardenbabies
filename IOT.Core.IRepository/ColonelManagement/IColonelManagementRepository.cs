@@ -11,6 +11,6 @@ namespace IOT.Core.IRepository.ColonelManagement
         //显示
         List<IOT.Core.Model.ColonelManagement> GetColonelManagements();
         //修改状态
-        int Uptdata(int id);
+        int Uptdata(string id);
     }
 }

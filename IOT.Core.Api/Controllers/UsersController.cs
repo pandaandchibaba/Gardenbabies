@@ -69,15 +69,10 @@ namespace IOT.Core.Api.Controllers
 
         [Route("/api/GetUsers")]
         [HttpGet]
-        public IActionResult GetUsers(string name="",int pageindex=1,int pagesize=2)
+        public IActionResult GetUsers(string name="")
         {
             var list = _usersRepository.GetUsers(name);
-            return Ok(new
-            {
-                msg = "",
-                code = 0,
-                data = list.Skip((pageindex - 1) * pagesize).Take(pagesize)
-            });
+            return Ok(new{data=list});
         }
         /// <summary>
         /// 添加
@@ -100,7 +95,7 @@ namespace IOT.Core.Api.Controllers
         [HttpPost]
         [Route("/api/UptUsers")]
 
-        public int UptUsers(Model.Users a)
+        public int UptUsers([FromForm]Model.Users a)
         {
             int i = _usersRepository.UptUsers(a);
             return i;
