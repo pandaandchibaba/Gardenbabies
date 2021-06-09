@@ -81,6 +81,8 @@ using IOT.Core.Repository.CommissionRecord;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using IOT.Core.IRepository.WorkBench;
+using IOT.Core.Repository.WorkBench;
 using IOT.Core.IRepository.Menu;
 using IOT.Core.Repository.Menu;
 using IOT.Core.IRepository.StaffAuthority;
@@ -166,7 +168,6 @@ namespace IOT.Core.Api
             services.AddSingleton<IAgentRepository, AgentRepository>();
             services.AddSingleton<IMenuRepository, MenuRepository>();
             services.AddSingleton<ICommissionRecordRepository, CommissionRecordRepository>();
-            services.AddSingleton<IStaffAuthorityRepository, StaffAuthorityRepository>();
             #endregion
             //IMiniProgramRepository
 

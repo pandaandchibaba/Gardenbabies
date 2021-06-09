@@ -14,7 +14,8 @@ namespace IOT.Core.Model
         public int Orderid           { get; set; }
         public string Ordernumber { get; set; }
         public int Orderexpress { get; set; }
-
+        public int days { get; set; }
+        public int PayState { get; set; }
         public int CommodityId       { get; set; }
         public int UserId            { get; set; }
         public int SendWay           { get; set; }
