@@ -21,14 +21,14 @@ namespace IOT.Core.Api.Controllers
 
         [Route("/api/colonelManagements")]
         [HttpGet]
-        public IActionResult colonelManagements(string checkname="",int res=2)
+        public IActionResult colonelManagements(string checkname="",int res=0)
         {
             var ls = _colonelManagementRepository.GetColonelManagements();
             if (!string.IsNullOrEmpty(checkname))
             {
                 ls = ls.Where(x => x.CheckName.Contains(checkname)).ToList();
             }
-            if (res != 2)
+            if (res != 0)
             {
                 ls = ls.Where(m => m.CheckStatus == res).ToList();
             }
