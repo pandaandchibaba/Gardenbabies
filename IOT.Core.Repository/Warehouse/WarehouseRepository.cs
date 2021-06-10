@@ -16,6 +16,7 @@ namespace IOT.Core.Repository.Warehouse
         string redisKey;
         //全部数据
         List<IOT.Core.Model.Warehouse> lst = new List<Model.Warehouse>();
+        //构造函数
         public WarehouseRepository()
         {
             redisKey = "ware_list";
