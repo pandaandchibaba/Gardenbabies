@@ -60,9 +60,9 @@ namespace IOT.Core.Api.Controllers
         /// <param name="cid"></param>
         /// <returns></returns>
         [HttpPost("/api/DeleteCom_Comment")]
-        public int DeleteCom_Comment([FromForm] int cid)
+        public int DeleteCom_Comment([FromForm] Model.Com_Comment com)
         {
-            return _com_Comment.DeleteCom_Comment(cid);
+            return _com_Comment.DeleteCom_Comment(com.Com_CommentId);
         }
 
         /// <summary>
